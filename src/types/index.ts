@@ -112,15 +112,32 @@ export interface Registration {
   event?: CampusEvent;
 }
 
+export type ConflictSeverity = 'hard_conflict' | 'advisory_warning' | 'informational_notice';
+
 export interface ConflictItem {
-  severity: 'hard_conflict' | 'strong_warning' | 'heads_up';
+  severity: ConflictSeverity;
   title: string;
   rule_triggered: string;
   rationale: string;
   conflicting_event: CampusEvent;
   venue_name?: string;
+  date_string?: string;
+  start_time?: string;
+  end_time?: string;
   overlapping_interval?: string;
+  source_authority: string;
+  is_authoritative: boolean;
   suggested_action: string;
+  available_resolutions: string[];
+}
+
+export interface ConflictCheckResult {
+  has_conflicts: boolean;
+  has_hard_conflict: boolean;
+  can_submit: boolean;
+  unverified_venue_warning?: string;
+  conflicts: ConflictItem[];
+  checked_at: string;
 }
 
 export interface ApprovalAction {

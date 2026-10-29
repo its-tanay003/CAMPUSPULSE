@@ -128,7 +128,7 @@ export const CreateEventPage: React.FC = () => {
   const startIso = startDate ? new Date(startDate).toISOString() : '';
   const endIso = endDate ? new Date(endDate).toISOString() : '';
 
-  const activeConflicts = detectEventConflicts(
+  const activeConflictResult = detectEventConflicts(
     {
       start_time: startIso,
       end_time: endIso,
@@ -140,7 +140,7 @@ export const CreateEventPage: React.FC = () => {
     id // exclude self when editing
   );
 
-  const hasHardConflict = activeConflicts.some(c => c.severity === 'hard_conflict');
+  const hasHardConflict = activeConflictResult.has_hard_conflict;
 
   // Form Validation & Submission
   const handleSubmit = async (e: React.FormEvent, isDraft = false) => {
@@ -681,7 +681,7 @@ export const CreateEventPage: React.FC = () => {
 
               <div className="mt-4">
                 <ClashWarningBox
-                  conflicts={activeConflicts}
+                  conflictResult={activeConflictResult}
                   allowedToProceed={false}
                 />
               </div>

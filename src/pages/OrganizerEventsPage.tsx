@@ -168,7 +168,7 @@ export const OrganizerEventsPage: React.FC = () => {
                   events,
                   venues,
                   event.id
-                );
+                ).conflicts;
 
                 return (
                   <div key={event.id} className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#1E293B]/40 transition">

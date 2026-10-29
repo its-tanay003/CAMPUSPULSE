@@ -28,7 +28,7 @@ export const AdminApprovalsPage: React.FC = () => {
         events,
         venues,
         activeEvent.id
-      )
+      ).conflicts
     : [];
 
   const handleExecuteDecision = () => {

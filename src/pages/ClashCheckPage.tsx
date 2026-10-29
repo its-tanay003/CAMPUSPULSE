@@ -14,7 +14,7 @@ export const ClashCheckPage: React.FC = () => {
   const [selectedEventId, setSelectedEventId] = useState<string>(events[1]?.id || events[0]?.id || '');
   const targetEvent = events.find(e => e.id === selectedEventId) || events[0];
 
-  const conflicts = detectEventConflicts(
+  const conflictResult = detectEventConflicts(
     {
       start_time: targetEvent.start_time,
       end_time: targetEvent.end_time,
@@ -94,11 +94,11 @@ export const ClashCheckPage: React.FC = () => {
               Automated Audit Findings
             </h2>
             <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#0B1020] text-[#38BDF8] border border-[#334155]">
-              {conflicts.length} finding{conflicts.length === 1 ? '' : 's'}
+              {conflictResult.conflicts.length} finding{conflictResult.conflicts.length === 1 ? '' : 's'}
             </span>
           </div>
 
-          <ClashWarningBox conflicts={conflicts} allowedToProceed={false} />
+          <ClashWarningBox conflictResult={conflictResult} allowedToProceed={false} />
 
           {/* Mathematical Proof Card */}
           <div className="bg-[#0B1020] rounded-xl p-4 border border-[#334155] text-xs text-[#94A3B8] space-y-2">
