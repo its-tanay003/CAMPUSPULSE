@@ -275,3 +275,4 @@ export const OrganizerEventsPage: React.FC = () => {
     </div>
   );
 };
+
