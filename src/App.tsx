@@ -15,6 +15,8 @@ import { ClashCheckPage } from './pages/ClashCheckPage';
 import { AdminApprovalsPage } from './pages/AdminApprovalsPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { ClubsDirectoryPage } from './pages/ClubsDirectoryPage';
+import { LoginPage } from './pages/LoginPage';
+import { SignupPage } from './pages/SignupPage';
 
 export const App: React.FC = () => {
   return (
@@ -34,6 +36,8 @@ export const App: React.FC = () => {
               <Route path="/saved" element={<Navigate to="/my-events" replace />} />
               <Route path="/clubs" element={<ClubsDirectoryPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
 
               {/* Organizer Studio Routes */}
               <Route path="/organizer" element={<OrganizerDashboardPage />} />
