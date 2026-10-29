@@ -79,3 +79,4 @@ create policy "Organizers update own club events" on public.events
     )
     or public.is_admin()
   );
+
