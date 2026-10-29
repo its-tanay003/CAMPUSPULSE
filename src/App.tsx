@@ -5,6 +5,7 @@ import { Navbar } from './components/Navbar';
 
 // Pages
 import { LandingPage } from './pages/LandingPage';
+import { StudentHomePage } from './pages/StudentHomePage';
 import { DiscoverPage } from './pages/DiscoverPage';
 import { EventDetailPage } from './pages/EventDetailPage';
 import { CalendarPage } from './pages/CalendarPage';
@@ -29,6 +30,7 @@ export const App: React.FC = () => {
             <Routes>
               {/* Public & Student Routes */}
               <Route path="/" element={<LandingPage />} />
+              <Route path="/home" element={<StudentHomePage />} />
               <Route path="/discover" element={<DiscoverPage />} />
               <Route path="/events/:id" element={<EventDetailPage />} />
               <Route path="/calendar" element={<CalendarPage />} />

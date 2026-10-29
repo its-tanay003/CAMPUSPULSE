@@ -8,91 +8,184 @@ import {
   Bookmark, 
   CheckCircle2, 
   List, 
-  ChevronRight
+  Grid,
+  ChevronRight,
+  ChevronLeft,
+  RotateCcw,
+  Download
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { detectPersonalScheduleConflicts } from '../lib/clashDetector';
 import { generateICS } from '../lib/icsExport';
+import { Button, Badge, Card, Toast } from '../components/ui';
 
 export const CalendarPage: React.FC = () => {
   const { events, savedEvents, registrations, currentUser } = useApp();
-  const [viewType, setViewType] = useState<'agenda' | 'all'>('agenda');
 
+  // Mode: Agenda (Accessible List default on mobile) vs Week View (on desktop)
+  const [viewType, setViewType] = useState<'agenda' | 'week'>('agenda');
+  const [filterMode, setFilterMode] = useState<'my_agenda' | 'campus_master'>('my_agenda');
+  const [currentWeekOffset, setCurrentWeekOffset] = useState(0);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Events saved or registered by this user
   const userEventIds = new Set([
     ...savedEvents.filter(s => s.user_id === currentUser?.id).map(s => s.event_id),
     ...registrations.filter(r => r.user_id === currentUser?.id).map(r => r.event_id)
   ]);
 
   const userScheduleEvents = events.filter(e => userEventIds.has(e.id));
+  
+  // Real personal overlap calculation
   const personalOverlaps = detectPersonalScheduleConflicts(userScheduleEvents);
 
-  const displayedEvents = (viewType === 'agenda' ? userScheduleEvents : events.filter(e => e.status === 'published'))
-    .sort((a, b) => new Date(a.start_time).getTime() - new Date(b.start_time).getTime());
+  // Base list depending on filterMode
+  const baseEvents = filterMode === 'my_agenda' ? userScheduleEvents : events.filter(e => e.status === 'published');
+
+  // Sorted events
+  const displayedEvents = [...baseEvents].sort(
+    (a, b) => new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
+  );
 
   return (
     <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] py-8">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header with Switcher */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-6 shadow-md mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F8FAFC] tracking-tight">
-              Campus Master Calendar
-            </h1>
-            <p className="text-sm text-[#94A3B8] mt-1">
-              Synchronized timeline with personal agenda clash detection as defined in P17 Blueprint Section 07.
-            </p>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        
+        {/* Header Toolbar (Table 15, Blueprint) */}
+        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-6 shadow-md">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <Badge variant="primary">Campus Master Schedule</Badge>
+                <span className="text-xs text-[#94A3B8]">· Asia/Kolkata (IST)</span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F8FAFC] tracking-tight mt-1">
+                Event Calendar & Personal Timeline
+              </h1>
+              <p className="text-xs text-[#94A3B8] mt-0.5">
+                Inspect event timings and identify personal scheduling collisions before reserving tickets.
+              </p>
+            </div>
+
+            {/* Scope Switcher: My Agenda vs Master Feed */}
+            <div className="flex bg-[#0B1020] p-1.5 rounded-xl border border-[#334155] text-xs font-semibold">
+              <button
+                onClick={() => setFilterMode('my_agenda')}
+                className={`px-3.5 py-2 rounded-lg transition flex items-center gap-1.5 ${
+                  filterMode === 'my_agenda'
+                    ? 'bg-[#7C5CFC] text-white shadow font-bold'
+                    : 'text-[#94A3B8] hover:text-[#F8FAFC]'
+                }`}
+              >
+                <Bookmark className="w-3.5 h-3.5 text-[#38BDF8]" />
+                My Schedule ({userScheduleEvents.length})
+              </button>
+              <button
+                onClick={() => setFilterMode('campus_master')}
+                className={`px-3.5 py-2 rounded-lg transition flex items-center gap-1.5 ${
+                  filterMode === 'campus_master'
+                    ? 'bg-[#7C5CFC] text-white shadow font-bold'
+                    : 'text-[#94A3B8] hover:text-[#F8FAFC]'
+                }`}
+              >
+                <List className="w-3.5 h-3.5 text-[#38BDF8]" />
+                Master Feed ({events.filter(e => e.status === 'published').length})
+              </button>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 bg-[#0B1020] p-1.5 rounded-xl border border-[#334155] text-xs font-semibold">
-            <button
-              onClick={() => setViewType('agenda')}
-              className={`px-4 py-2 rounded-lg transition flex items-center gap-1.5 ${
-                viewType === 'agenda'
-                  ? 'bg-[#7C5CFC] text-white shadow-sm font-bold'
-                  : 'text-[#94A3B8] hover:text-[#F8FAFC]'
-              }`}
-            >
-              <Bookmark className="w-3.5 h-3.5 text-[#38BDF8]" />
-              My Agenda ({userScheduleEvents.length})
-            </button>
-            <button
-              onClick={() => setViewType('all')}
-              className={`px-4 py-2 rounded-lg transition flex items-center gap-1.5 ${
-                viewType === 'all'
-                  ? 'bg-[#7C5CFC] text-white shadow-sm font-bold'
-                  : 'text-[#94A3B8] hover:text-[#F8FAFC]'
-              }`}
-            >
-              <List className="w-3.5 h-3.5 text-[#38BDF8]" />
-              All Campus Events
-            </button>
+          {/* Subtoolbar: Layout Mode (Agenda default) + Prev/Next/Today Controls */}
+          <div className="mt-6 pt-4 border-t border-[#334155] flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2">
+              <span className="text-[#94A3B8] font-medium">Display Mode:</span>
+              <div className="flex bg-[#0B1020] p-1 rounded-lg border border-[#334155]">
+                <button
+                  onClick={() => setViewType('agenda')}
+                  className={`px-3 py-1 rounded font-semibold transition ${
+                    viewType === 'agenda' ? 'bg-[#151C2F] text-[#38BDF8] shadow' : 'text-[#94A3B8]'
+                  }`}
+                >
+                  Agenda List (Mobile Default)
+                </button>
+                <button
+                  onClick={() => setViewType('week')}
+                  className={`hidden sm:inline-block px-3 py-1 rounded font-semibold transition ${
+                    viewType === 'week' ? 'bg-[#151C2F] text-[#38BDF8] shadow' : 'text-[#94A3B8]'
+                  }`}
+                >
+                  Weekly View
+                </button>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => setCurrentWeekOffset(prev => prev - 1)}
+                className="gap-1"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" /> Previous
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setCurrentWeekOffset(0)}
+                className="font-bold text-[#38BDF8]"
+              >
+                Today
+              </Button>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => setCurrentWeekOffset(prev => prev + 1)}
+                className="gap-1"
+              >
+                Next <ChevronRight className="w-3.5 h-3.5" />
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* Personal Overlap Alert */}
-        {personalOverlaps.length > 0 && viewType === 'agenda' && (
-          <aside aria-label="Personal schedule conflict alert" className="mb-8 bg-amber-950/50 border-l-4 border-amber-500 rounded-r-2xl p-5 text-amber-100 shadow-md">
-            <div className="flex items-start gap-3">
+        {/* PERSONAL SCHEDULING CONFLICTS ALERT (P17 Section 07) */}
+        {personalOverlaps.length > 0 && filterMode === 'my_agenda' && (
+          <aside aria-label="Personal scheduling collision" className="bg-amber-950/60 border-l-4 border-amber-500 rounded-r-2xl p-5 text-amber-100 shadow-xl">
+            <div className="flex items-start gap-3.5">
               <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-              <div className="space-y-1">
-                <h3 className="font-bold text-sm text-amber-300">
-                  Personal Schedule Conflict Detected ({personalOverlaps.length})
-                </h3>
-                <p className="text-xs text-[#94A3B8] leading-relaxed">
-                  You have saved or registered for multiple events occurring at the exact same time window. CampusPulse informs you of collisions so you can choose which event to prioritize.
-                </p>
+              <div className="space-y-2 flex-1">
+                <div>
+                  <h3 className="font-bold text-sm text-amber-300">
+                    Personal Schedule Conflict Detected ({personalOverlaps.length})
+                  </h3>
+                  <p className="text-xs text-[#94A3B8] mt-0.5 leading-relaxed">
+                    You have saved multiple events occurring in the exact same time window. CampusPulse presents both event specifications below so you can choose which one matters more without the app automatically choosing for you.
+                  </p>
+                </div>
 
-                <div className="mt-3 space-y-2">
+                <div className="space-y-2 pt-1">
                   {personalOverlaps.map((overlap, idx) => (
-                    <div key={idx} className="bg-[#151C2F] p-3 rounded-xl border border-amber-500/30 text-xs text-[#F8FAFC] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                      <div className="font-medium">
-                        <span className="font-bold text-[#38BDF8]">{overlap.eventA.title}</span>
-                        <span className="text-[#94A3B8] mx-2">overlaps with</span>
-                        <span className="font-bold text-amber-400">{overlap.eventB.title}</span>
+                    <div
+                      key={idx}
+                      className="bg-[#151C2F] p-3.5 rounded-xl border border-amber-500/30 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                    >
+                      <div className="space-y-1">
+                        <div className="font-bold text-[#F8FAFC]">
+                          <span className="text-[#38BDF8] underline">{overlap.eventA.title}</span>
+                          <span className="text-[#94A3B8] font-normal mx-2">overlaps with</span>
+                          <span className="text-amber-400 underline">{overlap.eventB.title}</span>
+                        </div>
+                        <div className="text-[11px] text-[#94A3B8]">
+                          A: {new Date(overlap.eventA.start_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} ({overlap.eventA.venue?.name}) | 
+                          B: {new Date(overlap.eventB.start_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} ({overlap.eventB.venue?.name})
+                        </div>
                       </div>
-                      <span className="font-mono text-[11px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-lg border border-amber-500/30 shrink-0">
-                        Collision: {overlap.overlapTime}
-                      </span>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <Badge variant="warning">Collision: {overlap.overlapTime}</Badge>
+                        <Link to={`/events/${overlap.eventA.id}`}>
+                          <Button variant="ghost" size="sm">Compare</Button>
+                        </Link>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -101,14 +194,14 @@ export const CalendarPage: React.FC = () => {
           </aside>
         )}
 
-        {/* Agenda Timeline List */}
+        {/* AGENDA TIMELINE LIST (Accessible alternative to canvas grid) */}
         <div className="space-y-4">
           {displayedEvents.length > 0 ? (
             displayedEvents.map(event => {
               const startDate = new Date(event.start_time);
               const endDate = new Date(event.end_time);
 
-              const timeStr = `${startDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })} - ${endDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}`;
+              const timeStr = `${startDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })} – ${endDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}`;
 
               const isRegistered = registrations.some(r => r.user_id === currentUser?.id && r.event_id === event.id);
               const isSaved = savedEvents.some(s => s.user_id === currentUser?.id && s.event_id === event.id);
@@ -116,7 +209,7 @@ export const CalendarPage: React.FC = () => {
               return (
                 <div
                   key={event.id}
-                  className="bg-[#151C2F] rounded-2xl border border-[#334155] p-5 shadow-sm hover:border-[#7C5CFC]/60 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                  className="bg-[#151C2F] rounded-2xl border border-[#334155] p-5 shadow-sm hover:border-[#7C5CFC]/50 transition flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
                   <div className="flex items-start gap-4">
                     {/* Date Block */}
@@ -132,21 +225,17 @@ export const CalendarPage: React.FC = () => {
                       </span>
                     </div>
 
-                    {/* Details */}
-                    <div>
-                      <div className="flex items-center gap-2 text-xs text-[#94A3B8] mb-1">
-                        <span className="font-semibold text-[#38BDF8]">{event.category}</span>
+                    {/* Event Metadata */}
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2 text-xs text-[#94A3B8]">
+                        <Badge variant="secondary">{event.category}</Badge>
                         <span>•</span>
                         <span>{event.organization?.name}</span>
                         {isRegistered && (
-                          <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
-                            <CheckCircle2 className="w-3 h-3" /> Registered
-                          </span>
+                          <Badge variant="success">Confirmed Pass</Badge>
                         )}
                         {!isRegistered && isSaved && (
-                          <span className="bg-[#7C5CFC]/20 text-purple-300 border border-[#7C5CFC]/30 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                            Saved
-                          </span>
+                          <Badge variant="primary">Saved in Schedule</Badge>
                         )}
                       </div>
 
@@ -165,20 +254,23 @@ export const CalendarPage: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Right Actions */}
+                  {/* Actions */}
                   <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-[#334155]">
-                    <button
-                      onClick={() => generateICS(event)}
-                      className="text-xs bg-[#0B1020] hover:bg-[#1E293B] text-[#94A3B8] hover:text-[#F8FAFC] font-semibold px-3 py-2 rounded-xl border border-[#334155] transition"
-                      title="Download .ics"
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => {
+                        generateICS(event);
+                        setToastMessage('Exported .ics calendar invite.');
+                      }}
+                      className="gap-1.5"
                     >
-                      Export .ics
-                    </button>
-                    <Link
-                      to={`/events/${event.id}`}
-                      className="text-xs bg-[#7C5CFC] hover:bg-[#6B46E5] text-white font-bold px-4 py-2 rounded-xl transition flex items-center gap-1 shadow"
-                    >
-                      View Details <ChevronRight className="w-3.5 h-3.5" />
+                      <Download className="w-3.5 h-3.5 text-[#38BDF8]" /> Export .ics
+                    </Button>
+                    <Link to={`/events/${event.id}`}>
+                      <Button variant="primary" size="sm" className="gap-1">
+                        View Event <ChevronRight className="w-3.5 h-3.5" />
+                      </Button>
                     </Link>
                   </div>
                 </div>
@@ -187,20 +279,27 @@ export const CalendarPage: React.FC = () => {
           ) : (
             <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-12 text-center shadow-lg">
               <CalendarIcon className="w-12 h-12 mx-auto text-[#94A3B8] mb-3" />
-              <h3 className="text-base font-bold text-[#F8FAFC]">Your agenda is empty</h3>
+              <h3 className="text-base font-bold text-[#F8FAFC]">Your timeline is empty</h3>
               <p className="text-xs text-[#94A3B8] max-w-sm mx-auto mt-1">
-                You haven't saved or registered for any events yet. Explore upcoming campus activities and save them to plan your schedule.
+                You haven't saved or registered for any events yet. Explore upcoming activities to plan your schedule.
               </p>
-              <Link
-                to="/discover"
-                className="mt-4 inline-block bg-[#7C5CFC] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow"
-              >
-                Browse Events Now
-              </Link>
+              <div className="mt-4">
+                <Link to="/discover">
+                  <Button variant="primary" size="sm">Browse Events</Button>
+                </Link>
+              </div>
             </div>
           )}
         </div>
       </div>
+
+      {toastMessage && (
+        <Toast
+          type="success"
+          message={toastMessage}
+          onClose={() => setToastMessage(null)}
+        />
+      )}
     </div>
   );
 };
