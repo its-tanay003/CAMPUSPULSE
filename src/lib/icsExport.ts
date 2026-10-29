@@ -41,3 +41,4 @@ export function generateICS(event: CampusEvent): void {
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
 }
+

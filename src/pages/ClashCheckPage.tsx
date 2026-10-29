@@ -122,3 +122,4 @@ export const ClashCheckPage: React.FC = () => {
     </div>
   );
 };
+

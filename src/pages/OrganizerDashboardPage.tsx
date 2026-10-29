@@ -166,3 +166,4 @@ export const OrganizerDashboardPage: React.FC = () => {
     </div>
   );
 };
+

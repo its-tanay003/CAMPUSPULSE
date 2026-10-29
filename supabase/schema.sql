@@ -261,3 +261,4 @@ create policy "Approvals access" on public.approvals
       where events.id = approvals.event_id and events.created_by = auth.uid()
     )
   );
+

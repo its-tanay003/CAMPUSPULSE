@@ -93,3 +93,4 @@ export const ClubsDirectoryPage: React.FC = () => {
     </div>
   );
 };
+

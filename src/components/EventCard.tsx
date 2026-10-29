@@ -165,3 +165,4 @@ export const EventCard: React.FC<EventCardProps> = ({ event, compact = false }) 
     </article>
   );
 };
+
