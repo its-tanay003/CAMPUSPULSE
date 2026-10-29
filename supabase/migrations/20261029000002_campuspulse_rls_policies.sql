@@ -215,3 +215,4 @@ create policy "Admins can view audit logs" on public.audit_logs
 
 create policy "System and admins insert audit logs" on public.audit_logs
   for insert with check (auth.uid() is not null);
+

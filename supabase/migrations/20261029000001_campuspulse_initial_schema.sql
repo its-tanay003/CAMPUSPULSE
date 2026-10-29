@@ -298,3 +298,4 @@ create trigger trg_registrations_updated_at before update on public.registration
 
 create trigger trg_event_reports_updated_at before update on public.event_reports
   for each row execute function public.set_updated_at();
+
