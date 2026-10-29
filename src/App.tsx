@@ -20,7 +20,7 @@ export const App: React.FC = () => {
   return (
     <AppProvider>
       <BrowserRouter>
-        <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased selection:bg-amber-500 selection:text-white">
+        <div className="min-h-screen flex flex-col bg-[#0B1020] text-[#F8FAFC] antialiased selection:bg-[#7C5CFC] selection:text-white">
           <Navbar />
 
           <main className="flex-1">
@@ -49,20 +49,20 @@ export const App: React.FC = () => {
             </Routes>
           </main>
 
-          {/* Accessible Footer as required by P17 Blueprint Table 12 & Table 23 */}
-          <footer className="bg-[#0B192C] text-slate-400 text-xs py-8 border-t border-slate-800">
+          {/* Accessible Footer */}
+          <footer className="bg-[#151C2F] text-[#94A3B8] text-xs py-8 border-t border-[#334155]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
-                <span className="font-bold text-white text-sm">CampusPulse</span> · INT335 Design Thinking Project
-                <p className="text-[11px] text-slate-500 mt-0.5">
+                <span className="font-bold text-[#F8FAFC] text-sm">CampusPulse</span> · INT335 Design Thinking Project
+                <p className="text-[11px] text-[#94A3B8] mt-0.5">
                   Demonstration prototype with consented campus venue and club models.
                 </p>
               </div>
 
               <div className="flex items-center gap-6 text-[11px]">
-                <a href="#privacy" className="hover:text-slate-300">Privacy & RLS Standards</a>
-                <a href="#terms" className="hover:text-slate-300">Terms of Service</a>
-                <span className="font-mono text-slate-500">v1.0.0-p17</span>
+                <a href="#privacy" className="hover:text-[#F8FAFC] transition">Privacy & RLS Standards</a>
+                <a href="#terms" className="hover:text-[#F8FAFC] transition">Terms of Service</a>
+                <span className="font-mono text-[#94A3B8]">v1.0.0-p17</span>
               </div>
             </div>
           </footer>

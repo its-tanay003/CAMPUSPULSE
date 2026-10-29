@@ -6,13 +6,12 @@ import {
   ArrowRight, 
   CheckCircle, 
   Clock, 
-  Layers, 
   Sparkles,
   BookOpen
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { EventCard } from '../components/EventCard';
-import { EventCategory } from '../types';
+import type { EventCategory } from '../types';
 
 const CATEGORIES: { label: EventCategory; desc: string; icon: string }[] = [
   { label: 'Technology', desc: 'AI, coding, hackathons & robotics', icon: '💻' },
@@ -29,77 +28,76 @@ export const LandingPage: React.FC = () => {
 
   const publishedEvents = events.filter(e => e.status === 'published');
   const featuredEvent = publishedEvents[0];
-  const upcomingEvents = publishedEvents.slice(1, 4);
 
   const filteredUpcoming = selectedInterest === 'All'
     ? publishedEvents.slice(0, 6)
     : publishedEvents.filter(e => e.category === selectedInterest);
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC]">
       {/* Hero Section */}
-      <section className="relative bg-[#0B192C] text-white overflow-hidden py-16 sm:py-24 border-b border-slate-800">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+      <section className="relative overflow-hidden py-16 sm:py-24 border-b border-[#334155]">
+        <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#7C5CFC_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-amber-400 text-xs font-semibold mb-6">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>P17 Design Solution: Cut through campus poster noise</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#151C2F] border border-[#7C5CFC]/30 text-[#38BDF8] text-xs font-semibold mb-6 shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-[#7C5CFC]" />
+              <span>P17 Solution: Cut through campus poster clutter</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              Your Campus. Your Interests. <span className="text-[#FF6500]">Your Next Experience.</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#F8FAFC] leading-tight">
+              Your Campus. Your Interests. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7C5CFC] to-[#38BDF8]">Your Next Experience.</span>
             </h1>
 
-            <p className="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed">
-              One authoritative campus feed, personal agenda synchronization, and transparent clash detection for student organizers. Never miss what matters at campus.
+            <p className="mt-5 text-base sm:text-lg text-[#94A3B8] leading-relaxed">
+              One central campus feed, personal agenda synchronization, and transparent clash detection for student organizers. Never miss what matters at campus.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 to="/discover"
-                className="bg-[#FF6500] hover:bg-[#e05800] text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition flex items-center gap-2 focus:ring-4 focus:ring-amber-500/30"
+                className="bg-[#7C5CFC] hover:bg-[#6B46E5] text-white font-bold px-6 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition flex items-center gap-2"
               >
                 <Compass className="w-5 h-5" />
                 Explore Campus Events
               </Link>
               <Link
                 to="/calendar"
-                className="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold px-6 py-3.5 rounded-xl transition flex items-center gap-2"
+                className="bg-[#151C2F] hover:bg-[#1E293B] text-[#F8FAFC] border border-[#334155] font-semibold px-6 py-3.5 rounded-xl transition flex items-center gap-2 shadow-sm"
               >
-                <Calendar className="w-5 h-5 text-amber-400" />
+                <Calendar className="w-5 h-5 text-[#38BDF8]" />
                 View Master Calendar
               </Link>
               {currentUser?.role === 'organizer' ? (
                 <Link
                   to="/organizer/create"
-                  className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3.5 rounded-xl transition flex items-center gap-2"
+                  className="bg-[#38BDF8]/20 border border-[#38BDF8]/40 hover:bg-[#38BDF8]/30 text-[#38BDF8] font-bold px-6 py-3.5 rounded-xl transition flex items-center gap-2"
                 >
                   Post Club Event
                 </Link>
               ) : (
                 <Link
                   to="/organizer"
-                  className="text-slate-300 hover:text-white px-4 py-3.5 flex items-center gap-1.5 text-sm font-medium hover:underline"
+                  className="text-[#94A3B8] hover:text-[#F8FAFC] px-4 py-3.5 flex items-center gap-1.5 text-sm font-medium hover:underline"
                 >
                   For Club Organisers →
                 </Link>
               )}
             </div>
 
-            {/* Quick Metrics from Blueprint */}
-            <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-4 pt-8 border-t border-slate-800/80 text-xs text-slate-400">
+            {/* Value Guarantees */}
+            <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-4 pt-8 border-t border-[#334155] text-xs text-[#94A3B8]">
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-emerald-400" />
                 <span>Verified Official Organisers</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-amber-400" />
+                <Clock className="w-4 h-4 text-[#38BDF8]" />
                 <span>Zero Double-Booking Guarantee</span>
               </div>
               <div className="flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-blue-400" />
+                <BookOpen className="w-4 h-4 text-[#7C5CFC]" />
                 <span>No Mandatory Account Gate</span>
               </div>
             </div>
@@ -109,26 +107,26 @@ export const LandingPage: React.FC = () => {
 
       {/* Featured Spotlight Section */}
       {featuredEvent && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-amber-600">Spotlight Event</span>
-              <h2 className="text-2xl font-bold text-slate-900 mt-1">Featured Campus Experience</h2>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#7C5CFC]">Spotlight Event</span>
+              <h2 className="text-2xl font-bold text-[#F8FAFC] mt-1">Featured Campus Experience</h2>
             </div>
-            <Link to="/discover" className="text-sm font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1">
-              All Events <ArrowRight className="w-4 h-4" />
+            <Link to="/discover" className="text-xs font-bold text-[#38BDF8] hover:text-cyan-300 flex items-center gap-1">
+              All Events <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition grid grid-cols-1 lg:grid-cols-12">
-            <div className="lg:col-span-7 h-64 lg:h-auto relative overflow-hidden bg-slate-900">
+          <div className="bg-[#151C2F] rounded-2xl border border-[#334155] overflow-hidden shadow-xl hover:border-[#7C5CFC]/50 transition-all duration-300 grid grid-cols-1 lg:grid-cols-12">
+            <div className="lg:col-span-7 h-64 lg:h-auto relative overflow-hidden bg-[#0B1020]">
               <img
                 src={featuredEvent.cover_image}
                 alt={featuredEvent.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover opacity-90"
               />
               <div className="absolute top-4 left-4">
-                <span className="bg-[#FF6500] text-white font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider shadow">
+                <span className="bg-[#7C5CFC] text-white font-bold text-xs px-3.5 py-1 rounded-full uppercase tracking-wider shadow-lg">
                   Editor's Choice
                 </span>
               </div>
@@ -136,24 +134,24 @@ export const LandingPage: React.FC = () => {
 
             <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between">
               <div>
-                <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-2">
+                <div className="flex items-center gap-2 text-xs font-semibold text-[#94A3B8] mb-2">
                   <span>{featuredEvent.organization?.name}</span>
-                  <span className="text-slate-300">•</span>
-                  <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-medium">Approved Listing</span>
+                  <span className="text-[#334155]">•</span>
+                  <span className="text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-md font-medium">Approved Listing</span>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 hover:text-blue-600 transition">
+                <h3 className="text-xl sm:text-2xl font-extrabold text-[#F8FAFC] hover:text-[#38BDF8] transition">
                   <Link to={`/events/${featuredEvent.id}`}>{featuredEvent.title}</Link>
                 </h3>
 
-                <p className="mt-3 text-sm text-slate-600 line-clamp-3 leading-relaxed">
+                <p className="mt-3 text-sm text-[#94A3B8] line-clamp-3 leading-relaxed">
                   {featuredEvent.description}
                 </p>
 
-                <div className="mt-6 space-y-2 text-xs text-slate-700">
+                <div className="mt-6 space-y-2 text-xs text-[#94A3B8]">
                   <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-amber-500" />
-                    <span className="font-semibold">
+                    <Calendar className="w-4 h-4 text-[#38BDF8]" />
+                    <span className="font-semibold text-[#F8FAFC]">
                       {new Date(featuredEvent.start_time).toLocaleString('en-IN', {
                         dateStyle: 'full',
                         timeStyle: 'short'
@@ -161,17 +159,17 @@ export const LandingPage: React.FC = () => {
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold text-slate-500">Venue:</span>
-                    <span>{featuredEvent.venue?.name}</span>
+                    <span className="font-semibold text-[#94A3B8]">Venue:</span>
+                    <span className="text-[#F8FAFC]">{featuredEvent.venue?.name}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-sm font-bold text-emerald-600">{featuredEvent.cost}</span>
+              <div className="mt-8 pt-6 border-t border-[#334155] flex items-center justify-between">
+                <span className="text-sm font-bold text-emerald-400">{featuredEvent.cost}</span>
                 <Link
                   to={`/events/${featuredEvent.id}`}
-                  className="bg-[#0B192C] hover:bg-slate-800 text-white text-xs font-semibold px-5 py-2.5 rounded-lg transition"
+                  className="bg-[#7C5CFC] hover:bg-[#6B46E5] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow"
                 >
                   View Details & Register →
                 </Link>
@@ -182,21 +180,21 @@ export const LandingPage: React.FC = () => {
       )}
 
       {/* Browse by Interest Categories */}
-      <section className="bg-slate-100/70 py-12 border-y border-slate-200">
+      <section className="bg-[#151C2F]/40 py-14 border-y border-[#334155]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Browse by Interest</h2>
-              <p className="text-xs text-slate-500 mt-1">Select a category to filter upcoming activities</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#F8FAFC]">Browse by Interest</h2>
+              <p className="text-xs text-[#94A3B8] mt-1">Select a category to filter upcoming activities</p>
             </div>
             
             <div className="flex gap-2 flex-wrap">
               <button
                 onClick={() => setSelectedInterest('All')}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition ${
                   selectedInterest === 'All'
-                    ? 'bg-[#0B192C] text-white shadow'
-                    : 'bg-white text-slate-600 hover:bg-slate-200'
+                    ? 'bg-[#7C5CFC] text-white shadow'
+                    : 'bg-[#151C2F] text-[#94A3B8] hover:bg-[#1E293B] border border-[#334155]'
                 }`}
               >
                 All Topics
@@ -205,10 +203,10 @@ export const LandingPage: React.FC = () => {
                 <button
                   key={c.label}
                   onClick={() => setSelectedInterest(c.label)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold transition flex items-center gap-1.5 ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition flex items-center gap-1.5 ${
                     selectedInterest === c.label
-                      ? 'bg-[#0B192C] text-white shadow'
-                      : 'bg-white text-slate-600 hover:bg-slate-200'
+                      ? 'bg-[#7C5CFC] text-white shadow'
+                      : 'bg-[#151C2F] text-[#94A3B8] hover:bg-[#1E293B] border border-[#334155]'
                   }`}
                 >
                   <span>{c.icon}</span>
@@ -224,10 +222,10 @@ export const LandingPage: React.FC = () => {
             ))}
           </div>
 
-          <div className="text-center mt-10">
+          <div className="text-center mt-12">
             <Link
               to="/discover"
-              className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-semibold px-6 py-2.5 rounded-xl text-sm shadow-sm transition"
+              className="inline-flex items-center gap-2 bg-[#151C2F] hover:bg-[#1E293B] border border-[#334155] text-[#F8FAFC] font-bold px-6 py-3 rounded-xl text-xs shadow-md transition"
             >
               Browse Full Event Catalogue ({events.length} listings) <ArrowRight className="w-4 h-4" />
             </Link>
@@ -235,30 +233,30 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* P17 Clash Prevention Showcase */}
+      {/* P17 Clash Prevention Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-gradient-to-r from-blue-900 to-indigo-950 rounded-2xl text-white p-8 sm:p-12 shadow-xl relative overflow-hidden">
+        <div className="bg-gradient-to-r from-[#151C2F] to-[#1E293B] rounded-3xl border border-[#7C5CFC]/40 p-8 sm:p-12 shadow-2xl relative overflow-hidden">
           <div className="max-w-2xl">
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#38BDF8] bg-[#38BDF8]/10 px-3 py-1 rounded-full border border-[#38BDF8]/30">
               The P17 Innovation
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold mt-4 leading-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold mt-4 leading-tight text-[#F8FAFC]">
               Organisers no longer have to shout or guess clashes.
             </h2>
-            <p className="mt-3 text-slate-300 text-sm leading-relaxed">
+            <p className="mt-3 text-[#94A3B8] text-sm leading-relaxed">
               CampusPulse runs live venue reservation checks (<code>A.start &lt; B.end AND B.start &lt; A.end</code>) and audience collision alerts before submission. Spot conflicts in real-time, avoid double-bookings, and coordinate seamlessly.
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 to="/organizer/clashes"
-                className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-5 py-2.5 rounded-lg text-xs shadow transition flex items-center gap-2"
+                className="bg-[#7C5CFC] hover:bg-[#6B46E5] text-white font-bold px-5 py-3 rounded-xl text-xs shadow-lg transition flex items-center gap-2"
               >
                 Launch Live Clash Demo →
               </Link>
               <Link
                 to="/organizer/create"
-                className="bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-2.5 rounded-lg text-xs border border-white/20 transition"
+                className="bg-[#151C2F] hover:bg-[#1E293B] text-[#F8FAFC] font-semibold px-5 py-3 rounded-xl text-xs border border-[#334155] transition"
               >
                 Create Event Draft
               </Link>
@@ -269,4 +267,3 @@ export const LandingPage: React.FC = () => {
     </div>
   );
 };
-
