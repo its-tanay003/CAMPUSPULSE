@@ -1,4 +1,4 @@
-import { CampusEvent, Organization, Venue, UserProfile, SavedEvent, Registration, ApprovalAction } from '../types';
+import { CampusEvent, Organization, OrganizationMember, Venue, UserProfile, SavedEvent, Registration, ApprovalAction } from '../types';
 
 export const DEMO_VENUES: Venue[] = [
   {
@@ -302,6 +302,27 @@ export const INITIAL_REGISTRATIONS: Registration[] = [
     source: 'platform',
     notes: 'Roll No: 12204592 - Lab Seat Confirmed',
     created_at: '2026-10-28T18:05:00+05:30'
+  }
+];
+
+export const INITIAL_ORGANIZATION_MEMBERS: OrganizationMember[] = [
+  {
+    id: 'mem-1',
+    organization_id: 'org-google-dev',
+    user_id: 'user-organizer-01',
+    role: 'lead'
+  },
+  {
+    id: 'mem-2',
+    organization_id: 'org-cultural-society',
+    user_id: 'user-organizer-01',
+    role: 'coordinator'
+  },
+  {
+    id: 'mem-3',
+    organization_id: 'org-acm',
+    user_id: 'user-organizer-02',
+    role: 'lead'
   }
 ];
 

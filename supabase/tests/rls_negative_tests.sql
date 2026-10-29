@@ -131,5 +131,34 @@ begin
   end if;
 end $$;
 
+-- ============================================================================
+-- TEST 6: Organizer cannot insert or create events for unauthorized organizations
+-- ============================================================================
+-- Execute as GDSC Lead attempting to create an event under ACM
+set local role authenticated;
+set local "request.jwt.claim.sub" = '33333333-3333-3333-3333-333333333333';
+
+do $$
+begin
+  insert into public.events (
+    id, title, description, category, organization_id, venue_id, start_time, end_time, status, created_by
+  ) values (
+    'evt-unauthorized-insert-attempt',
+    'Malicious Event by GDSC under ACM name',
+    'Description',
+    'Technology',
+    'org-acm', -- Not a member of org-acm!
+    'venue-block34-audi',
+    '2026-11-10T10:00:00Z',
+    '2026-11-10T12:00:00Z',
+    'draft',
+    '33333333-3333-3333-3333-333333333333'
+  );
+
+  raise exception 'FAIL: Organizer was able to insert an event for an unassigned organization!';
+exception when insufficient_privilege or check_violation then
+  raise notice 'PASS: Test 6 - Organizer blocked from inserting events for organizations without active membership.';
+end $$;
+
 rollback;
 

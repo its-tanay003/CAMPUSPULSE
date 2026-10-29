@@ -25,6 +25,15 @@ export interface Organization {
   member_count?: number;
 }
 
+export interface OrganizationMember {
+  id: string;
+  organization_id: string;
+  user_id: string;
+  role: 'lead' | 'coordinator' | 'member';
+  created_at?: string;
+  organization?: Organization;
+}
+
 export interface Venue {
   id: string;
   name: string;

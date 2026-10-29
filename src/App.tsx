@@ -12,6 +12,7 @@ import { CalendarPage } from './pages/CalendarPage';
 import { MyEventsPage } from './pages/MyEventsPage';
 import { CreateEventPage } from './pages/CreateEventPage';
 import { OrganizerDashboardPage } from './pages/OrganizerDashboardPage';
+import { OrganizerEventsPage } from './pages/OrganizerEventsPage';
 import { ClashCheckPage } from './pages/ClashCheckPage';
 import { AdminApprovalsPage } from './pages/AdminApprovalsPage';
 import { ProfilePage } from './pages/ProfilePage';
@@ -43,7 +44,9 @@ export const App: React.FC = () => {
 
               {/* Organizer Studio Routes */}
               <Route path="/organizer" element={<OrganizerDashboardPage />} />
+              <Route path="/organizer/events" element={<OrganizerEventsPage />} />
               <Route path="/organizer/create" element={<CreateEventPage />} />
+              <Route path="/organizer/edit/:id" element={<CreateEventPage />} />
               <Route path="/organizer/clashes" element={<ClashCheckPage />} />
 
               {/* Administrator Approvals & Governance Routes */}
