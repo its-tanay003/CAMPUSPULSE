@@ -19,7 +19,9 @@ export const Select: React.FC<SelectProps> = ({
   className = '',
   ...props
 }) => {
-  const selectId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined);
+  const generatedId = React.useId();
+  const selectId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : generatedId);
+  const errorId = `${selectId}-error`;
 
   return (
     <div className="w-full space-y-1.5">
@@ -30,6 +32,8 @@ export const Select: React.FC<SelectProps> = ({
       )}
       <select
         id={selectId}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? errorId : undefined}
         className={`w-full text-xs p-3 bg-[#0B1020] border rounded-xl text-[#F8FAFC] transition duration-150 focus:outline-none focus:ring-2 cursor-pointer ${
           error
             ? 'border-rose-500 focus:ring-rose-500'
@@ -43,7 +47,11 @@ export const Select: React.FC<SelectProps> = ({
           </option>
         ))}
       </select>
-      {error && <p className="text-[11px] text-rose-400 font-medium">{error}</p>}
+      {error && (
+        <p id={errorId} role="alert" className="text-[11px] text-rose-400 font-medium">
+          {error}
+        </p>
+      )}
     </div>
   );
 };

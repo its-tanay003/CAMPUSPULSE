@@ -16,11 +16,17 @@ export const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-8 gap-3 text-[#94A3B8]">
+    <div 
+      role="status" 
+      aria-live="polite" 
+      className="flex flex-col items-center justify-center p-8 gap-3 text-[#94A3B8]"
+    >
       <div
         className={`${sizeMap[size]} border-[#7C5CFC] border-t-transparent rounded-full animate-spin`}
+        aria-hidden="true"
       />
       {label && <p className="text-xs font-semibold">{label}</p>}
+      <span className="sr-only">{label}</span>
     </div>
   );
 };

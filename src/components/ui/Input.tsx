@@ -14,7 +14,10 @@ export const Input: React.FC<InputProps> = ({
   className = '',
   ...props
 }) => {
-  const inputId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined);
+  const generatedId = React.useId();
+  const inputId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : generatedId);
+  const errorId = `${inputId}-error`;
+  const helperId = `${inputId}-helper`;
 
   return (
     <div className="w-full space-y-1.5">
@@ -25,6 +28,10 @@ export const Input: React.FC<InputProps> = ({
       )}
       <input
         id={inputId}
+        aria-invalid={Boolean(error)}
+        aria-describedby={
+          error ? errorId : helperText ? helperId : undefined
+        }
         className={`w-full text-xs p-3 bg-[#0B1020] border rounded-xl text-[#F8FAFC] placeholder-[#94A3B8] transition duration-150 focus:outline-none focus:ring-2 ${
           error
             ? 'border-rose-500 focus:ring-rose-500'
@@ -32,8 +39,16 @@ export const Input: React.FC<InputProps> = ({
         } ${className}`}
         {...props}
       />
-      {error && <p className="text-[11px] text-rose-400 font-medium">{error}</p>}
-      {!error && helperText && <p className="text-[11px] text-[#94A3B8]">{helperText}</p>}
+      {error && (
+        <p id={errorId} role="alert" className="text-[11px] text-rose-400 font-medium">
+          {error}
+        </p>
+      )}
+      {!error && helperText && (
+        <p id={helperId} className="text-[11px] text-[#94A3B8]">
+          {helperText}
+        </p>
+      )}
     </div>
   );
 };

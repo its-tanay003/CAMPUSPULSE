@@ -88,14 +88,15 @@ export const EventCard: React.FC<EventCardProps> = ({ event, compact = false }) 
               e.preventDefault();
               toggleSaveEvent(event.id);
             }}
-            aria-label={saved ? `Remove ${event.title} from saved` : `Save ${event.title}`}
-            className={`absolute bottom-3 right-3 p-2.5 rounded-full shadow-lg transition-all ${
+            aria-label={saved ? `Remove ${event.title} from saved schedule` : `Save ${event.title} to my schedule`}
+            aria-pressed={saved}
+            className={`absolute bottom-3 right-3 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full shadow-lg transition-all ${
               saved 
                 ? 'bg-[#7C5CFC] text-white ring-2 ring-[#7C5CFC]/50' 
                 : 'bg-[#151C2F]/80 backdrop-blur-md text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F8FAFC] border border-[#334155]'
             }`}
           >
-            <Bookmark className={`w-4 h-4 ${saved ? 'fill-current' : ''}`} />
+            <Bookmark className={`w-4 h-4 ${saved ? 'fill-current' : ''}`} aria-hidden="true" />
           </button>
         </div>
       )}
@@ -156,7 +157,8 @@ export const EventCard: React.FC<EventCardProps> = ({ event, compact = false }) 
 
           <Link
             to={`/events/${event.id}`}
-            className="text-[#38BDF8] hover:text-cyan-300 font-bold flex items-center gap-1 transition"
+            aria-label={`View details and registration for ${event.title}`}
+            className="text-[#38BDF8] hover:text-cyan-300 font-bold flex items-center gap-1 transition p-1.5 min-h-[36px]"
           >
             Details →
           </Link>

@@ -101,15 +101,17 @@ export const CalendarPage: React.FC = () => {
               <div className="flex bg-[#0B1020] p-1 rounded-lg border border-[#334155]">
                 <button
                   onClick={() => setViewType('agenda')}
-                  className={`px-3 py-1 rounded font-semibold transition ${
+                  aria-pressed={viewType === 'agenda'}
+                  className={`px-3 py-1.5 min-h-[36px] rounded font-semibold transition ${
                     viewType === 'agenda' ? 'bg-[#151C2F] text-[#38BDF8] shadow' : 'text-[#94A3B8]'
                   }`}
                 >
-                  Agenda List (Mobile Default)
+                  Agenda List (Accessible)
                 </button>
                 <button
                   onClick={() => setViewType('week')}
-                  className={`hidden sm:inline-block px-3 py-1 rounded font-semibold transition ${
+                  aria-pressed={viewType === 'week'}
+                  className={`hidden sm:inline-block px-3 py-1.5 min-h-[36px] rounded font-semibold transition ${
                     viewType === 'week' ? 'bg-[#151C2F] text-[#38BDF8] shadow' : 'text-[#94A3B8]'
                   }`}
                 >

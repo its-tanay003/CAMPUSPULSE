@@ -210,8 +210,10 @@ export const DiscoverPage: React.FC = () => {
               variant="secondary"
               className="sm:hidden gap-2"
               onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
+              aria-expanded={mobileFilterOpen}
+              aria-controls="discover-filter-sidebar"
             >
-              <Filter className="w-4 h-4 text-[#38BDF8]" />
+              <Filter className="w-4 h-4 text-[#38BDF8]" aria-hidden="true" />
               Filter Options ({activeFilterCount})
             </Button>
           </div>
@@ -219,7 +221,7 @@ export const DiscoverPage: React.FC = () => {
           {/* Quick Date Shortcuts Bar */}
           <div className="mt-4 pt-4 border-t border-[#334155] flex items-center gap-2 flex-wrap text-xs">
             <span className="text-[#94A3B8] font-semibold flex items-center gap-1.5 mr-1">
-              <Calendar className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <Calendar className="w-3.5 h-3.5 text-[#38BDF8]" aria-hidden="true" />
               Quick Date:
             </span>
             {[
@@ -234,7 +236,8 @@ export const DiscoverPage: React.FC = () => {
                   setDateFilter(d.id as QuickDateFilter);
                   setCurrentPage(1);
                 }}
-                className={`px-3 py-1 rounded-lg font-semibold transition border ${
+                aria-pressed={dateFilter === d.id}
+                className={`px-3 py-1.5 min-h-[36px] rounded-lg font-semibold transition border ${
                   dateFilter === d.id
                     ? 'bg-[#7C5CFC] text-white border-[#7C5CFC] shadow-sm'
                     : 'bg-[#0B1020] text-[#94A3B8] hover:text-[#F8FAFC] border-[#334155]'
@@ -250,18 +253,22 @@ export const DiscoverPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           
           {/* Filters Sidebar */}
-          <aside className={`lg:block ${mobileFilterOpen ? 'block' : 'hidden'} space-y-6 bg-[#151C2F] p-6 rounded-2xl border border-[#334155] shadow-md h-fit`}>
+          <aside 
+            id="discover-filter-sidebar"
+            aria-label="Event filters"
+            className={`lg:block ${mobileFilterOpen ? 'block' : 'hidden'} space-y-6 bg-[#151C2F] p-6 rounded-2xl border border-[#334155] shadow-md h-fit`}
+          >
             <div className="flex items-center justify-between pb-4 border-b border-[#334155]">
               <h2 className="font-bold text-[#F8FAFC] text-sm flex items-center gap-2">
-                <Filter className="w-4 h-4 text-[#38BDF8]" />
+                <Filter className="w-4 h-4 text-[#38BDF8]" aria-hidden="true" />
                 Filter Options
               </h2>
               {activeFilterCount > 0 && (
                 <button
                   onClick={resetFilters}
-                  className="text-xs text-[#38BDF8] hover:text-cyan-300 font-semibold flex items-center gap-1"
+                  className="text-xs text-[#38BDF8] hover:text-cyan-300 font-semibold flex items-center gap-1 p-1 min-h-[32px]"
                 >
-                  <RotateCcw className="w-3 h-3" /> Reset
+                  <RotateCcw className="w-3 h-3" aria-hidden="true" /> Reset
                 </button>
               )}
             </div>
@@ -338,21 +345,24 @@ export const DiscoverPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => { setCostFilter('all'); setCurrentPage(1); }}
-                  className={`py-1.5 rounded-lg transition ${costFilter === 'all' ? 'bg-[#7C5CFC] text-white shadow-sm' : 'text-[#94A3B8] hover:text-[#F8FAFC]'}`}
+                  aria-pressed={costFilter === 'all'}
+                  className={`py-2 min-h-[36px] rounded-lg transition ${costFilter === 'all' ? 'bg-[#7C5CFC] text-white shadow-sm' : 'text-[#94A3B8] hover:text-[#F8FAFC]'}`}
                 >
                   All
                 </button>
                 <button
                   type="button"
                   onClick={() => { setCostFilter('free'); setCurrentPage(1); }}
-                  className={`py-1.5 rounded-lg transition ${costFilter === 'free' ? 'bg-[#7C5CFC] text-white shadow-sm' : 'text-[#94A3B8] hover:text-[#F8FAFC]'}`}
+                  aria-pressed={costFilter === 'free'}
+                  className={`py-2 min-h-[36px] rounded-lg transition ${costFilter === 'free' ? 'bg-[#7C5CFC] text-white shadow-sm' : 'text-[#94A3B8] hover:text-[#F8FAFC]'}`}
                 >
                   Free
                 </button>
                 <button
                   type="button"
                   onClick={() => { setCostFilter('paid'); setCurrentPage(1); }}
-                  className={`py-1.5 rounded-lg transition ${costFilter === 'paid' ? 'bg-[#7C5CFC] text-white shadow-sm' : 'text-[#94A3B8] hover:text-[#F8FAFC]'}`}
+                  aria-pressed={costFilter === 'paid'}
+                  className={`py-2 min-h-[36px] rounded-lg transition ${costFilter === 'paid' ? 'bg-[#7C5CFC] text-white shadow-sm' : 'text-[#94A3B8] hover:text-[#F8FAFC]'}`}
                 >
                   Paid
                 </button>

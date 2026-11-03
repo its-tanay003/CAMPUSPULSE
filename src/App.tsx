@@ -29,9 +29,17 @@ export const App: React.FC = () => {
     <AppProvider>
       <BrowserRouter>
         <div className="min-h-screen flex flex-col bg-[#0B1020] text-[#F8FAFC] antialiased selection:bg-[#7C5CFC] selection:text-white">
+          {/* Skip link for keyboard accessibility */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#7C5CFC] focus:text-white focus:rounded-xl focus:shadow-2xl focus:font-bold focus:outline-none focus:ring-2 focus:ring-white text-xs"
+          >
+            Skip to main content
+          </a>
+
           <Navbar />
 
-          <main className="flex-1">
+          <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
             <Routes>
               {/* Public & Student Routes */}
               <Route path="/" element={<LandingPage />} />

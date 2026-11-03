@@ -97,38 +97,49 @@ export const Navbar: React.FC = () => {
           <div className="relative">
             <button
               onClick={() => setRoleSwitcherOpen(!roleSwitcherOpen)}
-              className="flex items-center gap-2 bg-[#151C2F] hover:bg-[#1E293B] border border-[#334155] text-xs px-3 py-1.5 rounded-full text-[#F8FAFC] transition shadow-sm"
+              aria-haspopup="menu"
+              aria-expanded={roleSwitcherOpen}
+              aria-label={`Role simulator menu. Current role: ${currentUser?.role || 'Guest'}`}
+              className="flex items-center gap-2 bg-[#151C2F] hover:bg-[#1E293B] border border-[#334155] text-xs px-3 py-2 min-h-[36px] rounded-full text-[#F8FAFC] transition shadow-sm"
               title="Switch user role for test evaluation"
             >
-              <span className={`w-2 h-2 rounded-full ${
-                currentUser?.role === 'admin' 
-                  ? 'bg-purple-400' 
-                  : currentUser?.role === 'organizer' 
-                  ? 'bg-cyan-400' 
-                  : 'bg-emerald-400'
-              }`} />
+              <span 
+                aria-hidden="true"
+                className={`w-2 h-2 rounded-full ${
+                  currentUser?.role === 'admin' 
+                    ? 'bg-purple-400' 
+                    : currentUser?.role === 'organizer' 
+                    ? 'bg-cyan-400' 
+                    : 'bg-emerald-400'
+                }`} 
+              />
               <span className="font-semibold capitalize">{currentUser?.role || 'Guest'} Role</span>
               <span className="text-[10px] bg-[#0B1020] text-[#94A3B8] px-1 py-0.5 rounded font-mono">Simulate</span>
             </button>
 
             {roleSwitcherOpen && (
-              <div className="absolute right-0 mt-2 w-64 bg-[#151C2F] border border-[#334155] rounded-xl shadow-2xl py-2 z-50 text-xs">
+              <div 
+                role="menu"
+                aria-label="Select simulation role"
+                className="absolute right-0 mt-2 w-64 bg-[#151C2F] border border-[#334155] rounded-xl shadow-2xl py-2 z-50 text-xs"
+              >
                 <div className="px-3.5 py-1.5 text-[11px] font-bold text-[#94A3B8] uppercase tracking-wider border-b border-[#334155]">
                   Role Simulator
                 </div>
                 {(['student', 'organizer', 'admin'] as UserRole[]).map((r) => (
                   <button
                     key={r}
+                    role="menuitem"
                     onClick={() => {
                       switchRole(r);
                       setRoleSwitcherOpen(false);
                     }}
-                    className={`w-full text-left px-3.5 py-2.5 flex items-center justify-between hover:bg-[#1E293B] transition ${
+                    className={`w-full text-left px-3.5 py-2.5 min-h-[40px] flex items-center justify-between hover:bg-[#1E293B] transition ${
                       currentUser?.role === r ? 'text-[#38BDF8] font-bold bg-[#1E293B]/50' : 'text-[#F8FAFC]'
                     }`}
                   >
                     <span className="capitalize">{r} Persona</span>
-                    {currentUser?.role === r && <CheckCircle2 className="w-4 h-4 text-[#38BDF8]" />}
+                    {currentUser?.role === r && <CheckCircle2 className="w-4 h-4 text-[#38BDF8]" aria-hidden="true" />}
                   </button>
                 ))}
               </div>
@@ -191,23 +202,29 @@ export const Navbar: React.FC = () => {
         <div className="flex md:hidden items-center gap-2">
           <button
             onClick={() => switchRole(currentUser?.role === 'student' ? 'organizer' : currentUser?.role === 'organizer' ? 'admin' : 'student')}
-            className="text-[11px] bg-[#151C2F] px-2.5 py-1 rounded-lg text-[#38BDF8] border border-[#334155] font-semibold"
+            aria-label={`Current simulation role: ${currentUser?.role}. Click to switch role.`}
+            className="text-[11px] bg-[#151C2F] px-2.5 py-1.5 min-h-[36px] rounded-lg text-[#38BDF8] border border-[#334155] font-semibold"
           >
             {currentUser?.role}
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-[#94A3B8] hover:text-[#F8FAFC] rounded-lg"
-            aria-label="Toggle Navigation Menu"
+            className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-[#94A3B8] hover:text-[#F8FAFC] rounded-lg"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
           </button>
         </div>
       </nav>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#151C2F] border-b border-[#334155] px-4 pt-3 pb-6 space-y-3">
+        <div 
+          role="region" 
+          aria-label="Mobile navigation drawer"
+          className="md:hidden bg-[#151C2F] border-b border-[#334155] px-4 pt-3 pb-6 space-y-3"
+        >
           <div className="grid grid-cols-2 gap-2 pb-3 border-b border-[#334155] text-sm font-semibold">
             <Link
               to="/discover"

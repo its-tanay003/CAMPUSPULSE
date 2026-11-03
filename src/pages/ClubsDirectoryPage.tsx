@@ -38,8 +38,9 @@ export const ClubsDirectoryPage: React.FC = () => {
                   <div className="flex items-start gap-4">
                     <img
                       src={org.logo_url}
-                      alt={org.name}
+                      alt={`Logo for ${org.name}`}
                       className="w-14 h-14 rounded-2xl object-cover border border-[#334155] shrink-0"
+                      loading="lazy"
                     />
                     <div>
                       <div className="flex items-center gap-2">
