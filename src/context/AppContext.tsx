@@ -52,6 +52,8 @@ interface AppContextType {
 
   // Admin Actions
   reviewEventApproval: (eventId: string, decision: 'approved' | 'changes_requested' | 'rejected', reason: string) => void;
+  updateVenue: (venueData: Partial<Venue> & { id: string }) => { success: boolean; error?: string };
+  verifyOrganization: (orgId: string, verify: boolean, notes?: string) => { success: boolean; error?: string };
 
   // Global State
   isLoading: boolean;
@@ -79,8 +81,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }));
   });
 
-  const [organizations] = useState<Organization[]>(DEMO_ORGANIZATIONS);
-  const [venues] = useState<Venue[]>(DEMO_VENUES);
+  const [organizations, setOrganizations] = useState<Organization[]>(() => {
+    const cached = localStorage.getItem('cp_organizations');
+    return cached ? JSON.parse(cached) : DEMO_ORGANIZATIONS;
+  });
+  const [venues, setVenues] = useState<Venue[]>(() => {
+    const cached = localStorage.getItem('cp_venues');
+    return cached ? JSON.parse(cached) : DEMO_VENUES;
+  });
   const [organizationMembers] = useState<OrganizationMember[]>(() => {
     const cached = localStorage.getItem('cp_org_members');
     return cached ? JSON.parse(cached) : INITIAL_ORGANIZATION_MEMBERS;
@@ -120,6 +128,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => {
     localStorage.setItem('cp_approvals', JSON.stringify(approvals));
   }, [approvals]);
+
+  useEffect(() => {
+    localStorage.setItem('cp_venues', JSON.stringify(venues));
+  }, [venues]);
+
+  useEffect(() => {
+    localStorage.setItem('cp_organizations', JSON.stringify(organizations));
+  }, [organizations]);
 
   useEffect(() => {
     if (currentUser) {
@@ -431,6 +447,48 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setEvents(prev => prev.map(e => e.id === eventId ? { ...e, status: newStatus, updated_at: new Date().toISOString() } : e));
   };
 
+  const updateVenue = (venueData: Partial<Venue> & { id: string }): { success: boolean; error?: string } => {
+    if (!currentUser || currentUser.role !== 'admin') {
+      return { success: false, error: 'Permission denied: Only administrators can modify venue records.' };
+    }
+
+    const existing = venues.find(v => v.id === venueData.id);
+    if (!existing) {
+      return { success: false, error: 'Venue not found.' };
+    }
+
+    const updated: Venue = {
+      ...existing,
+      ...venueData,
+      updated_at: new Date().toISOString()
+    };
+
+    setVenues(prev => prev.map(v => v.id === updated.id ? updated : v));
+    return { success: true };
+  };
+
+  const verifyOrganization = (orgId: string, verify: boolean, notes?: string): { success: boolean; error?: string } => {
+    if (!currentUser || currentUser.role !== 'admin') {
+      return { success: false, error: 'Permission denied: Only administrators can execute organization verification.' };
+    }
+
+    const existing = organizations.find(o => o.id === orgId);
+    if (!existing) {
+      return { success: false, error: 'Organization not found.' };
+    }
+
+    const updated: Organization = {
+      ...existing,
+      is_verified: verify,
+      verified_by: verify ? currentUser.full_name : undefined,
+      verified_at: verify ? new Date().toISOString() : undefined,
+      verification_notes: notes || (verify ? 'Verified by campus student welfare administration.' : 'Verification revoked or suspended.')
+    };
+
+    setOrganizations(prev => prev.map(o => o.id === updated.id ? updated : o));
+    return { success: true };
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -454,6 +512,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         getUserOrganizations,
         canManageEvent,
         reviewEventApproval,
+        updateVenue,
+        verifyOrganization,
         isLoading,
         searchQuery,
         setSearchQuery

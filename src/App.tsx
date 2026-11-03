@@ -17,6 +17,8 @@ import { ClashCheckPage } from './pages/ClashCheckPage';
 import { AdminApprovalsPage } from './pages/AdminApprovalsPage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { AdminEventsDirectoryPage } from './pages/AdminEventsDirectoryPage';
+import { AdminVenuesPage } from './pages/AdminVenuesPage';
+import { AdminOrganizersPage } from './pages/AdminOrganizersPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { ClubsDirectoryPage } from './pages/ClubsDirectoryPage';
 import { LoginPage } from './pages/LoginPage';
@@ -55,6 +57,8 @@ export const App: React.FC = () => {
               <Route path="/admin" element={<AdminDashboardPage />} />
               <Route path="/admin/approvals" element={<AdminApprovalsPage />} />
               <Route path="/admin/events" element={<AdminEventsDirectoryPage />} />
+              <Route path="/admin/venues" element={<AdminVenuesPage />} />
+              <Route path="/admin/organizers" element={<AdminOrganizersPage />} />
 
               {/* Fallback */}
               <Route path="*" element={<Navigate to="/" replace />} />

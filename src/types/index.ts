@@ -22,6 +22,9 @@ export interface Organization {
   contact_email: string;
   lead_name: string;
   is_verified: boolean;
+  verified_by?: string;
+  verified_at?: string;
+  verification_notes?: string;
   member_count?: number;
 }
 
@@ -41,8 +44,22 @@ export interface Venue {
   building: string;
   capacity?: number;
   authority: string;
+  data_source?: string;
   is_authoritative: boolean;
+  is_demo?: boolean;
   is_active: boolean;
+  updated_at?: string;
+}
+
+export interface VerificationLog {
+  id: string;
+  organization_id: string;
+  organization_name: string;
+  reviewer_id: string;
+  reviewer_name: string;
+  decision: 'verified' | 'unverified';
+  notes: string;
+  created_at: string;
 }
 
 export type EventCategory = 

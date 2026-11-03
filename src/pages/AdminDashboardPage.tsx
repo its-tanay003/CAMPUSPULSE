@@ -13,7 +13,8 @@ import {
   Search, 
   ArrowRight,
   ExternalLink,
-  Layers
+  Layers,
+  Users
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { detectEventConflicts } from '../lib/clashDetector';
@@ -110,6 +111,20 @@ export const AdminDashboardPage: React.FC = () => {
             >
               <Layers className="w-4 h-4 text-[#38BDF8]" />
               All Campus Events
+            </Link>
+            <Link
+              to="/admin/venues"
+              className="bg-[#0B1020] hover:bg-[#1E293B] text-[#F8FAFC] border border-[#334155] font-semibold text-xs px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow"
+            >
+              <Building2 className="w-4 h-4 text-emerald-400" />
+              Venues Registry
+            </Link>
+            <Link
+              to="/admin/organizers"
+              className="bg-[#0B1020] hover:bg-[#1E293B] text-[#F8FAFC] border border-[#334155] font-semibold text-xs px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow"
+            >
+              <Users className="w-4 h-4 text-amber-400" />
+              Organizer Verification
             </Link>
           </div>
         </div>
@@ -272,3 +287,4 @@ export const AdminDashboardPage: React.FC = () => {
     </div>
   );
 };
+

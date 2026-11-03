@@ -8,8 +8,11 @@ export const DEMO_VENUES: Venue[] = [
     location: 'Central Campus',
     capacity: 2500,
     authority: 'Campus Central Estate & Room Allocation Office',
+    data_source: 'Official Campus Enterprise Room Allocation System (ERP)',
     is_authoritative: true,
-    is_active: true
+    is_demo: false,
+    is_active: true,
+    updated_at: '2026-10-25T08:00:00Z'
   },
   {
     id: 'venue-block34-audi',
@@ -18,8 +21,11 @@ export const DEMO_VENUES: Venue[] = [
     location: 'School of Computer Science',
     capacity: 350,
     authority: 'CSE Department Administration',
+    data_source: 'School of Computer Science Departmental Registry',
     is_authoritative: true,
-    is_active: true
+    is_demo: false,
+    is_active: true,
+    updated_at: '2026-10-25T08:00:00Z'
   },
   {
     id: 'venue-unipolis',
@@ -28,8 +34,11 @@ export const DEMO_VENUES: Venue[] = [
     location: 'North Zone',
     capacity: 8000,
     authority: 'Student Welfare & Sports Authority',
+    data_source: 'Student Welfare & Sports Facilities Master Registry',
     is_authoritative: true,
-    is_active: true
+    is_demo: false,
+    is_active: true,
+    updated_at: '2026-10-25T08:00:00Z'
   },
   {
     id: 'venue-innovation-lab',
@@ -38,8 +47,11 @@ export const DEMO_VENUES: Venue[] = [
     location: 'Engineering Complex',
     capacity: 80,
     authority: 'Dean Academic Computing',
+    data_source: 'Academic Computing Laboratory Scheduler',
     is_authoritative: true,
-    is_active: true
+    is_demo: false,
+    is_active: true,
+    updated_at: '2026-10-25T08:00:00Z'
   },
   {
     id: 'venue-block28-seminar',
@@ -48,8 +60,24 @@ export const DEMO_VENUES: Venue[] = [
     location: 'Management Complex',
     capacity: 150,
     authority: 'Estate Management Cell',
+    data_source: 'Estate Management Cell Internal Booking Log',
     is_authoritative: true,
-    is_active: true
+    is_demo: false,
+    is_active: true,
+    updated_at: '2026-10-25T08:00:00Z'
+  },
+  {
+    id: 'venue-demo-lawn',
+    name: 'Central Lawn Gazebo (Demonstration Record)',
+    building: 'Open Lawns',
+    location: 'Campus Quad',
+    capacity: 100,
+    authority: 'Informal Student Activities (Unmaintained Feed)',
+    data_source: 'Simulated Student Association Mock Feed',
+    is_authoritative: false,
+    is_demo: true,
+    is_active: true,
+    updated_at: '2026-11-01T12:00:00Z'
   }
 ];
 
@@ -64,6 +92,9 @@ export const DEMO_ORGANIZATIONS: Organization[] = [
     contact_email: 'gdsc@campus.edu',
     lead_name: 'Tanay Tanishk (Student Lead)',
     is_verified: true,
+    verified_by: 'Dr. R. K. Verma (Dean of Student Welfare)',
+    verified_at: '2026-08-15T10:00:00Z',
+    verification_notes: 'Recognized official campus technical chapter with approved faculty advisor.',
     member_count: 840
   },
   {
@@ -76,6 +107,9 @@ export const DEMO_ORGANIZATIONS: Organization[] = [
     contact_email: 'acm@campus.edu',
     lead_name: 'Ananya Sharma',
     is_verified: true,
+    verified_by: 'Dr. R. K. Verma (Dean of Student Welfare)',
+    verified_at: '2026-08-15T10:00:00Z',
+    verification_notes: 'Registered international professional student chapter.',
     member_count: 620
   },
   {
@@ -88,6 +122,9 @@ export const DEMO_ORGANIZATIONS: Organization[] = [
     contact_email: 'cultural@campus.edu',
     lead_name: 'Vikramjit Singh',
     is_verified: true,
+    verified_by: 'Dr. R. K. Verma (Dean of Student Welfare)',
+    verified_at: '2026-08-15T10:00:00Z',
+    verification_notes: 'University apex cultural council charter.',
     member_count: 1200
   },
   {
@@ -100,7 +137,22 @@ export const DEMO_ORGANIZATIONS: Organization[] = [
     contact_email: 'robotics@campus.edu',
     lead_name: 'Rohan Mehra',
     is_verified: true,
+    verified_by: 'Dr. R. K. Verma (Dean of Student Welfare)',
+    verified_at: '2026-08-15T10:00:00Z',
+    verification_notes: 'Chartered engineering society.',
     member_count: 310
+  },
+  {
+    id: 'org-unverified-hobby',
+    name: 'Campus Board Games & Chess Enthusiasts',
+    slug: 'board-games-club',
+    type: 'club',
+    description: 'Casual community circle meeting on weekends for strategy games and chess ladders.',
+    logo_url: 'https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=200&q=80',
+    contact_email: 'boardgames@campus.edu',
+    lead_name: 'Karan Joshi',
+    is_verified: false,
+    member_count: 45
   }
 ];
 

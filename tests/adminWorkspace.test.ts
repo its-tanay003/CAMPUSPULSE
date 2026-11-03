@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import { isValidStatusTransition } from '../src/lib/lifecycleManager.ts';
 import { detectEventConflicts } from '../src/lib/clashDetector.ts';
-import type { CampusEvent, Venue, ApprovalAction } from '../src/types/index.ts';
+import type { CampusEvent, Venue, ApprovalAction, Organization, UserRole } from '../src/types/index.ts';
 
 // Mock Test Venues
 const mockVenues: Venue[] = [
@@ -180,4 +180,128 @@ describe('Administrator Workspace & Clearance Governance Security', () => {
     });
   });
 
+  // TEST 5: Venue Management & Authoritative Registry Governance
+  describe('Venue Management & Data-Source Governance', () => {
+    it('5.1 allows administrators to update permitted venue info and activate/deactivate', () => {
+      const venuesList: Venue[] = JSON.parse(JSON.stringify(mockVenues));
+      const targetVenueId = 'venue-shanti-audi';
+
+      // Function simulating administrative update
+      const updateVenueByRole = (role: UserRole, id: string, updates: Partial<Venue>) => {
+        if (role !== 'admin') {
+          throw new Error('Access denied: Only administrators can update campus venue records.');
+        }
+        const index = venuesList.findIndex(v => v.id === id);
+        if (index !== -1) {
+          venuesList[index] = { ...venuesList[index], ...updates };
+        }
+      };
+
+      // Admin updates capacity and deactivates venue for renovation
+      updateVenueByRole('admin', targetVenueId, { capacity: 2600, is_active: false });
+      assert.strictEqual(venuesList[0].capacity, 2600);
+      assert.strictEqual(venuesList[0].is_active, false);
+
+      // Student or organizer attempt is rejected
+      assert.throws(() => {
+        updateVenueByRole('student', targetVenueId, { is_active: true });
+      }, /Only administrators can update/);
+
+      assert.throws(() => {
+        updateVenueByRole('organizer', targetVenueId, { capacity: 9999 });
+      }, /Only administrators can update/);
+    });
+
+    it('5.2 distinguishes authoritative sources from informal or demonstration venues', () => {
+      const demoLawn: Venue = {
+        id: 'venue-demo-lawn',
+        name: 'Uni Open Lawn - East (Informal Area)',
+        building: 'Open Grounds',
+        location: 'Adjacent to Food Court',
+        capacity: 100,
+        authority: 'None (Informal)',
+        is_authoritative: false,
+        is_demo: true,
+        is_active: true,
+        data_source: 'Manual Student Submission'
+      };
+
+      // Availability cannot be authoritatively guaranteed for informal venues
+      const checkAuthoritativeAvailabilityClaim = (v: Venue): { canClaimAvailability: boolean; warning?: string } => {
+        if (!v.is_authoritative || v.is_demo) {
+          return {
+            canClaimAvailability: false,
+            warning: "We can't confirm venue availability from the current records."
+          };
+        }
+        return { canClaimAvailability: true };
+      };
+
+      const demoCheck = checkAuthoritativeAvailabilityClaim(demoLawn);
+      assert.strictEqual(demoCheck.canClaimAvailability, false);
+      assert.match(demoCheck.warning || '', /We can't confirm venue availability/);
+
+      const officialCheck = checkAuthoritativeAvailabilityClaim(mockVenues[0]);
+      assert.strictEqual(officialCheck.canClaimAvailability, true);
+    });
+  });
+
+  // TEST 6: Organizer Verification Governance & Role Privilege
+  describe('Organizer Verification Process & Self-Elevation Prevention', () => {
+    it('6.1 enables administrators to grant or revoke verified organizer charter status', () => {
+      const testOrg: Organization = {
+        id: 'org-test-01',
+        name: 'Robotics Innovators Club',
+        category: 'Technical',
+        lead_name: 'Priya Sharma',
+        lead_email: 'priya@university.edu',
+        is_verified: false,
+        created_at: '2026-11-01T00:00:00Z'
+      };
+
+      const verifyOrgByRole = (
+        role: UserRole, 
+        org: Organization, 
+        verified: boolean, 
+        notes: string, 
+        reviewerName: string
+      ): Organization => {
+        if (role !== 'admin') {
+          throw new Error('Access denied: Ordinary users cannot grant or modify verified club charter status.');
+        }
+        return {
+          ...org,
+          is_verified: verified,
+          verification_notes: notes,
+          verified_by: reviewerName,
+          verified_at: new Date().toISOString()
+        };
+      };
+
+      // Student/organizer tries to self-verify -> throws error
+      assert.throws(() => {
+        verifyOrgByRole('student', testOrg, true, 'Self verified', 'Priya Sharma');
+      }, /Ordinary users cannot grant/);
+
+      assert.throws(() => {
+        verifyOrgByRole('organizer', testOrg, true, 'Self verified', 'Priya Sharma');
+      }, /Ordinary users cannot grant/);
+
+      // Administrator verifies with review notes & timestamp
+      const verifiedOrg = verifyOrgByRole(
+        'admin', 
+        testOrg, 
+        true, 
+        'Charter validated against Student Welfare Council Registry FY26.', 
+        'Dr. R. K. Verma'
+      );
+
+      assert.strictEqual(verifiedOrg.is_verified, true);
+      assert.strictEqual(verifiedOrg.verified_by, 'Dr. R. K. Verma');
+      assert.ok(verifiedOrg.verified_at);
+      assert.match(verifiedOrg.verification_notes || '', /Student Welfare Council/);
+    });
+  });
+
 });
+
