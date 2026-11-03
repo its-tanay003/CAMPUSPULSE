@@ -8,7 +8,8 @@ import {
   SavedEvent, 
   Registration, 
   ApprovalAction,
-  UserRole 
+  UserRole,
+  EventStatus
 } from '../types';
 import { 
   DEMO_PROFILES, 
@@ -20,6 +21,8 @@ import {
   INITIAL_APPROVALS,
   INITIAL_ORGANIZATION_MEMBERS
 } from '../lib/demoData';
+import { isValidStatusTransition } from '../lib/lifecycleManager';
+import { detectEventConflicts } from '../lib/clashDetector';
 
 interface AppContextType {
   currentUser: UserProfile | null;
@@ -280,15 +283,82 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         };
       }
 
+      // If status transition is requested, validate transition logic
+      const nextStatus = eventData.status || existing.status;
+      if (nextStatus !== existing.status) {
+        const transitionCheck = isValidStatusTransition(existing.status, nextStatus, currentUser.role);
+        if (!transitionCheck.allowed) {
+          setIsLoading(false);
+          return {
+            success: false,
+            error: transitionCheck.reason || 'Invalid event lifecycle status transition.'
+          };
+        }
+      }
+
+      // If submitting for review (pending_review), re-run conflict check
+      if (nextStatus === 'pending_review') {
+        const checkStart = eventData.start_time || existing.start_time;
+        const checkEnd = eventData.end_time || existing.end_time;
+        const checkVenue = eventData.venue_id || existing.venue_id;
+        const checkCat = eventData.category || existing.category;
+
+        const conflictCheck = detectEventConflicts(
+          {
+            id: existing.id,
+            start_time: checkStart,
+            end_time: checkEnd,
+            venue_id: checkVenue,
+            category: checkCat
+          },
+          events,
+          venues,
+          existing.id
+        );
+
+        if (conflictCheck.has_hard_conflict) {
+          setIsLoading(false);
+          return {
+            success: false,
+            error: 'Submission blocked: Authoritative venue double-booking detected during pre-submission verification. Please modify venue or time window.'
+          };
+        }
+      }
+
       targetEvent = {
         ...existing,
         ...eventData,
+        status: nextStatus,
         updated_at: new Date().toISOString()
       };
       setEvents(prev => prev.map(e => e.id === targetEvent.id ? targetEvent : e));
     } else {
       // create new draft or pending
       const id = `evt-${Date.now().toString(36)}`;
+      const initialStatus = eventData.status || 'draft';
+
+      // If initial creation is pending_review, validate conflicts immediately
+      if (initialStatus === 'pending_review') {
+        const conflictCheck = detectEventConflicts(
+          {
+            start_time: eventData.start_time || new Date().toISOString(),
+            end_time: eventData.end_time || new Date(Date.now() + 3600000).toISOString(),
+            venue_id: eventData.venue_id || DEMO_VENUES[0].id,
+            category: eventData.category || 'Technology'
+          },
+          events,
+          venues
+        );
+
+        if (conflictCheck.has_hard_conflict) {
+          setIsLoading(false);
+          return {
+            success: false,
+            error: 'Submission blocked: Authoritative venue double-booking detected during pre-submission verification. Please modify venue or time window.'
+          };
+        }
+      }
+
       targetEvent = {
         id,
         title: eventData.title || 'Untitled Campus Event',
@@ -308,7 +378,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         registration_deadline: eventData.registration_deadline,
         cover_image: eventData.cover_image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80',
         contact_email: eventData.contact_email || currentUser.email || 'events@campus.edu',
-        status: eventData.status || 'pending_review',
+        status: initialStatus,
         created_by: currentUser.id,
         views_count: 0,
         created_at: new Date().toISOString(),
@@ -337,6 +407,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       return;
     }
 
+    const existing = events.find(e => e.id === eventId);
+    if (!existing) return;
+
+    const newStatus = decision === 'approved' ? 'published' : decision === 'rejected' ? 'rejected' : 'changes_requested';
+    const transitionCheck = isValidStatusTransition(existing.status, newStatus, currentUser.role);
+    if (!transitionCheck.allowed) {
+      alert(transitionCheck.reason || 'Invalid status transition.');
+      return;
+    }
+
     const newApproval: ApprovalAction = {
       id: `app-${Date.now()}`,
       event_id: eventId,
@@ -348,8 +428,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
 
     setApprovals(prev => [newApproval, ...prev]);
-
-    const newStatus = decision === 'approved' ? 'published' : decision === 'rejected' ? 'rejected' : 'changes_requested';
     setEvents(prev => prev.map(e => e.id === eventId ? { ...e, status: newStatus, updated_at: new Date().toISOString() } : e));
   };
 

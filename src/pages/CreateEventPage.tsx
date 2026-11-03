@@ -17,6 +17,7 @@ import { useApp } from '../context/AppContext';
 import type { EventCategory } from '../types';
 import { detectEventConflicts } from '../lib/clashDetector';
 import { ClashWarningBox } from '../components/ClashWarningBox';
+import { StatusTimeline } from '../components/StatusTimeline';
 
 const CATEGORIES: EventCategory[] = [
   'Technology',
@@ -34,7 +35,7 @@ export const CreateEventPage: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
   const isEditing = Boolean(id);
 
-  const { venues, events, currentUser, createOrUpdateEvent, getUserOrganizations, canManageEvent } = useApp();
+  const { venues, events, currentUser, createOrUpdateEvent, getUserOrganizations, canManageEvent, approvals } = useApp();
   const navigate = useNavigate();
 
   // Filter organizations where the current user has active membership
@@ -49,6 +50,9 @@ export const CreateEventPage: React.FC = () => {
   const [contactEmail, setContactEmail] = useState(currentUser?.email || '');
   const [organizationId, setOrganizationId] = useState(authorizedOrgs[0]?.id || '');
   const [venueId, setVenueId] = useState(venues[0]?.id || '');
+  const [eventStatus, setEventStatus] = useState<EventCategory | string>('draft');
+  const [createdAtDate, setCreatedAtDate] = useState<string>('');
+  const [updatedAtDate, setUpdatedAtDate] = useState<string>('');
   
   // Dates & Timing
   const [startDate, setStartDate] = useState('2026-11-05T14:00');
@@ -96,6 +100,9 @@ export const CreateEventPage: React.FC = () => {
         setRegMethod(existing.registration_method);
         setRegUrl(existing.registration_url || '');
         setContactEmail(existing.contact_email || currentUser?.email || '');
+        setEventStatus(existing.status);
+        setCreatedAtDate(existing.created_at);
+        setUpdatedAtDate(existing.updated_at);
         if (existing.cover_image) setCoverUrl(existing.cover_image);
 
         // Dates conversion to datetime-local friendly format
@@ -298,6 +305,18 @@ export const CreateEventPage: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Existing Event Lifecycle Timeline Status (If Editing) */}
+        {isEditing && id && (
+          <div className="mb-8">
+            <StatusTimeline
+              status={eventStatus as any}
+              createdAt={createdAtDate || new Date().toISOString()}
+              updatedAt={updatedAtDate || new Date().toISOString()}
+              approvalsHistory={approvals.filter(a => a.event_id === id)}
+            />
+          </div>
+        )}
 
         {/* General Error Banner */}
         {generalError && (

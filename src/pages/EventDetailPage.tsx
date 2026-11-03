@@ -31,7 +31,8 @@ export const EventDetailPage: React.FC = () => {
     isEventSaved, 
     registerForEvent, 
     isEventRegistered,
-    currentUser 
+    currentUser,
+    canManageEvent
   } = useApp();
 
   const [registering, setRegistering] = useState(false);
@@ -42,15 +43,26 @@ export const EventDetailPage: React.FC = () => {
   const [reportSubmitted, setReportSubmitted] = useState(false);
 
   // Retrieve target event
-  const event = events.find(e => e.id === id);
+  const rawEvent = events.find(e => e.id === id);
 
-  // 1. Not Found Recovery State
+  // Database-grade public visibility enforcement:
+  // Unapproved events (draft, pending_review, changes_requested, rejected)
+  // are invisible to public visitors and students unless user is an authorized organizer of that club or admin.
+  const isAuthorizedViewer = rawEvent ? (
+    ['published', 'completed', 'cancelled'].includes(rawEvent.status) ||
+    currentUser?.role === 'admin' ||
+    (currentUser?.role === 'organizer' && canManageEvent(rawEvent, currentUser.id))
+  ) : false;
+
+  const event = isAuthorizedViewer ? rawEvent : null;
+
+  // 1. Not Found Recovery State (Used both when event does not exist OR is unapproved and viewer is unauthorized)
   if (!event) {
     return (
       <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] py-16 px-4">
         <EmptyState
-          title="Event Not Found"
-          description="The event listing you requested does not exist or may have been unlisted by campus administration."
+          title="Event Not Found or Access Restricted"
+          description="The event listing you requested does not exist, is currently an unapproved private draft, or has not completed administrative review."
           actionLabel="Return to Event Directory"
           onAction={() => window.location.href = '/discover'}
         />

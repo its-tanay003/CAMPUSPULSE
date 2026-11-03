@@ -16,12 +16,14 @@ import {
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { detectEventConflicts } from '../lib/clashDetector';
-import type { EventStatus } from '../types';
+import { StatusTimeline } from '../components/StatusTimeline';
+import type { EventStatus, CampusEvent } from '../types';
 
 export const OrganizerDashboardPage: React.FC = () => {
-  const { events, venues, currentUser, cancelEvent, getUserOrganizations, canManageEvent } = useApp();
+  const { events, venues, currentUser, cancelEvent, getUserOrganizations, canManageEvent, approvals } = useApp();
   const [statusFilter, setStatusFilter] = useState<'all' | EventStatus>('all');
   const [selectedOrgFilter, setSelectedOrgFilter] = useState<string>('all');
+  const [selectedTimelineEvent, setSelectedTimelineEvent] = useState<CampusEvent | null>(null);
 
   // Authorized user organizations
   const userOrgs = getUserOrganizations(currentUser?.id);
@@ -385,6 +387,17 @@ export const OrganizerDashboardPage: React.FC = () => {
 
                     {/* Action Controls */}
                     <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-[#334155]">
+                      {/* Lifecycle Timeline Modal Toggle */}
+                      <button
+                        type="button"
+                        onClick={() => setSelectedTimelineEvent(event)}
+                        className="text-xs bg-[#1E293B] hover:bg-[#334155] text-[#38BDF8] hover:text-white font-semibold px-3 py-2 rounded-xl border border-[#334155] transition flex items-center gap-1"
+                        title="View Submission Timeline & History"
+                      >
+                        <Clock className="w-3.5 h-3.5" />
+                        Timeline
+                      </button>
+
                       {/* Public Preview */}
                       <Link
                         to={`/events/${event.id}`}
@@ -437,6 +450,45 @@ export const OrganizerDashboardPage: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Lifecycle Status Timeline Dialog Modal */}
+      {selectedTimelineEvent && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
+          <div className="bg-[#151C2F] border border-[#334155] rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl relative">
+            <div className="flex items-center justify-between pb-4 border-b border-[#334155] mb-4">
+              <div>
+                <span className="text-xs font-semibold text-[#7C5CFC]">
+                  {selectedTimelineEvent.organization?.name || 'Club Organization'}
+                </span>
+                <h3 className="text-lg font-black text-[#F8FAFC]">
+                  {selectedTimelineEvent.title}
+                </h3>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setSelectedTimelineEvent(null)}
+                className="text-xs bg-[#0B1020] hover:bg-[#1E293B] text-[#94A3B8] hover:text-[#F8FAFC] px-3 py-1.5 rounded-xl border border-[#334155] transition"
+              >
+                Close
+              </button>
+            </div>
+
+            <StatusTimeline
+              status={selectedTimelineEvent.status}
+              createdAt={selectedTimelineEvent.created_at}
+              updatedAt={selectedTimelineEvent.updated_at}
+              approvalsHistory={approvals.filter(a => a.event_id === selectedTimelineEvent.id)}
+              actionButtonLabel={selectedTimelineEvent.status === 'changes_requested' ? 'Open Event Editor' : undefined}
+              onActionClick={() => {
+                const targetId = selectedTimelineEvent.id;
+                setSelectedTimelineEvent(null);
+                window.location.href = `/organizer/edit/${targetId}`;
+              }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
