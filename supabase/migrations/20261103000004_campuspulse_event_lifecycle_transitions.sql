@@ -89,3 +89,4 @@ create policy "Event read policy" on public.events
     -- Administrator rule: Admins can inspect all events in review
     or public.is_admin()
   );
+

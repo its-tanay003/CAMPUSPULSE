@@ -15,6 +15,8 @@ import { OrganizerDashboardPage } from './pages/OrganizerDashboardPage';
 import { OrganizerEventsPage } from './pages/OrganizerEventsPage';
 import { ClashCheckPage } from './pages/ClashCheckPage';
 import { AdminApprovalsPage } from './pages/AdminApprovalsPage';
+import { AdminDashboardPage } from './pages/AdminDashboardPage';
+import { AdminEventsDirectoryPage } from './pages/AdminEventsDirectoryPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { ClubsDirectoryPage } from './pages/ClubsDirectoryPage';
 import { LoginPage } from './pages/LoginPage';
@@ -50,8 +52,9 @@ export const App: React.FC = () => {
               <Route path="/organizer/clashes" element={<ClashCheckPage />} />
 
               {/* Administrator Approvals & Governance Routes */}
+              <Route path="/admin" element={<AdminDashboardPage />} />
               <Route path="/admin/approvals" element={<AdminApprovalsPage />} />
-              <Route path="/admin" element={<Navigate to="/admin/approvals" replace />} />
+              <Route path="/admin/events" element={<AdminEventsDirectoryPage />} />
 
               {/* Fallback */}
               <Route path="*" element={<Navigate to="/" replace />} />
