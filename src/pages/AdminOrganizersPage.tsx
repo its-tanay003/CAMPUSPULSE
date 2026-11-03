@@ -340,3 +340,4 @@ export const AdminOrganizersPage: React.FC = () => {
     </div>
   );
 };
+
