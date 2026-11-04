@@ -2,40 +2,47 @@
 
 @layer base {
   :root {
-    --color-bg-root: #050814;
-    --color-surface-glass: rgba(15, 23, 42, 0.65);
-    --color-surface-card: #0D1326;
-    --color-surface-elevated: #151D38;
-    --color-surface-highlight: #1E294B;
+    /* Brand Color System */
+    --color-primary-indigo: #4F46E5;
+    --color-deep-navy: #101828;
+    --color-soft-indigo: #EEF2FF;
     
-    --color-accent-indigo: #6366F1;
-    --color-accent-violet: #8B5CF6;
-    --color-accent-cyan: #06B6D4;
-    --color-accent-rose: #F43F5E;
-    --color-accent-amber: #F59E0B;
-    --color-accent-emerald: #10B981;
-
+    --color-accent-lime: #C7F36B;
+    --color-accent-purple: #8B5CF6;
+    --color-accent-cyan: #67E8F9;
+    
+    --color-canvas: #090D1A;
+    --color-surface-panel: rgba(16, 24, 40, 0.75);
+    --color-surface-card: #131C31;
+    --color-surface-elevated: #1B2642;
+    --color-surface-highlight: #233154;
+    
     --color-text-main: #F8FAFC;
-    --color-text-muted: #94A3B8;
-    --color-text-faint: #64748B;
+    --color-text-secondary: #94A3B8;
+    --color-text-muted: #64748B;
     
-    --color-border-glass: rgba(255, 255, 255, 0.08);
+    --color-border-subtle: rgba(255, 255, 255, 0.08);
     --color-border-card: rgba(255, 255, 255, 0.05);
-    --color-border-accent: rgba(99, 102, 241, 0.4);
+    --color-border-focus: #4F46E5;
+    
+    --color-success: #16A34A;
+    --color-warning: #F59E0B;
+    --color-error: #DC2626;
+    --color-info: #2563EB;
   }
 
   body {
     margin: 0;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: #F8FAFC;
-    background-color: #050814;
+    background-color: #090D1A;
     min-height: 100vh;
     background-image: 
-      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
-      radial-gradient(at 50% 100%, rgba(139, 92, 246, 0.06) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0px, transparent 45%),
+      radial-gradient(at 100% 0%, rgba(103, 232, 249, 0.1) 0px, transparent 40%),
+      radial-gradient(at 50% 100%, rgba(199, 243, 107, 0.05) 0px, transparent 45%);
     background-attachment: fixed;
-    letter-spacing: -0.011em;
+    letter-spacing: -0.015em;
   }
 
   code, kbd, samp, pre {
@@ -52,9 +59,9 @@
   input:focus-visible,
   select:focus-visible,
   textarea:focus-visible {
-    outline: 2px solid #6366F1;
+    outline: 2px solid #C7F36B;
     outline-offset: 3px;
-    box-shadow: 0 0 16px rgba(99, 102, 241, 0.5);
+    box-shadow: 0 0 16px rgba(199, 243, 107, 0.5);
   }
 
   /* Custom Sleek Scrollbar */
@@ -63,15 +70,15 @@
     height: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #050814;
+    background: #090D1A;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1E294B;
+    background: #1B2642;
     border-radius: 9999px;
-    border: 2px solid #050814;
+    border: 2px solid #090D1A;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #6366F1;
+    background: #4F46E5;
   }
 
   /* Screen reader only utility class */
@@ -89,26 +96,30 @@
 
   /* Glassmorphism utility helpers */
   .glass-card {
-    background: rgba(13, 19, 38, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-
-  .glass-panel {
-    background: rgba(15, 23, 42, 0.75);
+    background: rgba(19, 28, 49, 0.72);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .glass-panel {
+    background: rgba(16, 24, 40, 0.82);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .glow-indigo {
-    box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 0 30px -5px rgba(79, 70, 229, 0.45);
+  }
+
+  .glow-lime {
+    box-shadow: 0 0 25px -5px rgba(199, 243, 107, 0.35);
   }
 
   .glow-cyan {
-    box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.4);
+    box-shadow: 0 0 25px -5px rgba(103, 232, 249, 0.35);
   }
 
   /* Respect prefers-reduced-motion for user accessibility */

@@ -10,4 +10,4 @@ export * from './LoadingIndicator';
 export * from './EmptyState';
 export * from './ErrorState';
 export * from './PageContainer';
-
+export * from './Skeleton';
