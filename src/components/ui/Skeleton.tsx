@@ -44,3 +44,4 @@ export const EventCardSkeleton: React.FC = () => {
     </div>
   );
 };
+

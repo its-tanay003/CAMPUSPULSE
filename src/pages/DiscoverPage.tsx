@@ -9,11 +9,15 @@ import {
   Calendar,
   Sparkles,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  SlidersHorizontal,
+  Building2,
+  Tag,
+  DollarSign
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { EventCard } from '../components/EventCard';
-import { Button, Input, Select, Badge, Card, EmptyState, LoadingIndicator, ErrorState } from '../components/ui';
+import { Button, Badge, LoadingIndicator, EmptyState, EventCardSkeleton } from '../components/ui';
 import type { EventCategory } from '../types';
 
 const CATEGORIES: EventCategory[] = [
@@ -150,30 +154,39 @@ export const DiscoverPage: React.FC = () => {
 
   return (
     <div className="min-h-screen text-slate-100 py-10 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        {/* Header & Search Bar */}
-        <div className="glass-card rounded-3xl p-6 sm:p-8 mb-8 glow-indigo">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        {/* Header & Search Bar Banner */}
+        <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo relative overflow-hidden">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
             <div>
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-400">Event Exploration Layer</span>
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-mono">
+                <Sparkles className="w-3.5 h-3.5 text-[#C7F36B]" />
+                <span>Live Event Catalogue</span>
+                <span className="text-slate-500">·</span>
+                <span className="text-slate-300">Verified Chapters</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-2">
                 Discover Campus Events
               </h1>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl leading-relaxed">
-                Real-time searchable event catalogue across verified student clubs, academic departments, and authoritative campus venues.
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl leading-relaxed">
+                Real-time searchable event catalogue across registered societies, academic wings, and campus halls.
               </p>
             </div>
 
             <div className="flex items-center gap-2.5">
-              <span className="text-xs font-medium text-slate-400">Active Filters:</span>
-              <Badge variant={activeFilterCount > 0 ? 'primary' : 'neutral'}>
+              <span className="text-xs font-mono text-slate-400">Active Filters:</span>
+              <span className={`px-2.5 py-1 rounded-full text-xs font-mono font-bold border ${
+                activeFilterCount > 0 
+                  ? 'bg-[#C7F36B]/20 text-[#C7F36B] border-[#C7F36B]/40' 
+                  : 'bg-white/5 text-slate-400 border-white/10'
+              }`}>
                 {activeFilterCount} Active
-              </Badge>
+              </span>
               {activeFilterCount > 0 && (
                 <button
                   onClick={resetFilters}
-                  className="text-xs text-cyan-400 hover:text-cyan-300 font-semibold underline ml-1 cursor-pointer"
+                  className="text-xs text-[#C7F36B] hover:underline font-mono ml-1 cursor-pointer"
                 >
                   Clear all
                 </button>
@@ -182,9 +195,9 @@ export const DiscoverPage: React.FC = () => {
           </div>
 
           {/* Search Input and Mobile Trigger */}
-          <div className="mt-6 flex flex-col sm:flex-row gap-3">
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 relative z-10">
             <div className="relative flex-1">
-              <Search className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
+              <Search className="absolute left-4 top-3.5 w-5 h-5 text-slate-400 pointer-events-none" />
               <input
                 type="text"
                 value={searchQuery}
@@ -194,13 +207,13 @@ export const DiscoverPage: React.FC = () => {
                 }}
                 placeholder="Search by event title, description, organizing club, venue, or category..."
                 aria-label="Search events"
-                className="w-full pl-12 pr-11 py-3.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/80 transition-all shadow-inner"
+                className="w-full pl-12 pr-11 py-3.5 bg-black/40 border border-white/15 rounded-2xl text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#C7F36B] backdrop-blur-md transition shadow-inner"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
                   aria-label="Clear search input"
-                  className="absolute right-4 top-3.5 text-slate-400 hover:text-white rounded-full p-0.5 transition"
+                  className="absolute right-4 top-3.5 text-slate-400 hover:text-white rounded-full p-0.5 transition cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -214,16 +227,16 @@ export const DiscoverPage: React.FC = () => {
               aria-expanded={mobileFilterOpen}
               aria-controls="discover-filter-sidebar"
             >
-              <Filter className="w-4 h-4 text-cyan-400" aria-hidden="true" />
+              <Filter className="w-4 h-4 text-[#C7F36B]" aria-hidden="true" />
               Filter Options ({activeFilterCount})
             </Button>
           </div>
 
           {/* Quick Date Shortcuts Bar */}
-          <div className="mt-5 pt-4 border-t border-white/[0.06] flex items-center gap-2 flex-wrap text-xs">
-            <span className="text-slate-400 font-medium flex items-center gap-1.5 mr-1">
-              <Calendar className="w-3.5 h-3.5 text-cyan-400" aria-hidden="true" />
-              Quick Date:
+          <div className="mt-5 pt-4 border-t border-white/[0.08] flex items-center gap-2 flex-wrap text-xs relative z-10">
+            <span className="text-slate-400 font-mono flex items-center gap-1.5 mr-1 text-[11px]">
+              <Calendar className="w-3.5 h-3.5 text-[#C7F36B]" aria-hidden="true" />
+              DATE WINDOW:
             </span>
             {[
               { id: 'all', label: 'Any Date' },
@@ -238,10 +251,10 @@ export const DiscoverPage: React.FC = () => {
                   setCurrentPage(1);
                 }}
                 aria-pressed={dateFilter === d.id}
-                className={`px-3.5 py-1.5 min-h-[36px] rounded-xl font-medium transition-all border ${
+                className={`px-3.5 py-1.5 min-h-[36px] rounded-xl font-medium transition-all border cursor-pointer ${
                   dateFilter === d.id
-                    ? 'bg-indigo-600 text-white border-indigo-400/40 shadow-md shadow-indigo-600/30'
-                    : 'bg-[#050814]/70 text-slate-400 hover:text-white border-white/10 hover:border-white/20'
+                    ? 'bg-[#4F46E5] text-white border-indigo-400/50 shadow-md shadow-indigo-600/30 font-semibold'
+                    : 'bg-white/[0.04] text-slate-300 hover:text-white border-white/10 hover:border-white/20'
                 }`}
               >
                 {d.label}
@@ -261,13 +274,13 @@ export const DiscoverPage: React.FC = () => {
           >
             <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
               <h2 className="font-bold text-white text-sm flex items-center gap-2">
-                <Filter className="w-4 h-4 text-cyan-400" aria-hidden="true" />
-                Filter Options
+                <SlidersHorizontal className="w-4 h-4 text-[#C7F36B]" aria-hidden="true" />
+                Refine Catalogue
               </h2>
               {activeFilterCount > 0 && (
                 <button
                   onClick={resetFilters}
-                  className="text-xs text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1.5 p-1 min-h-[32px] transition cursor-pointer"
+                  className="text-xs text-[#C7F36B] hover:underline font-mono flex items-center gap-1.5 p-1 transition cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" /> Reset
                 </button>
@@ -286,11 +299,11 @@ export const DiscoverPage: React.FC = () => {
                   setSelectedCategory(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full text-xs p-3 bg-[#050814]/80 text-white border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/80 transition-all cursor-pointer"
+                className="w-full text-xs p-3 bg-black/40 text-white border border-white/15 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C7F36B] transition-all cursor-pointer"
               >
                 <option value="all">All Categories</option>
                 {CATEGORIES.map(c => (
-                  <option key={c} value={c}>{c}</option>
+                  <option key={c} value={c} className="bg-[#101828] text-white">{c}</option>
                 ))}
               </select>
             </div>
@@ -307,11 +320,11 @@ export const DiscoverPage: React.FC = () => {
                   setSelectedVenue(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full text-xs p-3 bg-[#050814]/80 text-white border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/80 transition-all cursor-pointer"
+                className="w-full text-xs p-3 bg-black/40 text-white border border-white/15 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C7F36B] transition-all cursor-pointer"
               >
                 <option value="all">All Campus Venues</option>
                 {venues.map(v => (
-                  <option key={v.id} value={v.id}>{v.name} ({v.building})</option>
+                  <option key={v.id} value={v.id} className="bg-[#101828] text-white">{v.name} ({v.building})</option>
                 ))}
               </select>
             </div>
@@ -328,11 +341,11 @@ export const DiscoverPage: React.FC = () => {
                   setSelectedOrg(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full text-xs p-3 bg-[#050814]/80 text-white border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/80 transition-all cursor-pointer"
+                className="w-full text-xs p-3 bg-black/40 text-white border border-white/15 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C7F36B] transition-all cursor-pointer"
               >
                 <option value="all">All Clubs & Societies</option>
                 {organizations.map(o => (
-                  <option key={o.id} value={o.id}>{o.name}</option>
+                  <option key={o.id} value={o.id} className="bg-[#101828] text-white">{o.name}</option>
                 ))}
               </select>
             </div>
@@ -342,12 +355,12 @@ export const DiscoverPage: React.FC = () => {
               <label className="block text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-2">
                 Admission Fee
               </label>
-              <div className="grid grid-cols-3 gap-1 bg-[#050814]/80 p-1.5 rounded-2xl border border-white/10 text-xs font-semibold">
+              <div className="grid grid-cols-3 gap-1 bg-black/40 p-1.5 rounded-2xl border border-white/15 text-xs font-semibold">
                 <button
                   type="button"
                   onClick={() => { setCostFilter('all'); setCurrentPage(1); }}
                   aria-pressed={costFilter === 'all'}
-                  className={`py-2 min-h-[36px] rounded-xl transition cursor-pointer ${costFilter === 'all' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30' : 'text-slate-400 hover:text-white'}`}
+                  className={`py-2 min-h-[36px] rounded-xl transition cursor-pointer ${costFilter === 'all' ? 'bg-[#4F46E5] text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
                 >
                   All
                 </button>
@@ -355,7 +368,7 @@ export const DiscoverPage: React.FC = () => {
                   type="button"
                   onClick={() => { setCostFilter('free'); setCurrentPage(1); }}
                   aria-pressed={costFilter === 'free'}
-                  className={`py-2 min-h-[36px] rounded-xl transition cursor-pointer ${costFilter === 'free' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30' : 'text-slate-400 hover:text-white'}`}
+                  className={`py-2 min-h-[36px] rounded-xl transition cursor-pointer ${costFilter === 'free' ? 'bg-[#4F46E5] text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
                 >
                   Free
                 </button>
@@ -363,7 +376,7 @@ export const DiscoverPage: React.FC = () => {
                   type="button"
                   onClick={() => { setCostFilter('paid'); setCurrentPage(1); }}
                   aria-pressed={costFilter === 'paid'}
-                  className={`py-2 min-h-[36px] rounded-xl transition cursor-pointer ${costFilter === 'paid' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30' : 'text-slate-400 hover:text-white'}`}
+                  className={`py-2 min-h-[36px] rounded-xl transition cursor-pointer ${costFilter === 'paid' ? 'bg-[#4F46E5] text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
                 >
                   Paid
                 </button>
@@ -373,7 +386,7 @@ export const DiscoverPage: React.FC = () => {
             {/* Registration Method */}
             <div>
               <label htmlFor="filter-reg" className="block text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-2">
-                Registration Status
+                Registration Type
               </label>
               <select
                 id="filter-reg"
@@ -382,7 +395,7 @@ export const DiscoverPage: React.FC = () => {
                   setRegStatusFilter(e.target.value as any);
                   setCurrentPage(1);
                 }}
-                className="w-full text-xs p-3 bg-[#050814]/80 text-white border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/80 transition-all cursor-pointer"
+                className="w-full text-xs p-3 bg-black/40 text-white border border-white/15 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C7F36B] transition-all cursor-pointer"
               >
                 <option value="all">Any Registration Type</option>
                 <option value="open">CampusPulse 1-Click Open</option>
@@ -398,24 +411,24 @@ export const DiscoverPage: React.FC = () => {
             {/* View Bar: Count, Sort Dropdown & Grid Toggle */}
             <div className="flex items-center justify-between glass-card px-6 py-4 rounded-3xl text-xs text-slate-400">
               <span className="font-semibold text-white flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                Showing <span className="font-mono text-cyan-300">{filteredEvents.length}</span> {filteredEvents.length === 1 ? 'event' : 'events'}
+                <span className="w-2 h-2 rounded-full bg-[#C7F36B] animate-pulse" />
+                Showing <span className="font-mono text-[#C7F36B]">{filteredEvents.length}</span> {filteredEvents.length === 1 ? 'event' : 'events'}
               </span>
 
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
-                  <label htmlFor="sort-events-select" className="text-slate-400 font-medium">Sort:</label>
+                  <label htmlFor="sort-events-select" className="text-slate-400 font-mono text-[11px]">SORT BY:</label>
                   <select
                     id="sort-events-select"
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as any)}
                     aria-label="Sort events"
-                    className="bg-[#050814]/80 font-bold text-cyan-400 border border-white/10 px-3 py-1.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+                    className="bg-black/40 font-bold text-[#C7F36B] border border-white/10 px-3 py-1.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C7F36B] cursor-pointer"
                   >
-                    <option value="soonest" className="bg-[#0b1020] text-white">Chronological (Soonest)</option>
-                    <option value="recent" className="bg-[#0b1020] text-white">Recently Added</option>
+                    <option value="soonest" className="bg-[#101828] text-white">Chronological (Soonest)</option>
+                    <option value="recent" className="bg-[#101828] text-white">Recently Added</option>
                     {currentUser?.interests && currentUser.interests.length > 0 && (
-                      <option value="recommended" className="bg-[#0b1020] text-white">Recommended (My Interests)</option>
+                      <option value="recommended" className="bg-[#101828] text-white">Recommended (My Interests)</option>
                     )}
                   </select>
                 </div>
@@ -424,14 +437,14 @@ export const DiscoverPage: React.FC = () => {
                   <button
                     onClick={() => setViewMode('grid')}
                     aria-label="Grid view layout"
-                    className={`p-2 rounded-xl transition cursor-pointer ${viewMode === 'grid' ? 'bg-indigo-600/30 text-cyan-300 border border-indigo-500/30' : 'text-slate-400 hover:text-white'}`}
+                    className={`p-2 rounded-xl transition cursor-pointer ${viewMode === 'grid' ? 'bg-indigo-600/30 text-[#C7F36B] border border-indigo-500/30' : 'text-slate-400 hover:text-white'}`}
                   >
                     <Grid className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => setViewMode('list')}
                     aria-label="List view layout"
-                    className={`p-2 rounded-xl transition cursor-pointer ${viewMode === 'list' ? 'bg-indigo-600/30 text-cyan-300 border border-indigo-500/30' : 'text-slate-400 hover:text-white'}`}
+                    className={`p-2 rounded-xl transition cursor-pointer ${viewMode === 'list' ? 'bg-indigo-600/30 text-[#C7F36B] border border-indigo-500/30' : 'text-slate-400 hover:text-white'}`}
                   >
                     <List className="w-4 h-4" />
                   </button>
@@ -441,7 +454,11 @@ export const DiscoverPage: React.FC = () => {
 
             {/* Results Grid / List */}
             {isLoading ? (
-              <LoadingIndicator label="Querying event records..." />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {[1, 2, 3, 4].map(n => (
+                  <EventCardSkeleton key={n} />
+                ))}
+              </div>
             ) : filteredEvents.length > 0 ? (
               <>
                 <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 gap-6' : 'space-y-4'}>
