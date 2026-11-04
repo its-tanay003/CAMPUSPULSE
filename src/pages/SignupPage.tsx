@@ -49,29 +49,29 @@ export const SignupPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen text-slate-100 flex flex-col justify-center py-16 sm:px-6 lg:px-8 relative">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <Link to="/" className="inline-flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#7C5CFC] to-[#38BDF8] flex items-center justify-center font-bold text-white text-xl shadow-lg">
+        <Link to="/" className="inline-flex items-center gap-3">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-500 via-indigo-600 to-cyan-400 flex items-center justify-center font-extrabold text-white text-xl shadow-lg shadow-indigo-500/25">
             P
           </div>
-          <span className="text-2xl font-extrabold tracking-tight text-[#F8FAFC]">
-            Campus<span className="text-[#7C5CFC]">Pulse</span>
+          <span className="text-2xl font-extrabold tracking-tight text-white">
+            Campus<span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Pulse</span>
           </span>
         </Link>
-        <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-[#F8FAFC]">
+        <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-white">
           Create Student Account
         </h2>
-        <p className="mt-1 text-xs text-[#94A3B8]">
+        <p className="mt-1.5 text-xs text-slate-400 max-w-sm mx-auto">
           Personalized event schedule, clash detection, and bookmark synchronization.
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4">
-        <Card className="shadow-2xl">
+        <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo">
           <form onSubmit={handleSubmit} className="space-y-4">
             {errorMessage && (
-              <div className="p-3.5 bg-rose-950/60 border border-rose-500/40 rounded-xl text-rose-200 text-xs font-semibold flex items-center gap-2">
+              <div className="p-4 bg-rose-950/40 border border-rose-500/40 rounded-2xl text-rose-200 text-xs font-semibold flex items-center gap-2.5">
                 <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
                 <span>{errorMessage}</span>
               </div>
@@ -105,18 +105,18 @@ export const SignupPage: React.FC = () => {
             />
 
             <div>
-              <label className="block text-xs font-semibold text-[#94A3B8] mb-1.5">Campus Location</label>
+              <label className="block text-xs font-mono font-semibold text-slate-400 mb-2">Campus Location</label>
               <input
                 type="text"
                 value={campus}
                 onChange={(e) => setCampus(e.target.value)}
-                className="w-full text-xs p-3 bg-[#0B1020] border border-[#334155] rounded-xl text-[#F8FAFC]"
+                className="w-full text-xs p-3.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
                 required
               />
             </div>
 
-            <div className="p-3 bg-[#0B1020] rounded-xl border border-[#334155] text-[11px] text-[#94A3B8] flex items-start gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#38BDF8] shrink-0 mt-0.5" />
+            <div className="p-3.5 bg-[#050814]/80 rounded-2xl border border-white/10 text-xs text-slate-400 flex items-start gap-2.5">
+              <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
               <span>
                 Standard Student Profile: Organizer permissions require verified club appointment by Campus Administration.
               </span>
@@ -124,23 +124,23 @@ export const SignupPage: React.FC = () => {
 
             <Button
               type="submit"
-              variant="primary"
+              variant="gradient"
               size="md"
               isLoading={isLoading}
-              className="w-full gap-2 mt-2"
+              className="w-full gap-2 mt-3"
             >
               <span>Complete Student Registration</span>
               <ArrowRight className="w-4 h-4" />
             </Button>
           </form>
 
-          <div className="mt-6 pt-4 border-t border-[#334155] text-center text-xs text-[#94A3B8]">
+          <div className="mt-6 pt-4 border-t border-white/[0.08] text-center text-xs text-slate-400">
             Already have an account?{' '}
-            <Link to="/login" className="font-bold text-[#38BDF8] hover:underline">
+            <Link to="/login" className="font-bold text-cyan-400 hover:text-cyan-300 underline">
               Sign In Instead
             </Link>
           </div>
-        </Card>
+        </div>
       </div>
     </div>
   );

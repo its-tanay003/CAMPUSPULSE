@@ -27,73 +27,74 @@ export const ClashCheckPage: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] py-8">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen text-slate-100 py-10 relative">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Header */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-6 shadow-md mb-8">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#7C5CFC]/20 text-[#38BDF8] border border-[#7C5CFC]/30 flex items-center justify-center font-bold">
+        <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center font-bold">
               <AlertTriangle className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-2xl font-extrabold text-[#F8FAFC] tracking-tight">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-400">Deterministic Engine</span>
+              <h1 className="text-3xl font-extrabold text-white tracking-tight mt-0.5">
                 P17 Conflict & Clash Verification Engine
               </h1>
-              <p className="text-xs text-[#94A3B8] mt-0.5">
-                Evaluates exact interval collisions (<code>A.start &lt; B.end AND B.start &lt; A.end</code>) across authoritative campus venues.
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                Evaluates exact interval collisions (<code className="text-cyan-400 font-mono">A.start &lt; B.end AND B.start &lt; A.end</code>) across authoritative campus venues.
               </p>
             </div>
           </div>
         </div>
 
         {/* Event Selector */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-6 shadow-md mb-8">
-          <label htmlFor="test-event-select" className="block text-xs font-bold text-[#94A3B8] uppercase tracking-wider mb-2">
+        <div className="glass-card rounded-3xl p-6 sm:p-7">
+          <label htmlFor="test-event-select" className="block text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-2.5">
             Select An Event to Analyze for Scheduling Clashes
           </label>
           <select
             id="test-event-select"
             value={selectedEventId}
             onChange={(e) => setSelectedEventId(e.target.value)}
-            className="w-full p-3 bg-[#0B1020] border border-[#334155] rounded-xl text-sm font-semibold text-[#F8FAFC]"
+            className="w-full p-3.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
           >
             {events.map(ev => (
-              <option key={ev.id} value={ev.id}>
+              <option key={ev.id} value={ev.id} className="bg-[#0b1020] text-white">
                 [{ev.status.toUpperCase()}] {ev.title} ({ev.venue?.name})
               </option>
             ))}
           </select>
-          <p className="text-[11px] text-[#94A3B8] mt-2">
+          <p className="text-xs text-slate-400 mt-2.5">
             Tip: Select "Annual Flagship Hackathon 2026: Code the Campus" to see the seeded double-booking clash with "Agentic AI Workshop" at Block 34 Mini Audi.
           </p>
         </div>
 
         {/* Selected Event Context */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 bg-[#151C2F]/50 p-5 rounded-2xl border border-[#334155] text-xs">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 glass-card p-6 rounded-3xl text-xs">
           <div>
-            <span className="text-[#94A3B8] font-medium">Selected Event:</span>
-            <div className="font-bold text-[#F8FAFC] text-sm mt-0.5">{targetEvent.title}</div>
+            <span className="text-slate-400 font-mono">Selected Event:</span>
+            <div className="font-bold text-white text-sm mt-1">{targetEvent.title}</div>
           </div>
           <div>
-            <span className="text-[#94A3B8] font-medium">Venue:</span>
-            <div className="font-bold text-[#38BDF8] mt-0.5">{targetEvent.venue?.name}</div>
+            <span className="text-slate-400 font-mono">Venue:</span>
+            <div className="font-bold text-cyan-400 mt-1">{targetEvent.venue?.name}</div>
           </div>
           <div>
-            <span className="text-[#94A3B8] font-medium">Time Window:</span>
-            <div className="font-bold text-[#F8FAFC] mt-0.5">
+            <span className="text-slate-400 font-mono">Time Window:</span>
+            <div className="font-bold text-white font-mono mt-1">
               {new Date(targetEvent.start_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(targetEvent.end_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </div>
           </div>
         </div>
 
         {/* Live Analysis Output */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-6 shadow-md space-y-6">
-          <div className="flex items-center justify-between border-b border-[#334155] pb-4">
-            <h2 className="font-bold text-[#F8FAFC] text-base flex items-center gap-2">
-              <ShieldAlert className="w-5 h-5 text-[#38BDF8]" />
+        <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-6 glow-indigo">
+          <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
+            <h2 className="font-bold text-white text-base flex items-center gap-2.5">
+              <ShieldAlert className="w-5 h-5 text-cyan-400" />
               Automated Audit Findings
             </h2>
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#0B1020] text-[#38BDF8] border border-[#334155]">
+            <span className="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-[#050814]/80 text-cyan-300 border border-white/10">
               {conflictResult.conflicts.length} finding{conflictResult.conflicts.length === 1 ? '' : 's'}
             </span>
           </div>
@@ -101,12 +102,12 @@ export const ClashCheckPage: React.FC = () => {
           <ClashWarningBox conflictResult={conflictResult} allowedToProceed={false} />
 
           {/* Mathematical Proof Card */}
-          <div className="bg-[#0B1020] rounded-xl p-4 border border-[#334155] text-xs text-[#94A3B8] space-y-2">
-            <div className="font-bold text-[#F8FAFC] flex items-center gap-1.5">
-              <Info className="w-4 h-4 text-[#38BDF8]" />
+          <div className="bg-[#050814]/80 rounded-2xl p-5 border border-white/10 text-xs text-slate-300 space-y-2">
+            <div className="font-bold text-white flex items-center gap-2">
+              <Info className="w-4 h-4 text-cyan-400" />
               Explainable Verification Rule Documentation
             </div>
-            <p className="leading-relaxed">
+            <p className="leading-relaxed text-slate-400">
               In accordance with Section 07 of the INT335 P17 Blueprint, schedule detection is fully deterministic and explainable. No black-box scores or opaque AI heuristics are used. Hard conflicts represent physical venue resource overlap, while strong warnings highlight audience attention splitting across identical categories.
             </p>
           </div>

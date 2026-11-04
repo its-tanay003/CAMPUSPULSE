@@ -18,11 +18,11 @@ export const ClashWarningBox: React.FC<ClashWarningBoxProps> = ({
     <div className="space-y-4">
       {/* Fallback Warning for Unverified/Missing Venue Records */}
       {unverified_venue_warning && (
-        <div className="bg-amber-950/40 border border-amber-500/50 rounded-xl p-3.5 text-xs text-amber-200 flex items-start gap-2.5 shadow">
+        <div className="glass-card border-l-4 border-l-amber-500 rounded-2xl p-4 text-xs text-amber-200 flex items-start gap-3">
           <HelpCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
           <div>
             <div className="font-bold text-amber-300">Unverified Venue Record</div>
-            <div className="text-amber-200/80 mt-0.5 leading-relaxed">
+            <div className="text-amber-200/80 mt-1 leading-relaxed">
               {unverified_venue_warning}
             </div>
           </div>
@@ -31,11 +31,11 @@ export const ClashWarningBox: React.FC<ClashWarningBoxProps> = ({
 
       {/* Clear Schedule State */}
       {conflicts.length === 0 && (
-        <div className="bg-emerald-950/40 border border-emerald-500/40 rounded-xl p-4 text-emerald-200 text-sm flex items-start gap-3 shadow">
+        <div className="glass-card border-l-4 border-l-emerald-500 rounded-2xl p-5 text-emerald-200 text-sm flex items-start gap-3.5">
           <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
           <div>
             <div className="font-bold text-emerald-300">Schedule Clear — No Collisions Detected</div>
-            <div className="text-emerald-400/90 text-xs mt-0.5 leading-relaxed">
+            <div className="text-slate-300 text-xs mt-1 leading-relaxed">
               The proposed time window does not intersect with any authoritative room reservations or concurrent category events.
             </div>
           </div>
@@ -50,15 +50,15 @@ export const ClashWarningBox: React.FC<ClashWarningBoxProps> = ({
         return (
           <div
             key={idx}
-            className={`rounded-xl border p-4 text-sm transition-all shadow-md ${
+            className={`glass-card rounded-2xl border p-5 text-sm transition-all ${
               isHard
-                ? 'bg-rose-950/60 border-rose-500/50 text-rose-100'
+                ? 'border-rose-500/50 bg-rose-950/20 text-rose-100'
                 : isAdvisory
-                ? 'bg-amber-950/60 border-amber-500/50 text-amber-100'
-                : 'bg-cyan-950/50 border-cyan-500/40 text-cyan-100'
+                ? 'border-amber-500/50 bg-amber-950/20 text-amber-100'
+                : 'border-cyan-500/50 bg-cyan-950/20 text-cyan-100'
             }`}
           >
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3.5">
               {isHard ? (
                 <AlertCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
               ) : isAdvisory ? (
@@ -67,10 +67,10 @@ export const ClashWarningBox: React.FC<ClashWarningBoxProps> = ({
                 <Info className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
               )}
 
-              <div className="flex-1 space-y-2">
+              <div className="flex-1 space-y-3">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-sm font-extrabold">{conflict.title}</span>
-                  <span className={`text-[10px] uppercase font-bold px-2.5 py-0.5 rounded-full tracking-wider ${
+                  <span className="text-sm font-extrabold text-white">{conflict.title}</span>
+                  <span className={`text-[10px] font-mono uppercase font-bold px-2.5 py-0.5 rounded-full tracking-wider ${
                     isHard 
                       ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40' 
                       : isAdvisory 
@@ -82,54 +82,54 @@ export const ClashWarningBox: React.FC<ClashWarningBoxProps> = ({
                 </div>
 
                 {/* Specific Details */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] bg-black/40 p-2.5 rounded-lg border border-white/5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] bg-[#050814]/80 p-3 rounded-xl border border-white/10 font-mono">
                   <div>
-                    <span className="text-[#94A3B8]">Conflicting Event: </span>
-                    <strong className="text-[#F8FAFC]">{conflict.conflicting_event.title}</strong>
+                    <span className="text-slate-400">Conflicting Event: </span>
+                    <strong className="text-white">{conflict.conflicting_event.title}</strong>
                   </div>
                   <div>
-                    <span className="text-[#94A3B8]">Venue: </span>
-                    <strong className="text-[#F8FAFC]">{conflict.venue_name || 'N/A'}</strong>
+                    <span className="text-slate-400">Venue: </span>
+                    <strong className="text-white">{conflict.venue_name || 'N/A'}</strong>
                   </div>
                   <div>
-                    <span className="text-[#94A3B8]">Date & Timing: </span>
-                    <strong className="text-[#F8FAFC]">
+                    <span className="text-slate-400">Date & Timing: </span>
+                    <strong className="text-white">
                       {conflict.date_string} ({conflict.start_time} – {conflict.end_time})
                     </strong>
                   </div>
                   <div>
-                    <span className="text-[#94A3B8]">Source: </span>
-                    <strong className="text-[#38BDF8]">{conflict.source_authority}</strong>
+                    <span className="text-slate-400">Source: </span>
+                    <strong className="text-cyan-400">{conflict.source_authority}</strong>
                   </div>
                 </div>
 
                 {/* Formal Rule Triggered */}
-                <div className="text-[11px] font-mono bg-black/20 p-2 rounded border border-white/5 text-[#94A3B8]">
-                  <strong className="text-white">Detection Logic:</strong> {conflict.rule_triggered}
+                <div className="text-[11px] font-mono bg-[#050814]/60 p-2.5 rounded-xl border border-white/5 text-slate-400">
+                  <strong className="text-white font-sans">Detection Logic:</strong> {conflict.rule_triggered}
                 </div>
 
                 {/* Plain-English Rationale */}
-                <p className="text-xs leading-relaxed text-[#F8FAFC]/90">
+                <p className="text-xs leading-relaxed text-slate-300">
                   {conflict.rationale}
                 </p>
 
                 {/* Overlap Window */}
                 {conflict.overlapping_interval && (
-                  <div className="text-xs font-semibold text-[#38BDF8]">
-                    Calculated Overlap Interval: <span className="underline">{conflict.overlapping_interval}</span>
+                  <div className="text-xs font-semibold text-cyan-400 font-mono">
+                    Calculated Overlap Interval: <span className="underline decoration-cyan-500/40">{conflict.overlapping_interval}</span>
                   </div>
                 )}
 
                 {/* Available Resolution Actions */}
                 {conflict.available_resolutions && conflict.available_resolutions.length > 0 && (
-                  <div className="pt-2 border-t border-white/10 space-y-1">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#94A3B8]">
+                  <div className="pt-3 border-t border-white/[0.08] space-y-1.5">
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400">
                       Suggested Resolutions:
                     </span>
                     <ul className="text-xs space-y-1 text-slate-300">
                       {conflict.available_resolutions.map((res, rIdx) => (
-                        <li key={rIdx} className="flex items-start gap-1.5">
-                          <span className="text-[#38BDF8]">•</span>
+                        <li key={rIdx} className="flex items-start gap-2">
+                          <span className="text-cyan-400">•</span>
                           <span>{res}</span>
                         </li>
                       ))}
@@ -144,9 +144,9 @@ export const ClashWarningBox: React.FC<ClashWarningBoxProps> = ({
 
       {/* Blocking Validation Error notice for Hard Conflicts */}
       {has_hard_conflict && !allowedToProceed && (
-        <div className="bg-rose-950/80 border border-rose-500 text-rose-200 text-xs p-3.5 rounded-xl flex items-center justify-between shadow">
+        <div className="glass-card border-rose-500/50 bg-rose-950/30 text-rose-200 text-xs p-4 rounded-2xl flex items-center justify-between">
           <span>
-            <strong>Blocking Rule:</strong> Authoritative venue double-bookings cannot be submitted for administrative approval until the venue or time slot is modified.
+            <strong className="text-rose-300">Blocking Rule:</strong> Authoritative venue double-bookings cannot be submitted for administrative approval until the venue or time slot is modified.
           </span>
         </div>
       )}

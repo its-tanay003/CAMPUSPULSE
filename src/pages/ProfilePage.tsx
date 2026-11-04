@@ -41,25 +41,25 @@ export const ProfilePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] py-8">
+    <div className="min-h-screen text-slate-100 py-10 relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* User Card */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-6 sm:p-8 shadow-md">
+        <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo">
           <div className="flex flex-col sm:flex-row sm:items-center gap-6">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-[#7C5CFC] to-[#38BDF8] text-white flex items-center justify-center font-bold text-2xl shadow-lg">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-indigo-500 via-indigo-600 to-cyan-400 text-white flex items-center justify-center font-extrabold text-2xl shadow-lg shadow-indigo-500/25">
               {currentUser?.full_name?.charAt(0) || 'U'}
             </div>
 
-            <div className="space-y-1 flex-1">
-              <div className="flex items-center gap-2">
-                <h1 className="text-2xl font-extrabold text-[#F8FAFC]">{currentUser?.full_name}</h1>
-                <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-[#7C5CFC]/20 text-[#38BDF8] border border-[#7C5CFC]/30">
+            <div className="space-y-1.5 flex-1">
+              <div className="flex items-center gap-2.5">
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">{currentUser?.full_name}</h1>
+                <span className="text-[10px] font-mono uppercase font-bold px-3 py-1 rounded-full bg-indigo-500/20 text-cyan-300 border border-indigo-500/30">
                   {currentUser?.role}
                 </span>
               </div>
-              <p className="text-xs text-[#94A3B8]">{currentUser?.email}</p>
-              <div className="text-xs font-medium text-[#94A3B8] flex items-center gap-2 pt-1">
-                <Building className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <p className="text-xs text-slate-400 font-mono">{currentUser?.email}</p>
+              <div className="text-xs font-medium text-slate-400 flex items-center gap-2 pt-1">
+                <Building className="w-3.5 h-3.5 text-cyan-400" />
                 <span>{currentUser?.campus}</span>
               </div>
             </div>
@@ -67,13 +67,13 @@ export const ProfilePage: React.FC = () => {
         </div>
 
         {/* Interest Taxonomy */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-6 sm:p-8 shadow-md space-y-6">
-          <div className="border-b border-[#334155] pb-4">
-            <h2 className="text-lg font-bold text-[#F8FAFC] flex items-center gap-2">
-              <Tag className="w-5 h-5 text-[#38BDF8]" />
+        <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo space-y-6">
+          <div className="border-b border-white/[0.08] pb-4">
+            <h2 className="text-lg font-bold text-white flex items-center gap-2.5">
+              <Tag className="w-5 h-5 text-cyan-400" />
               Interest Taxonomy & Feed Personalization
             </h2>
-            <p className="text-xs text-[#94A3B8] mt-1">
+            <p className="text-xs text-slate-400 mt-1">
               Transparent, user-controlled rules: events matching your chosen tags appear with a "Matches Your Interests" indicator.
             </p>
           </div>
@@ -85,10 +85,10 @@ export const ProfilePage: React.FC = () => {
                 <button
                   key={interest}
                   onClick={() => toggleInterest(interest)}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold transition border ${
+                  className={`px-4 py-2 min-h-[38px] rounded-xl text-xs font-semibold transition border cursor-pointer ${
                     active
-                      ? 'bg-[#7C5CFC] text-white border-[#7C5CFC] shadow-sm font-bold'
-                      : 'bg-[#0B1020] hover:bg-[#1E293B] text-[#94A3B8] hover:text-[#F8FAFC] border-[#334155]'
+                      ? 'bg-indigo-600 text-white border-indigo-400/40 shadow-md shadow-indigo-600/30 font-bold'
+                      : 'bg-[#050814]/80 hover:bg-[#0b1020] text-slate-400 hover:text-white border-white/10'
                   }`}
                 >
                   {interest} {active && '✓'}
@@ -97,21 +97,21 @@ export const ProfilePage: React.FC = () => {
             })}
           </div>
 
-          <div className="pt-4 flex items-center justify-between border-t border-[#334155]">
-            <span className="text-xs text-[#94A3B8]">
+          <div className="pt-4 flex items-center justify-between border-t border-white/[0.08]">
+            <span className="text-xs text-slate-400 font-mono">
               {selectedInterests.length} categories active
             </span>
 
             <button
               onClick={handleSave}
-              className="bg-[#7C5CFC] hover:bg-[#6B46E5] text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-lg transition flex items-center gap-1.5"
+              className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-5 py-2.5 rounded-2xl shadow-lg transition flex items-center gap-2 cursor-pointer"
             >
               <Save className="w-4 h-4" /> Save Preferences
             </button>
           </div>
 
           {savedSuccess && (
-            <div className="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 text-xs font-semibold flex items-center gap-2">
+            <div className="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 text-xs font-semibold flex items-center gap-2.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
               Preferences successfully updated!
             </div>
@@ -119,24 +119,24 @@ export const ProfilePage: React.FC = () => {
         </div>
 
         {/* Notification Settings */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-6 sm:p-8 shadow-md space-y-4">
-          <h2 className="text-lg font-bold text-[#F8FAFC] flex items-center gap-2">
-            <Bell className="w-5 h-5 text-[#38BDF8]" />
+        <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+          <h2 className="text-lg font-bold text-white flex items-center gap-2.5">
+            <Bell className="w-5 h-5 text-cyan-400" />
             Alerts & Opt-in Controls
           </h2>
-          <div className="space-y-3 text-xs text-[#94A3B8]">
-            <label className="flex items-center gap-3 p-3.5 bg-[#0B1020] rounded-xl border border-[#334155]">
-              <input type="checkbox" defaultChecked className="rounded text-[#7C5CFC] focus:ring-[#7C5CFC]" />
+          <div className="space-y-3 text-xs text-slate-400">
+            <label className="flex items-center gap-3.5 p-4 bg-[#050814]/80 rounded-2xl border border-white/10 cursor-pointer">
+              <input type="checkbox" defaultChecked className="rounded text-indigo-600 focus:ring-indigo-500" />
               <div>
-                <div className="font-semibold text-[#F8FAFC]">Event Schedule Conflict Warnings</div>
-                <div className="text-[11px] text-[#94A3B8]">Notify me when 2 saved events overlap in time</div>
+                <div className="font-semibold text-white">Event Schedule Conflict Warnings</div>
+                <div className="text-[11px] text-slate-400">Notify me when 2 saved events overlap in time</div>
               </div>
             </label>
-            <label className="flex items-center gap-3 p-3.5 bg-[#0B1020] rounded-xl border border-[#334155]">
-              <input type="checkbox" defaultChecked className="rounded text-[#7C5CFC] focus:ring-[#7C5CFC]" />
+            <label className="flex items-center gap-3.5 p-4 bg-[#050814]/80 rounded-2xl border border-white/10 cursor-pointer">
+              <input type="checkbox" defaultChecked className="rounded text-indigo-600 focus:ring-indigo-500" />
               <div>
-                <div className="font-semibold text-[#F8FAFC]">Registered Event Material Changes</div>
-                <div className="text-[11px] text-[#94A3B8]">Alert me if venue or time changes for events I'm attending</div>
+                <div className="font-semibold text-white">Registered Event Material Changes</div>
+                <div className="text-[11px] text-slate-400">Alert me if venue or time changes for events I'm attending</div>
               </div>
             </label>
           </div>

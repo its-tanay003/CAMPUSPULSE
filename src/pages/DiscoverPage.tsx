@@ -149,30 +149,31 @@ export const DiscoverPage: React.FC = () => {
   const paginatedEvents = filteredEvents.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
-    <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] py-8">
+    <div className="min-h-screen text-slate-100 py-10 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header & Search Bar */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-6 shadow-md mb-8">
+        <div className="glass-card rounded-3xl p-6 sm:p-8 mb-8 glow-indigo">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F8FAFC] tracking-tight">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-400">Event Exploration Layer</span>
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-1">
                 Discover Campus Events
               </h1>
-              <p className="text-sm text-[#94A3B8] mt-1">
-                Real-time searchable event layer across verified clubs, departments, and authoritative campus venues.
+              <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl leading-relaxed">
+                Real-time searchable event catalogue across verified student clubs, academic departments, and authoritative campus venues.
               </p>
             </div>
 
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-[#94A3B8]">Active Filters:</span>
-              <Badge variant={activeFilterCount > 0 ? 'secondary' : 'neutral'}>
+            <div className="flex items-center gap-2.5">
+              <span className="text-xs font-medium text-slate-400">Active Filters:</span>
+              <Badge variant={activeFilterCount > 0 ? 'primary' : 'neutral'}>
                 {activeFilterCount} Active
               </Badge>
               {activeFilterCount > 0 && (
                 <button
                   onClick={resetFilters}
-                  className="text-xs text-[#38BDF8] hover:text-cyan-300 font-semibold underline ml-1"
+                  className="text-xs text-cyan-400 hover:text-cyan-300 font-semibold underline ml-1 cursor-pointer"
                 >
                   Clear all
                 </button>
@@ -183,7 +184,7 @@ export const DiscoverPage: React.FC = () => {
           {/* Search Input and Mobile Trigger */}
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-3.5 w-5 h-5 text-[#94A3B8]" />
+              <Search className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
               <input
                 type="text"
                 value={searchQuery}
@@ -193,13 +194,13 @@ export const DiscoverPage: React.FC = () => {
                 }}
                 placeholder="Search by event title, description, organizing club, venue, or category..."
                 aria-label="Search events"
-                className="w-full pl-11 pr-10 py-3 bg-[#0B1020] border border-[#334155] rounded-xl text-sm text-[#F8FAFC] placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#7C5CFC] transition"
+                className="w-full pl-12 pr-11 py-3.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/80 transition-all shadow-inner"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
                   aria-label="Clear search input"
-                  className="absolute right-3.5 top-3.5 text-[#94A3B8] hover:text-[#F8FAFC] rounded-full"
+                  className="absolute right-4 top-3.5 text-slate-400 hover:text-white rounded-full p-0.5 transition"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -213,15 +214,15 @@ export const DiscoverPage: React.FC = () => {
               aria-expanded={mobileFilterOpen}
               aria-controls="discover-filter-sidebar"
             >
-              <Filter className="w-4 h-4 text-[#38BDF8]" aria-hidden="true" />
+              <Filter className="w-4 h-4 text-cyan-400" aria-hidden="true" />
               Filter Options ({activeFilterCount})
             </Button>
           </div>
 
           {/* Quick Date Shortcuts Bar */}
-          <div className="mt-4 pt-4 border-t border-[#334155] flex items-center gap-2 flex-wrap text-xs">
-            <span className="text-[#94A3B8] font-semibold flex items-center gap-1.5 mr-1">
-              <Calendar className="w-3.5 h-3.5 text-[#38BDF8]" aria-hidden="true" />
+          <div className="mt-5 pt-4 border-t border-white/[0.06] flex items-center gap-2 flex-wrap text-xs">
+            <span className="text-slate-400 font-medium flex items-center gap-1.5 mr-1">
+              <Calendar className="w-3.5 h-3.5 text-cyan-400" aria-hidden="true" />
               Quick Date:
             </span>
             {[
@@ -237,10 +238,10 @@ export const DiscoverPage: React.FC = () => {
                   setCurrentPage(1);
                 }}
                 aria-pressed={dateFilter === d.id}
-                className={`px-3 py-1.5 min-h-[36px] rounded-lg font-semibold transition border ${
+                className={`px-3.5 py-1.5 min-h-[36px] rounded-xl font-medium transition-all border ${
                   dateFilter === d.id
-                    ? 'bg-[#7C5CFC] text-white border-[#7C5CFC] shadow-sm'
-                    : 'bg-[#0B1020] text-[#94A3B8] hover:text-[#F8FAFC] border-[#334155]'
+                    ? 'bg-indigo-600 text-white border-indigo-400/40 shadow-md shadow-indigo-600/30'
+                    : 'bg-[#050814]/70 text-slate-400 hover:text-white border-white/10 hover:border-white/20'
                 }`}
               >
                 {d.label}
@@ -256,26 +257,26 @@ export const DiscoverPage: React.FC = () => {
           <aside 
             id="discover-filter-sidebar"
             aria-label="Event filters"
-            className={`lg:block ${mobileFilterOpen ? 'block' : 'hidden'} space-y-6 bg-[#151C2F] p-6 rounded-2xl border border-[#334155] shadow-md h-fit`}
+            className={`lg:block ${mobileFilterOpen ? 'block' : 'hidden'} space-y-6 glass-card p-6 rounded-3xl glow-indigo h-fit`}
           >
-            <div className="flex items-center justify-between pb-4 border-b border-[#334155]">
-              <h2 className="font-bold text-[#F8FAFC] text-sm flex items-center gap-2">
-                <Filter className="w-4 h-4 text-[#38BDF8]" aria-hidden="true" />
+            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
+              <h2 className="font-bold text-white text-sm flex items-center gap-2">
+                <Filter className="w-4 h-4 text-cyan-400" aria-hidden="true" />
                 Filter Options
               </h2>
               {activeFilterCount > 0 && (
                 <button
                   onClick={resetFilters}
-                  className="text-xs text-[#38BDF8] hover:text-cyan-300 font-semibold flex items-center gap-1 p-1 min-h-[32px]"
+                  className="text-xs text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1.5 p-1 min-h-[32px] transition cursor-pointer"
                 >
-                  <RotateCcw className="w-3 h-3" aria-hidden="true" /> Reset
+                  <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" /> Reset
                 </button>
               )}
             </div>
 
             {/* Category Filter */}
             <div>
-              <label htmlFor="filter-cat" className="block text-xs font-bold text-[#94A3B8] uppercase tracking-wider mb-2">
+              <label htmlFor="filter-cat" className="block text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-2">
                 Category
               </label>
               <select
@@ -285,7 +286,7 @@ export const DiscoverPage: React.FC = () => {
                   setSelectedCategory(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full text-xs p-2.5 bg-[#0B1020] text-[#F8FAFC] border border-[#334155] rounded-xl focus:ring-2 focus:ring-[#7C5CFC]"
+                className="w-full text-xs p-3 bg-[#050814]/80 text-white border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/80 transition-all cursor-pointer"
               >
                 <option value="all">All Categories</option>
                 {CATEGORIES.map(c => (
@@ -296,7 +297,7 @@ export const DiscoverPage: React.FC = () => {
 
             {/* Venue Filter */}
             <div>
-              <label htmlFor="filter-venue" className="block text-xs font-bold text-[#94A3B8] uppercase tracking-wider mb-2">
+              <label htmlFor="filter-venue" className="block text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-2">
                 Campus Venue
               </label>
               <select
@@ -306,7 +307,7 @@ export const DiscoverPage: React.FC = () => {
                   setSelectedVenue(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full text-xs p-2.5 bg-[#0B1020] text-[#F8FAFC] border border-[#334155] rounded-xl focus:ring-2 focus:ring-[#7C5CFC]"
+                className="w-full text-xs p-3 bg-[#050814]/80 text-white border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/80 transition-all cursor-pointer"
               >
                 <option value="all">All Campus Venues</option>
                 {venues.map(v => (
@@ -317,7 +318,7 @@ export const DiscoverPage: React.FC = () => {
 
             {/* Organizer Filter */}
             <div>
-              <label htmlFor="filter-org" className="block text-xs font-bold text-[#94A3B8] uppercase tracking-wider mb-2">
+              <label htmlFor="filter-org" className="block text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-2">
                 Organizing Club
               </label>
               <select
@@ -327,7 +328,7 @@ export const DiscoverPage: React.FC = () => {
                   setSelectedOrg(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full text-xs p-2.5 bg-[#0B1020] text-[#F8FAFC] border border-[#334155] rounded-xl focus:ring-2 focus:ring-[#7C5CFC]"
+                className="w-full text-xs p-3 bg-[#050814]/80 text-white border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/80 transition-all cursor-pointer"
               >
                 <option value="all">All Clubs & Societies</option>
                 {organizations.map(o => (
@@ -338,15 +339,15 @@ export const DiscoverPage: React.FC = () => {
 
             {/* Admission / Cost */}
             <div>
-              <label className="block text-xs font-bold text-[#94A3B8] uppercase tracking-wider mb-2">
+              <label className="block text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-2">
                 Admission Fee
               </label>
-              <div className="grid grid-cols-3 gap-1 bg-[#0B1020] p-1 rounded-xl border border-[#334155] text-xs font-semibold">
+              <div className="grid grid-cols-3 gap-1 bg-[#050814]/80 p-1.5 rounded-2xl border border-white/10 text-xs font-semibold">
                 <button
                   type="button"
                   onClick={() => { setCostFilter('all'); setCurrentPage(1); }}
                   aria-pressed={costFilter === 'all'}
-                  className={`py-2 min-h-[36px] rounded-lg transition ${costFilter === 'all' ? 'bg-[#7C5CFC] text-white shadow-sm' : 'text-[#94A3B8] hover:text-[#F8FAFC]'}`}
+                  className={`py-2 min-h-[36px] rounded-xl transition cursor-pointer ${costFilter === 'all' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30' : 'text-slate-400 hover:text-white'}`}
                 >
                   All
                 </button>
@@ -354,7 +355,7 @@ export const DiscoverPage: React.FC = () => {
                   type="button"
                   onClick={() => { setCostFilter('free'); setCurrentPage(1); }}
                   aria-pressed={costFilter === 'free'}
-                  className={`py-2 min-h-[36px] rounded-lg transition ${costFilter === 'free' ? 'bg-[#7C5CFC] text-white shadow-sm' : 'text-[#94A3B8] hover:text-[#F8FAFC]'}`}
+                  className={`py-2 min-h-[36px] rounded-xl transition cursor-pointer ${costFilter === 'free' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30' : 'text-slate-400 hover:text-white'}`}
                 >
                   Free
                 </button>
@@ -362,7 +363,7 @@ export const DiscoverPage: React.FC = () => {
                   type="button"
                   onClick={() => { setCostFilter('paid'); setCurrentPage(1); }}
                   aria-pressed={costFilter === 'paid'}
-                  className={`py-2 min-h-[36px] rounded-lg transition ${costFilter === 'paid' ? 'bg-[#7C5CFC] text-white shadow-sm' : 'text-[#94A3B8] hover:text-[#F8FAFC]'}`}
+                  className={`py-2 min-h-[36px] rounded-xl transition cursor-pointer ${costFilter === 'paid' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30' : 'text-slate-400 hover:text-white'}`}
                 >
                   Paid
                 </button>
@@ -371,7 +372,7 @@ export const DiscoverPage: React.FC = () => {
 
             {/* Registration Method */}
             <div>
-              <label htmlFor="filter-reg" className="block text-xs font-bold text-[#94A3B8] uppercase tracking-wider mb-2">
+              <label htmlFor="filter-reg" className="block text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-2">
                 Registration Status
               </label>
               <select
@@ -381,7 +382,7 @@ export const DiscoverPage: React.FC = () => {
                   setRegStatusFilter(e.target.value as any);
                   setCurrentPage(1);
                 }}
-                className="w-full text-xs p-2.5 bg-[#0B1020] text-[#F8FAFC] border border-[#334155] rounded-xl focus:ring-2 focus:ring-[#7C5CFC]"
+                className="w-full text-xs p-3 bg-[#050814]/80 text-white border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/80 transition-all cursor-pointer"
               >
                 <option value="all">Any Registration Type</option>
                 <option value="open">CampusPulse 1-Click Open</option>
@@ -395,41 +396,42 @@ export const DiscoverPage: React.FC = () => {
           <main className="lg:col-span-3 space-y-6">
             
             {/* View Bar: Count, Sort Dropdown & Grid Toggle */}
-            <div className="flex items-center justify-between bg-[#151C2F] px-5 py-3.5 rounded-2xl border border-[#334155] text-xs text-[#94A3B8] shadow-sm">
-              <span className="font-semibold text-[#F8FAFC]">
-                Showing {filteredEvents.length} {filteredEvents.length === 1 ? 'event' : 'events'}
+            <div className="flex items-center justify-between glass-card px-6 py-4 rounded-3xl text-xs text-slate-400">
+              <span className="font-semibold text-white flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                Showing <span className="font-mono text-cyan-300">{filteredEvents.length}</span> {filteredEvents.length === 1 ? 'event' : 'events'}
               </span>
 
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-1.5">
-                  <label htmlFor="sort-events-select" className="text-[#94A3B8] font-medium">Sort:</label>
+                <div className="flex items-center gap-2">
+                  <label htmlFor="sort-events-select" className="text-slate-400 font-medium">Sort:</label>
                   <select
                     id="sort-events-select"
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as any)}
                     aria-label="Sort events"
-                    className="bg-transparent font-bold text-[#38BDF8] border-none focus:outline-none cursor-pointer"
+                    className="bg-[#050814]/80 font-bold text-cyan-400 border border-white/10 px-3 py-1.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
                   >
-                    <option value="soonest" className="bg-[#151C2F] text-[#F8FAFC]">Chronological (Soonest)</option>
-                    <option value="recent" className="bg-[#151C2F] text-[#F8FAFC]">Recently Added</option>
+                    <option value="soonest" className="bg-[#0b1020] text-white">Chronological (Soonest)</option>
+                    <option value="recent" className="bg-[#0b1020] text-white">Recently Added</option>
                     {currentUser?.interests && currentUser.interests.length > 0 && (
-                      <option value="recommended" className="bg-[#151C2F] text-[#F8FAFC]">Recommended (My Interests)</option>
+                      <option value="recommended" className="bg-[#0b1020] text-white">Recommended (My Interests)</option>
                     )}
                   </select>
                 </div>
 
-                <div className="hidden sm:flex items-center gap-1 border-l pl-3 border-[#334155]">
+                <div className="hidden sm:flex items-center gap-1.5 border-l pl-3.5 border-white/[0.08]">
                   <button
                     onClick={() => setViewMode('grid')}
                     aria-label="Grid view layout"
-                    className={`p-1.5 rounded-lg transition ${viewMode === 'grid' ? 'bg-[#7C5CFC]/20 text-[#38BDF8]' : 'text-[#94A3B8] hover:text-[#F8FAFC]'}`}
+                    className={`p-2 rounded-xl transition cursor-pointer ${viewMode === 'grid' ? 'bg-indigo-600/30 text-cyan-300 border border-indigo-500/30' : 'text-slate-400 hover:text-white'}`}
                   >
                     <Grid className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => setViewMode('list')}
                     aria-label="List view layout"
-                    className={`p-1.5 rounded-lg transition ${viewMode === 'list' ? 'bg-[#7C5CFC]/20 text-[#38BDF8]' : 'text-[#94A3B8] hover:text-[#F8FAFC]'}`}
+                    className={`p-2 rounded-xl transition cursor-pointer ${viewMode === 'list' ? 'bg-indigo-600/30 text-cyan-300 border border-indigo-500/30' : 'text-slate-400 hover:text-white'}`}
                   >
                     <List className="w-4 h-4" />
                   </button>
@@ -450,8 +452,8 @@ export const DiscoverPage: React.FC = () => {
 
                 {/* Pagination Controls */}
                 {totalPages > 1 && (
-                  <div className="flex items-center justify-between pt-6 border-t border-[#334155] text-xs">
-                    <span className="text-[#94A3B8]">
+                  <div className="flex items-center justify-between pt-6 border-t border-white/[0.08] text-xs">
+                    <span className="text-slate-400 font-mono">
                       Page {currentPage} of {totalPages}
                     </span>
 
@@ -461,7 +463,7 @@ export const DiscoverPage: React.FC = () => {
                         size="sm"
                         disabled={currentPage === 1}
                         onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                        className="gap-1"
+                        className="gap-1.5 rounded-xl"
                       >
                         <ChevronLeft className="w-3.5 h-3.5" /> Previous
                       </Button>
@@ -470,7 +472,7 @@ export const DiscoverPage: React.FC = () => {
                         size="sm"
                         disabled={currentPage === totalPages}
                         onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                        className="gap-1"
+                        className="gap-1.5 rounded-xl"
                       >
                         Next <ChevronRight className="w-3.5 h-3.5" />
                       </Button>

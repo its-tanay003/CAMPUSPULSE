@@ -27,28 +27,28 @@ export const EventCard: React.FC<EventCardProps> = ({ event, compact = false }) 
 
   return (
     <article
-      className={`group bg-[#151C2F] rounded-2xl border border-[#334155] overflow-hidden shadow-md hover:border-[#7C5CFC]/60 hover:shadow-xl transition-all duration-300 flex flex-col ${
-        compact ? 'p-3' : 'p-0'
+      className={`group glass-card rounded-3xl overflow-hidden hover:border-indigo-500/40 hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-950/40 transition-all duration-300 flex flex-col relative ${
+        compact ? 'p-3.5' : 'p-0'
       }`}
     >
       {/* Cover Image & Category Badges */}
       {!compact && (
-        <div className="relative h-44 w-full bg-[#0B1020] overflow-hidden">
+        <div className="relative h-48 w-full bg-[#050814] overflow-hidden">
           <img
             src={event.cover_image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80'}
             alt={`Poster for ${event.title}`}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-85"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#151C2F] via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0D1326] via-[#0D1326]/40 to-transparent pointer-events-none" />
 
           {/* Top category chip */}
-          <div className="absolute top-3 left-3 flex gap-1.5 flex-wrap">
-            <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#151C2F]/90 backdrop-blur-md text-[#38BDF8] border border-[#334155] shadow">
+          <div className="absolute top-3.5 left-3.5 flex gap-1.5 flex-wrap">
+            <span className="text-[11px] font-semibold px-3 py-1 rounded-full bg-[#0D1326]/80 backdrop-blur-md text-cyan-300 border border-white/10 shadow-lg">
               {event.category}
             </span>
             {event.cost === 'Free' ? (
-              <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
+              <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md text-emerald-300 border border-emerald-500/30">
                 Free Entry
               </span>
             ) : (
@@ -59,24 +59,24 @@ export const EventCard: React.FC<EventCardProps> = ({ event, compact = false }) 
           </div>
 
           {/* Status Badge */}
-          <div className="absolute top-3 right-3 flex items-center gap-1">
+          <div className="absolute top-3.5 right-3.5 flex items-center gap-1">
             {event.status === 'published' && (
-              <span className="bg-emerald-500/20 backdrop-blur-md text-emerald-300 border border-emerald-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full shadow flex items-center gap-1">
-                <CheckCircle2 className="w-3 h-3" /> Approved
+              <span className="bg-emerald-500/20 backdrop-blur-md text-emerald-300 border border-emerald-500/30 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full shadow flex items-center gap-1">
+                <CheckCircle2 className="w-3 h-3 text-emerald-400" /> Approved
               </span>
             )}
             {event.status === 'pending_review' && (
-              <span className="bg-amber-500/20 backdrop-blur-md text-amber-300 border border-amber-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full shadow flex items-center gap-1">
-                <AlertCircle className="w-3 h-3" /> Under Review
+              <span className="bg-amber-500/20 backdrop-blur-md text-amber-300 border border-amber-500/30 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full shadow flex items-center gap-1">
+                <AlertCircle className="w-3 h-3 text-amber-400" /> Under Review
               </span>
             )}
             {event.status === 'cancelled' && (
-              <span className="bg-rose-500/30 backdrop-blur-md text-rose-300 border border-rose-500/40 text-[10px] font-bold px-2 py-0.5 rounded-full shadow">
+              <span className="bg-rose-500/30 backdrop-blur-md text-rose-300 border border-rose-500/40 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full shadow">
                 Cancelled
               </span>
             )}
             {event.status === 'draft' && (
-              <span className="bg-slate-800/80 backdrop-blur-md text-[#94A3B8] border border-[#334155] text-[10px] font-bold px-2 py-0.5 rounded-full shadow">
+              <span className="bg-slate-800/80 backdrop-blur-md text-slate-300 border border-white/10 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full shadow">
                 Draft
               </span>
             )}
@@ -90,66 +90,66 @@ export const EventCard: React.FC<EventCardProps> = ({ event, compact = false }) 
             }}
             aria-label={saved ? `Remove ${event.title} from saved schedule` : `Save ${event.title} to my schedule`}
             aria-pressed={saved}
-            className={`absolute bottom-3 right-3 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full shadow-lg transition-all ${
+            className={`absolute bottom-3.5 right-3.5 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-2xl shadow-xl transition-all ${
               saved 
-                ? 'bg-[#7C5CFC] text-white ring-2 ring-[#7C5CFC]/50' 
-                : 'bg-[#151C2F]/80 backdrop-blur-md text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F8FAFC] border border-[#334155]'
+                ? 'bg-indigo-600 text-white ring-2 ring-indigo-400/50 shadow-indigo-600/40' 
+                : 'bg-[#050814]/80 backdrop-blur-md text-slate-300 hover:text-white border border-white/15 hover:border-white/30'
             }`}
           >
-            <Bookmark className={`w-4 h-4 ${saved ? 'fill-current' : ''}`} aria-hidden="true" />
+            <Bookmark className={`w-4 h-4 ${saved ? 'fill-current text-cyan-300' : ''}`} aria-hidden="true" />
           </button>
         </div>
       )}
 
       {/* Body Content */}
-      <div className="p-5 flex-1 flex flex-col justify-between">
+      <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
         <div>
           {/* Organiser line */}
-          <div className="flex items-center gap-2 text-xs text-[#94A3B8] mb-1.5 font-medium">
+          <div className="flex items-center gap-2 text-xs text-slate-400 mb-2 font-medium">
             <span className="truncate">{event.organization?.name || 'Campus Organiser'}</span>
             {event.organization?.is_verified && (
-              <span className="text-[10px] bg-[#7C5CFC]/20 text-[#38BDF8] border border-[#7C5CFC]/30 font-bold px-1.5 py-0.5 rounded">
+              <span className="text-[10px] bg-indigo-500/20 text-cyan-300 border border-indigo-500/30 font-semibold px-2 py-0.5 rounded-full font-mono">
                 Verified
               </span>
             )}
           </div>
 
           {/* Title with link */}
-          <h3 className="font-bold text-[#F8FAFC] group-hover:text-[#38BDF8] transition-colors line-clamp-2 text-base leading-snug">
+          <h3 className="font-extrabold text-white group-hover:text-cyan-300 transition-colors line-clamp-2 text-base sm:text-lg leading-snug tracking-tight">
             <Link to={`/events/${event.id}`}>
               {event.title}
             </Link>
           </h3>
 
           {/* Date, Time & Venue in Readable Plain Text */}
-          <div className="mt-3.5 space-y-2 text-xs text-[#94A3B8]">
+          <div className="mt-4 space-y-2 text-xs text-slate-400">
             <div className="flex items-center gap-2">
-              <Calendar className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
-              <span className="font-semibold text-[#F8FAFC]">{dateFormatted}</span>
-              <span className="text-[#334155]">·</span>
-              <span>{timeFormatted}</span>
+              <Calendar className="w-4 h-4 text-cyan-400 shrink-0" />
+              <span className="font-semibold text-slate-200">{dateFormatted}</span>
+              <span className="text-slate-600">·</span>
+              <span className="font-mono text-slate-300">{timeFormatted}</span>
             </div>
 
             <div className="flex items-center gap-2">
-              <MapPin className="w-3.5 h-3.5 text-[#7C5CFC] shrink-0" />
+              <MapPin className="w-4 h-4 text-indigo-400 shrink-0" />
               <span className="truncate">{event.venue?.name || 'On-campus'}</span>
             </div>
           </div>
         </div>
 
         {/* Footer info: Registered indicator & CTA */}
-        <div className="mt-5 pt-3.5 border-t border-[#334155] flex items-center justify-between text-xs">
+        <div className="mt-5 pt-4 border-t border-white/[0.07] flex items-center justify-between text-xs">
           <div>
             {registered ? (
-              <span className="inline-flex items-center gap-1 text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-lg border border-emerald-500/30">
-                <CheckCircle2 className="w-3 h-3" /> Registered
+              <span className="inline-flex items-center gap-1.5 text-emerald-300 font-semibold bg-emerald-500/10 px-2.5 py-1 rounded-xl border border-emerald-500/30">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Registered
               </span>
             ) : saved ? (
-              <span className="text-purple-300 font-semibold bg-[#7C5CFC]/20 px-2 py-0.5 rounded-lg border border-[#7C5CFC]/30">
+              <span className="text-indigo-300 font-semibold bg-indigo-500/15 px-2.5 py-1 rounded-xl border border-indigo-500/30 font-mono text-[11px]">
                 Saved in schedule
               </span>
             ) : (
-              <span className="text-[#94A3B8] text-[11px]">
+              <span className="text-slate-400 text-[11px] truncate max-w-[140px] sm:max-w-none">
                 {event.target_audience}
               </span>
             )}
@@ -158,7 +158,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, compact = false }) 
           <Link
             to={`/events/${event.id}`}
             aria-label={`View details and registration for ${event.title}`}
-            className="text-[#38BDF8] hover:text-cyan-300 font-bold flex items-center gap-1 transition p-1.5 min-h-[36px]"
+            className="text-cyan-300 hover:text-cyan-200 font-bold flex items-center gap-1 transition p-1.5 min-h-[36px] group-hover:translate-x-0.5"
           >
             Details →
           </Link>

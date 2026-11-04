@@ -27,65 +27,67 @@ export const Navbar: React.FC = () => {
   const savedCount = savedEvents.filter(s => s.user_id === currentUser?.id).length;
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0B1020]/95 backdrop-blur-md text-[#F8FAFC] border-b border-[#334155] shadow-lg">
+    <header className="sticky top-0 z-50 bg-[#050814]/85 backdrop-blur-xl text-[#F8FAFC] border-b border-white/[0.08] shadow-2xl">
       {/* Top Banner: Verification & Demo Data Notice */}
-      <aside aria-label="Prototype demo indicator" className="bg-[#7C5CFC]/10 border-b border-[#7C5CFC]/20 text-[#38BDF8] text-xs px-4 py-1.5 flex items-center justify-between">
-        <div className="flex items-center gap-1.5 mx-auto text-center font-medium">
-          <Info className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" aria-hidden="true" />
-          <span>CampusPulse Prototype: Verified campus event layer & explainable schedule clash detection.</span>
+      <aside aria-label="Prototype demo indicator" className="bg-gradient-to-r from-indigo-950/40 via-purple-950/30 to-cyan-950/40 border-b border-white/[0.05] text-cyan-300 text-xs px-4 py-1.5 flex items-center justify-between">
+        <div className="flex items-center gap-2 mx-auto text-center font-medium">
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping shrink-0" aria-hidden="true" />
+          <span className="text-[11px] sm:text-xs text-slate-300">
+            <strong className="text-cyan-300 font-semibold">CampusPulse Engine:</strong> Verified campus event registry & explainable clash detection.
+          </span>
         </div>
       </aside>
 
       <nav aria-label="Main navigation" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand */}
         <div className="flex items-center gap-6">
-          <Link to="/" className="flex items-center gap-2.5 group rounded-lg p-1">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#7C5CFC] to-[#38BDF8] flex items-center justify-center font-bold text-white text-xl shadow-md">
+          <Link to="/" className="flex items-center gap-2.5 group rounded-2xl p-1 transition-transform active:scale-95">
+            <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 flex items-center justify-center font-extrabold text-white text-lg shadow-lg shadow-indigo-500/30 group-hover:shadow-indigo-500/50 transition-all">
               P
             </div>
             <div>
-              <span className="text-xl font-extrabold tracking-tight text-[#F8FAFC] group-hover:text-[#38BDF8] transition-colors">
-                Campus<span className="text-[#7C5CFC]">Pulse</span>
+              <span className="text-xl font-extrabold tracking-tight text-white group-hover:text-cyan-300 transition-colors">
+                Campus<span className="text-indigo-400">Pulse</span>
               </span>
-              <span className="hidden sm:inline-block ml-2 text-[10px] font-bold uppercase tracking-wider bg-[#151C2F] text-[#94A3B8] px-1.5 py-0.5 rounded border border-[#334155]">
+              <span className="hidden sm:inline-block ml-2 text-[9px] font-mono font-bold uppercase tracking-wider bg-white/[0.06] text-cyan-300 px-2 py-0.5 rounded-full border border-white/10">
                 P17
               </span>
             </div>
           </Link>
 
           {/* Primary Nav Links */}
-          <div className="hidden md:flex items-center gap-1 text-sm font-semibold">
+          <div className="hidden md:flex items-center gap-1.5 text-xs font-semibold">
             <Link
               to="/discover"
-              className={`px-3.5 py-2 rounded-lg transition-colors flex items-center gap-1.5 ${
+              className={`px-3.5 py-2 rounded-2xl transition-all flex items-center gap-2 ${
                 isActive('/discover') 
-                  ? 'bg-[#151C2F] text-[#38BDF8] border border-[#334155]' 
-                  : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#151C2F]/60'
+                  ? 'bg-indigo-500/15 text-cyan-300 border border-indigo-500/30 shadow-sm shadow-indigo-950/50' 
+                  : 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
               }`}
             >
-              <Compass className="w-4 h-4" />
+              <Compass className="w-4 h-4 text-cyan-400" />
               Discover
             </Link>
             <Link
               to="/calendar"
-              className={`px-3.5 py-2 rounded-lg transition-colors flex items-center gap-1.5 ${
+              className={`px-3.5 py-2 rounded-2xl transition-all flex items-center gap-2 ${
                 isActive('/calendar') 
-                  ? 'bg-[#151C2F] text-[#38BDF8] border border-[#334155]' 
-                  : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#151C2F]/60'
+                  ? 'bg-indigo-500/15 text-cyan-300 border border-indigo-500/30 shadow-sm shadow-indigo-950/50' 
+                  : 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
               }`}
             >
-              <Calendar className="w-4 h-4" />
+              <Calendar className="w-4 h-4 text-purple-400" />
               Calendar
             </Link>
             <Link
               to="/clubs"
-              className={`px-3.5 py-2 rounded-lg transition-colors flex items-center gap-1.5 ${
+              className={`px-3.5 py-2 rounded-2xl transition-all flex items-center gap-2 ${
                 isActive('/clubs') 
-                  ? 'bg-[#151C2F] text-[#38BDF8] border border-[#334155]' 
-                  : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#151C2F]/60'
+                  ? 'bg-indigo-500/15 text-cyan-300 border border-indigo-500/30 shadow-sm shadow-indigo-950/50' 
+                  : 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
               }`}
             >
-              <Layers className="w-4 h-4" />
+              <Layers className="w-4 h-4 text-emerald-400" />
               Clubs
             </Link>
           </div>
@@ -100,30 +102,30 @@ export const Navbar: React.FC = () => {
               aria-haspopup="menu"
               aria-expanded={roleSwitcherOpen}
               aria-label={`Role simulator menu. Current role: ${currentUser?.role || 'Guest'}`}
-              className="flex items-center gap-2 bg-[#151C2F] hover:bg-[#1E293B] border border-[#334155] text-xs px-3 py-2 min-h-[36px] rounded-full text-[#F8FAFC] transition shadow-sm"
+              className="flex items-center gap-2 bg-[#0D1326]/80 hover:bg-[#151D38] border border-white/10 hover:border-white/20 text-xs px-3.5 py-2 min-h-[36px] rounded-full text-slate-200 transition-all shadow-sm backdrop-blur-md"
               title="Switch user role for test evaluation"
             >
               <span 
                 aria-hidden="true"
                 className={`w-2 h-2 rounded-full ${
                   currentUser?.role === 'admin' 
-                    ? 'bg-purple-400' 
+                    ? 'bg-purple-400 ring-2 ring-purple-400/30' 
                     : currentUser?.role === 'organizer' 
-                    ? 'bg-cyan-400' 
-                    : 'bg-emerald-400'
+                    ? 'bg-cyan-400 ring-2 ring-cyan-400/30' 
+                    : 'bg-emerald-400 ring-2 ring-emerald-400/30'
                 }`} 
               />
               <span className="font-semibold capitalize">{currentUser?.role || 'Guest'} Role</span>
-              <span className="text-[10px] bg-[#0B1020] text-[#94A3B8] px-1 py-0.5 rounded font-mono">Simulate</span>
+              <span className="text-[10px] bg-white/[0.08] text-slate-400 px-1.5 py-0.5 rounded-full font-mono">Simulate</span>
             </button>
 
             {roleSwitcherOpen && (
               <div 
                 role="menu"
                 aria-label="Select simulation role"
-                className="absolute right-0 mt-2 w-64 bg-[#151C2F] border border-[#334155] rounded-xl shadow-2xl py-2 z-50 text-xs"
+                className="absolute right-0 mt-2 w-64 glass-card rounded-2xl shadow-2xl py-2 z-50 text-xs glow-indigo"
               >
-                <div className="px-3.5 py-1.5 text-[11px] font-bold text-[#94A3B8] uppercase tracking-wider border-b border-[#334155]">
+                <div className="px-4 py-2 text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider border-b border-white/[0.07]">
                   Role Simulator
                 </div>
                 {(['student', 'organizer', 'admin'] as UserRole[]).map((r) => (
@@ -134,12 +136,12 @@ export const Navbar: React.FC = () => {
                       switchRole(r);
                       setRoleSwitcherOpen(false);
                     }}
-                    className={`w-full text-left px-3.5 py-2.5 min-h-[40px] flex items-center justify-between hover:bg-[#1E293B] transition ${
-                      currentUser?.role === r ? 'text-[#38BDF8] font-bold bg-[#1E293B]/50' : 'text-[#F8FAFC]'
+                    className={`w-full text-left px-4 py-2.5 min-h-[40px] flex items-center justify-between hover:bg-white/[0.06] transition ${
+                      currentUser?.role === r ? 'text-cyan-300 font-bold bg-indigo-500/10' : 'text-slate-200'
                     }`}
                   >
                     <span className="capitalize">{r} Persona</span>
-                    {currentUser?.role === r && <CheckCircle2 className="w-4 h-4 text-[#38BDF8]" aria-hidden="true" />}
+                    {currentUser?.role === r && <CheckCircle2 className="w-4 h-4 text-cyan-400" aria-hidden="true" />}
                   </button>
                 ))}
               </div>
@@ -150,9 +152,9 @@ export const Navbar: React.FC = () => {
           {currentUser?.role === 'organizer' && (
             <Link
               to="/organizer"
-              className="bg-[#7C5CFC] hover:bg-[#6B46E5] text-white text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition shadow"
+              className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-4 py-2 rounded-2xl flex items-center gap-1.5 transition shadow-lg shadow-indigo-600/30 border border-indigo-400/30"
             >
-              <PlusCircle className="w-3.5 h-3.5" />
+              <PlusCircle className="w-3.5 h-3.5 text-cyan-300" />
               Organizer Studio
             </Link>
           )}
@@ -160,9 +162,9 @@ export const Navbar: React.FC = () => {
           {currentUser?.role === 'admin' && (
             <Link
               to="/admin/approvals"
-              className="bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition shadow"
+              className="bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold px-4 py-2 rounded-2xl flex items-center gap-1.5 transition shadow-lg shadow-purple-600/30 border border-purple-400/30"
             >
-              <ShieldCheck className="w-3.5 h-3.5" />
+              <ShieldCheck className="w-3.5 h-3.5 text-purple-200" />
               Admin Portal
             </Link>
           )}
@@ -171,12 +173,12 @@ export const Navbar: React.FC = () => {
           {currentUser && (
             <Link
               to="/my-events"
-              className="text-[#94A3B8] hover:text-[#F8FAFC] p-2 rounded-xl hover:bg-[#151C2F] transition relative"
+              className="text-slate-400 hover:text-white p-2.5 rounded-2xl hover:bg-white/[0.06] transition relative border border-white/5"
               title="My Schedule & Saved"
             >
-              <Bookmark className="w-5 h-5" />
+              <Bookmark className="w-4 h-4" />
               {savedCount > 0 && (
-                <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-[#7C5CFC] text-white text-[10px] font-bold flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-indigo-500 text-white text-[9px] font-mono font-bold flex items-center justify-center shadow-md">
                   {savedCount}
                 </span>
               )}
@@ -186,14 +188,14 @@ export const Navbar: React.FC = () => {
           {/* User Profile */}
           <Link
             to="/profile"
-            className="flex items-center gap-2.5 pl-2.5 border-l border-[#334155] text-xs text-[#94A3B8] hover:text-[#F8FAFC]"
+            className="flex items-center gap-2.5 pl-3 border-l border-white/[0.08] text-xs text-slate-400 hover:text-white"
           >
-            <div className="w-8 h-8 rounded-full bg-[#1E293B] flex items-center justify-center font-bold text-white border border-[#334155]">
-              <User className="w-4 h-4 text-[#94A3B8]" />
+            <div className="w-8 h-8 rounded-full bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center font-bold text-white shadow-sm">
+              <User className="w-4 h-4 text-cyan-400" />
             </div>
             <div className="hidden lg:block text-left">
-              <div className="font-semibold text-[#F8FAFC] line-clamp-1">{currentUser?.full_name?.split(' ')[0]}</div>
-              <div className="text-[10px] text-[#94A3B8] capitalize">{currentUser?.role}</div>
+              <div className="font-semibold text-slate-200 line-clamp-1">{currentUser?.full_name?.split(' ')[0]}</div>
+              <div className="text-[10px] text-slate-400 capitalize">{currentUser?.role}</div>
             </div>
           </Link>
         </div>

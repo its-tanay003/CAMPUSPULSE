@@ -44,13 +44,13 @@ export const OrganizerEventsPage: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] py-8">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen text-slate-100 py-10 relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Navigation Breadcrumb */}
-        <div className="mb-6 flex items-center justify-between">
+        <div className="flex items-center justify-between">
           <Link
             to="/organizer"
-            className="inline-flex items-center gap-1.5 text-xs text-[#94A3B8] hover:text-[#F8FAFC] transition font-medium"
+            className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-white transition font-medium"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Organizer Workspace
@@ -58,7 +58,7 @@ export const OrganizerEventsPage: React.FC = () => {
 
           <Link
             to="/organizer/create"
-            className="bg-[#7C5CFC] hover:bg-[#6B46E5] text-white font-bold text-xs px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow"
+            className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2.5 rounded-2xl transition flex items-center gap-2 shadow"
           >
             <PlusCircle className="w-3.5 h-3.5" />
             New Event Proposal
@@ -66,16 +66,17 @@ export const OrganizerEventsPage: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-6 shadow-md mb-8">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#7C5CFC]/20 text-[#38BDF8] border border-[#7C5CFC]/30 flex items-center justify-center font-bold">
-              <Building2 className="w-5 h-5" />
+        <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center font-bold">
+              <Building2 className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-2xl font-extrabold text-[#F8FAFC] tracking-tight">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-400">Club Management</span>
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-0.5">
                 All Managed Club Events
               </h1>
-              <p className="text-xs text-[#94A3B8] mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">
                 Full lifecycle directory of drafts, reviews, approvals, and published campus listings.
               </p>
             </div>
@@ -83,9 +84,9 @@ export const OrganizerEventsPage: React.FC = () => {
         </div>
 
         {/* Filter & Search Bar */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-4 mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="glass-card rounded-3xl p-5 sm:p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label htmlFor="search-org-events" className="block text-[11px] font-semibold text-[#94A3B8] mb-1">
+            <label htmlFor="search-org-events" className="block text-xs font-mono font-semibold text-slate-400 mb-2">
               Search by Keyword
             </label>
             <input
@@ -94,19 +95,19 @@ export const OrganizerEventsPage: React.FC = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search title, venue, category..."
-              className="w-full text-xs p-2.5 bg-[#0B1020] border border-[#334155] rounded-xl text-[#F8FAFC] focus:ring-1 focus:ring-[#7C5CFC]"
+              className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             />
           </div>
 
           <div>
-            <label htmlFor="filter-org-status" className="block text-[11px] font-semibold text-[#94A3B8] mb-1">
+            <label htmlFor="filter-org-status" className="block text-xs font-mono font-semibold text-slate-400 mb-2">
               Status Filter
             </label>
             <select
               id="filter-org-status"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as any)}
-              className="w-full text-xs p-2.5 bg-[#0B1020] border border-[#334155] rounded-xl text-[#F8FAFC]"
+              className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
             >
               <option value="all">All Statuses ({myEvents.length})</option>
               <option value="draft">Drafts Only</option>
@@ -118,14 +119,14 @@ export const OrganizerEventsPage: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="filter-org-club" className="block text-[11px] font-semibold text-[#94A3B8] mb-1">
+            <label htmlFor="filter-org-club" className="block text-xs font-mono font-semibold text-slate-400 mb-2">
               Host Club / Society
             </label>
             <select
               id="filter-org-club"
               value={orgFilter}
               onChange={(e) => setOrgFilter(e.target.value)}
-              className="w-full text-xs p-2.5 bg-[#0B1020] border border-[#334155] rounded-xl text-[#F8FAFC]"
+              className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
             >
               <option value="all">All Clubs ({userOrgs.length})</option>
               {userOrgs.map(org => (
@@ -136,23 +137,23 @@ export const OrganizerEventsPage: React.FC = () => {
         </div>
 
         {/* Listing */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] overflow-hidden shadow-md">
-          <div className="p-4 border-b border-[#334155] flex items-center justify-between text-xs text-[#94A3B8]">
-            <span className="flex items-center gap-1.5 font-semibold text-[#F8FAFC]">
-              <Filter className="w-3.5 h-3.5 text-[#38BDF8]" />
-              Event Results: {filteredEvents.length}
+        <div className="glass-card rounded-3xl overflow-hidden glow-indigo">
+          <div className="p-5 border-b border-white/[0.08] flex items-center justify-between text-xs text-slate-400">
+            <span className="flex items-center gap-2 font-semibold text-white">
+              <Filter className="w-3.5 h-3.5 text-cyan-400" />
+              Event Results: <span className="font-mono text-cyan-300">{filteredEvents.length}</span>
             </span>
-            <span>Total Organized: {myEvents.length}</span>
+            <span className="font-mono">Total Organized: {myEvents.length}</span>
           </div>
 
           {filteredEvents.length === 0 ? (
             <div className="p-12 text-center">
               <Layers className="w-10 h-10 text-slate-500 mx-auto mb-3" />
-              <p className="text-sm font-bold text-[#F8FAFC]">No events match your search</p>
-              <p className="text-xs text-[#94A3B8] mt-1">Try resetting filters or searching a different term.</p>
+              <p className="text-base font-bold text-white">No events match your search</p>
+              <p className="text-xs text-slate-400 mt-1">Try resetting filters or searching a different term.</p>
             </div>
           ) : (
-            <div className="divide-y divide-[#334155]">
+            <div className="divide-y divide-white/[0.08]">
               {filteredEvents.map(event => {
                 const startDate = new Date(event.start_time);
                 const isEditable = canManageEvent(event, currentUser?.id) && 
@@ -171,10 +172,10 @@ export const OrganizerEventsPage: React.FC = () => {
                 ).conflicts;
 
                 return (
-                  <div key={event.id} className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#1E293B]/40 transition">
-                    <div className="space-y-1.5 flex-1 min-w-0">
+                  <div key={event.id} className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-white/[0.02] transition">
+                    <div className="space-y-2 flex-1 min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className={`text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full border ${
+                        <span className={`text-[10px] font-mono font-extrabold uppercase px-2.5 py-0.5 rounded-full border ${
                           event.status === 'published'
                             ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
                             : event.status === 'pending_review'
@@ -183,43 +184,43 @@ export const OrganizerEventsPage: React.FC = () => {
                             ? 'bg-rose-500/20 text-rose-300 border-rose-500/30'
                             : event.status === 'draft'
                             ? 'bg-slate-700/50 text-slate-300 border-slate-600'
-                            : 'bg-[#0B1020] text-[#94A3B8] border-[#334155]'
+                            : 'bg-[#050814]/80 text-slate-400 border-white/10'
                         }`}>
                           {event.status.replace('_', ' ')}
                         </span>
 
-                        <span className="text-xs font-semibold text-[#7C5CFC]">
+                        <span className="text-xs font-semibold text-indigo-400">
                           {event.organization?.name || 'Club'}
                         </span>
 
-                        <span className="text-[#334155]">·</span>
+                        <span className="text-white/20">·</span>
 
-                        <span className="text-xs text-[#38BDF8] font-medium">
+                        <span className="text-xs text-cyan-300 font-medium">
                           {event.category}
                         </span>
 
                         {event.status === 'draft' && (
-                          <span className="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded border border-[#334155]">
+                          <span className="text-[10px] font-mono bg-slate-800 text-slate-400 px-2.5 py-0.5 rounded-full border border-white/10">
                             Private Draft
                           </span>
                         )}
 
                         {clashes.length > 0 && (
-                          <span className="text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded flex items-center gap-1 font-semibold">
+                          <span className="text-[10px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-full flex items-center gap-1 font-semibold">
                             <AlertTriangle className="w-3 h-3" />
                             {clashes.length} Warning{clashes.length > 1 ? 's' : ''}
                           </span>
                         )}
                       </div>
 
-                      <h3 className="font-bold text-[#F8FAFC] text-base truncate">
-                        <Link to={`/events/${event.id}`} className="hover:text-[#38BDF8] transition">
+                      <h3 className="font-bold text-white text-base truncate">
+                        <Link to={`/events/${event.id}`} className="hover:text-cyan-300 transition">
                           {event.title}
                         </Link>
                       </h3>
 
-                      <div className="text-xs text-[#94A3B8] flex flex-wrap items-center gap-4">
-                        <span className="flex items-center gap-1">
+                      <div className="text-xs text-slate-400 flex flex-wrap items-center gap-4">
+                        <span className="flex items-center gap-1.5 font-mono">
                           <Calendar className="w-3.5 h-3.5 text-slate-400" />
                           {startDate.toLocaleString('en-IN', { 
                             dateStyle: 'medium', 
@@ -232,10 +233,10 @@ export const OrganizerEventsPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-[#334155]">
+                    <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-white/[0.08]">
                       <Link
                         to={`/events/${event.id}`}
-                        className="text-xs bg-[#0B1020] hover:bg-[#1E293B] text-[#94A3B8] hover:text-[#F8FAFC] font-semibold px-3 py-2 rounded-xl border border-[#334155] transition flex items-center gap-1"
+                        className="text-xs bg-[#050814]/80 hover:bg-[#0b1020] text-slate-300 hover:text-white font-semibold px-3.5 py-2 rounded-xl border border-white/10 transition flex items-center gap-1.5"
                       >
                         <Eye className="w-3.5 h-3.5" />
                         Preview
@@ -244,7 +245,7 @@ export const OrganizerEventsPage: React.FC = () => {
                       {isEditable && (
                         <Link
                           to={`/organizer/edit/${event.id}`}
-                          className="text-xs bg-[#7C5CFC]/20 hover:bg-[#7C5CFC]/30 text-[#38BDF8] border border-[#7C5CFC]/40 font-bold px-3 py-2 rounded-xl transition flex items-center gap-1"
+                          className="text-xs bg-indigo-600/30 hover:bg-indigo-600/50 text-cyan-300 border border-indigo-500/40 font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5"
                         >
                           <Edit3 className="w-3.5 h-3.5" />
                           Edit
@@ -259,7 +260,7 @@ export const OrganizerEventsPage: React.FC = () => {
                               cancelEvent(event.id);
                             }
                           }}
-                          className="text-xs text-rose-400 hover:bg-rose-500/10 px-3 py-2 rounded-xl font-semibold transition"
+                          className="text-xs text-rose-400 hover:bg-rose-500/10 px-3.5 py-2 rounded-xl font-semibold transition cursor-pointer"
                         >
                           Cancel
                         </button>
@@ -273,6 +274,4 @@ export const OrganizerEventsPage: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
-
+  );};

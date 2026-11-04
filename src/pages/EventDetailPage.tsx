@@ -59,7 +59,7 @@ export const EventDetailPage: React.FC = () => {
   // 1. Not Found Recovery State (Used both when event does not exist OR is unapproved and viewer is unauthorized)
   if (!event) {
     return (
-      <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] py-16 px-4">
+      <div className="min-h-screen text-slate-100 py-16 px-4">
         <EmptyState
           title="Event Not Found or Access Restricted"
           description="The event listing you requested does not exist, is currently an unapproved private draft, or has not completed administrative review."
@@ -122,21 +122,21 @@ export const EventDetailPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] py-8">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <div className="min-h-screen text-slate-100 py-10 relative">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Breadcrumb Navigation */}
         <div className="flex items-center justify-between">
           <Link
             to="/discover"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#94A3B8] hover:text-[#38BDF8] transition"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-cyan-400 transition"
           >
             <ChevronLeft className="w-4 h-4" /> Back to Event Catalogue
           </Link>
 
           <button
             onClick={() => setReportModalOpen(true)}
-            className="text-xs text-[#94A3B8] hover:text-rose-400 font-semibold flex items-center gap-1.5 transition"
+            className="text-xs text-slate-400 hover:text-rose-400 font-semibold flex items-center gap-1.5 transition cursor-pointer"
           >
             <Flag className="w-3.5 h-3.5" /> Report Incorrect Details
           </button>
@@ -144,47 +144,47 @@ export const EventDetailPage: React.FC = () => {
 
         {/* Status Banners */}
         {event.status === 'cancelled' && (
-          <aside aria-label="Event cancellation notice" className="bg-rose-950/70 border-l-4 border-rose-500 p-4 rounded-r-2xl text-rose-100 shadow-md">
-            <div className="flex items-center gap-2 font-bold text-sm">
+          <aside aria-label="Event cancellation notice" className="glass-card border-l-4 border-l-rose-500 p-5 rounded-3xl text-rose-200">
+            <div className="flex items-center gap-2 font-bold text-sm text-rose-300">
               <AlertTriangle className="w-5 h-5 text-rose-400" />
               This event has been officially cancelled by the organizers.
             </div>
-            <p className="text-xs text-rose-300 mt-1">
+            <p className="text-xs text-rose-300/80 mt-1 pl-7">
               Registered participants will not need to attend. Room booking has been released by Campus Estate.
             </p>
           </aside>
         )}
 
         {isCompleted && event.status !== 'cancelled' && (
-          <aside aria-label="Event completed notice" className="bg-slate-800/80 border-l-4 border-slate-500 p-4 rounded-r-2xl text-slate-200 shadow-md">
-            <div className="flex items-center gap-2 font-bold text-sm">
-              <CheckCircle2 className="w-5 h-5 text-[#38BDF8]" />
+          <aside aria-label="Event completed notice" className="glass-card border-l-4 border-l-slate-500 p-5 rounded-3xl text-slate-300">
+            <div className="flex items-center gap-2 font-bold text-sm text-cyan-300">
+              <CheckCircle2 className="w-5 h-5 text-cyan-400" />
               This event has concluded.
             </div>
-            <p className="text-xs text-[#94A3B8] mt-1">
+            <p className="text-xs text-slate-400 mt-1 pl-7">
               Check the host club page for post-event highlights, recordings, and slides.
             </p>
           </aside>
         )}
 
         {/* ABOVE-THE-FOLD CARD */}
-        <div className="bg-[#151C2F] rounded-3xl border border-[#334155] overflow-hidden shadow-2xl">
+        <div className="glass-card rounded-3xl overflow-hidden glow-indigo">
           {/* Cover Media with Gradient Overlay */}
-          <div className="relative h-64 sm:h-96 w-full bg-[#0B1020]">
+          <div className="relative h-64 sm:h-96 w-full bg-[#050814]">
             <img
               src={event.cover_image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80'}
               alt={event.title}
-              className="w-full h-full object-cover opacity-85"
+              className="w-full h-full object-cover opacity-80"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#151C2F] via-[#151C2F]/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0b1020] via-[#0b1020]/60 to-transparent" />
 
-            <div className="absolute bottom-6 left-6 right-6 text-white space-y-2">
+            <div className="absolute bottom-6 left-6 right-6 text-white space-y-3">
               <div className="flex flex-wrap items-center gap-2">
                 <Badge variant="primary" size="md">{event.category}</Badge>
                 <Badge variant="neutral" size="md">{event.cost} Admission</Badge>
                 {event.status === 'published' && (
                   <Badge variant="success" size="md">
-                    <CheckCircle2 className="w-3 h-3" /> Approved Listing
+                    <CheckCircle2 className="w-3.5 h-3.5" /> Approved Listing
                   </Badge>
                 )}
                 {event.status === 'cancelled' && (
@@ -192,15 +192,15 @@ export const EventDetailPage: React.FC = () => {
                 )}
               </div>
 
-              <h1 className="text-2xl sm:text-4xl font-extrabold text-[#F8FAFC] leading-tight">
+              <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
                 {event.title}
               </h1>
 
-              <div className="flex items-center gap-2 text-xs sm:text-sm text-[#94A3B8]">
+              <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-300">
                 <span>Organized by</span>
-                <span className="font-bold text-[#F8FAFC] underline">{event.organization?.name}</span>
+                <span className="font-bold text-white underline decoration-indigo-400/50 underline-offset-4">{event.organization?.name}</span>
                 {event.organization?.is_verified && (
-                  <span className="text-[10px] bg-[#7C5CFC]/20 text-[#38BDF8] border border-[#7C5CFC]/30 font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
+                  <span className="text-[10px] font-mono bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
                     <ShieldCheck className="w-3 h-3" /> Verified Chapter
                   </span>
                 )}
@@ -209,34 +209,40 @@ export const EventDetailPage: React.FC = () => {
           </div>
 
           {/* Quick Schedule Grid (Date, Time, Venue) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 border-t border-b border-[#334155] bg-[#0B1020]/60 p-5 gap-4 text-xs sm:text-sm text-[#94A3B8]">
-            <div className="flex items-center gap-3">
-              <Calendar className="w-5 h-5 text-[#38BDF8] shrink-0" />
+          <div className="grid grid-cols-1 md:grid-cols-3 border-t border-b border-white/[0.08] bg-[#050814]/70 p-6 gap-4 text-xs sm:text-sm text-slate-300">
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0">
+                <Calendar className="w-5 h-5 text-cyan-400 shrink-0" />
+              </div>
               <div>
-                <div className="font-semibold text-[#F8FAFC]">{dateFormatted}</div>
-                <div className="text-[11px] text-[#94A3B8]">Event Date</div>
+                <div className="font-semibold text-white">{dateFormatted}</div>
+                <div className="text-[11px] font-mono text-slate-400">Event Date</div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <Clock className="w-5 h-5 text-[#7C5CFC] shrink-0" />
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0">
+                <Clock className="w-5 h-5 text-indigo-400 shrink-0" />
+              </div>
               <div>
-                <div className="font-semibold text-[#F8FAFC]">{timeFormatted}</div>
-                <div className="text-[11px] text-[#94A3B8]">Time Window ({event.timezone})</div>
+                <div className="font-semibold text-white font-mono">{timeFormatted}</div>
+                <div className="text-[11px] font-mono text-slate-400">Time Window ({event.timezone})</div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <MapPin className="w-5 h-5 text-emerald-400 shrink-0" />
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
+                <MapPin className="w-5 h-5 text-emerald-400 shrink-0" />
+              </div>
               <div>
-                <div className="font-semibold text-[#F8FAFC]">{event.venue?.name}</div>
-                <div className="text-[11px] text-[#94A3B8]">{event.venue?.building} · {event.venue?.location}</div>
+                <div className="font-semibold text-white">{event.venue?.name}</div>
+                <div className="text-[11px] text-slate-400">{event.venue?.building} · {event.venue?.location}</div>
               </div>
             </div>
           </div>
 
           {/* Primary Action Ribbon */}
-          <div className="p-6 bg-[#151C2F] border-b border-[#334155] flex flex-wrap items-center justify-between gap-4">
+          <div className="p-6 bg-[#0b1020]/90 border-b border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3 flex-wrap">
               {/* Registration CTAs */}
               {event.status === 'cancelled' ? (
@@ -259,27 +265,27 @@ export const EventDetailPage: React.FC = () => {
                     rel="noopener noreferrer"
                     className="inline-block"
                   >
-                    <Button variant="primary" className="gap-2 bg-[#38BDF8] hover:bg-cyan-400 text-slate-950 font-bold">
+                    <Button variant="gradient" className="gap-2">
                       <ExternalLink className="w-4 h-4" />
                       Register on External Portal
                     </Button>
                   </a>
-                  <p className="text-[10px] text-[#94A3B8]">
+                  <p className="text-[10px] text-slate-400">
                     Note: Handled by external platform; link click does not confirm attendance in CampusPulse.
                   </p>
                 </div>
               ) : event.registration_method === 'none' ? (
-                <div className="bg-[#0B1020] text-[#94A3B8] font-semibold px-4 py-2.5 rounded-xl text-xs border border-[#334155]">
+                <div className="bg-[#050814]/80 text-slate-300 font-semibold px-4 py-2.5 rounded-2xl text-xs border border-white/10">
                   Open Walk-In (No prior registration required)
                 </div>
               ) : registered ? (
-                <div className="bg-emerald-950/40 border border-emerald-500 text-emerald-300 font-bold px-5 py-2.5 rounded-xl text-xs flex items-center gap-2">
+                <div className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-bold px-5 py-2.5 rounded-2xl text-xs flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                   Confirmed Seat Pass
                 </div>
               ) : (
                 <Button
-                  variant="primary"
+                  variant="gradient"
                   isLoading={registering}
                   onClick={handleRegister}
                   className="gap-2"
@@ -300,7 +306,7 @@ export const EventDetailPage: React.FC = () => {
                 }}
                 className="gap-2"
               >
-                <Bookmark className={`w-4 h-4 ${saved ? 'fill-current' : ''}`} />
+                <Bookmark className={`w-4 h-4 ${saved ? 'fill-current text-white' : 'text-slate-400'}`} />
                 <span>{saved ? 'Saved in Agenda' : 'Save Event'}</span>
               </Button>
 
@@ -313,14 +319,14 @@ export const EventDetailPage: React.FC = () => {
                 }}
                 className="gap-2"
               >
-                <Download className="w-4 h-4 text-[#38BDF8]" />
+                <Download className="w-4 h-4 text-cyan-400" />
                 <span>Add to Calendar (.ics)</span>
               </Button>
             </div>
 
             {/* Share Trigger */}
-            <Button variant="ghost" size="sm" onClick={handleShare} className="gap-1.5">
-              <Share2 className="w-4 h-4 text-[#38BDF8]" />
+            <Button variant="ghost" size="sm" onClick={handleShare} className="gap-2 text-slate-300 hover:text-white">
+              <Share2 className="w-4 h-4 text-cyan-400" />
               <span>Share Event</span>
             </Button>
           </div>
@@ -329,31 +335,31 @@ export const EventDetailPage: React.FC = () => {
           <div className="p-6 sm:p-8 space-y-8">
             {/* Description */}
             <div>
-              <h2 className="text-lg font-bold text-[#F8FAFC] mb-3">About This Experience</h2>
-              <p className="text-[#94A3B8] leading-relaxed text-sm whitespace-pre-line">
+              <h2 className="text-lg font-bold text-white mb-3">About This Experience</h2>
+              <p className="text-slate-300 leading-relaxed text-sm whitespace-pre-line">
                 {event.description}
               </p>
             </div>
 
             {/* Structured Specifications Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-[#334155] text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-white/[0.08] text-xs">
               <div>
-                <h3 className="font-bold text-[#94A3B8] uppercase tracking-wider mb-1.5">Target Audience</h3>
-                <span className="font-semibold text-[#F8FAFC] bg-[#0B1020] px-3 py-1.5 rounded-lg inline-block border border-[#334155]">
+                <h3 className="font-mono font-bold text-slate-400 uppercase tracking-wider mb-2">Target Audience</h3>
+                <span className="font-semibold text-white bg-[#050814]/80 px-3.5 py-2 rounded-xl inline-block border border-white/10">
                   {event.target_audience}
                 </span>
               </div>
 
               <div>
-                <h3 className="font-bold text-[#94A3B8] uppercase tracking-wider mb-1.5">Capacity</h3>
-                <span className="font-semibold text-[#F8FAFC] bg-[#0B1020] px-3 py-1.5 rounded-lg inline-block border border-[#334155]">
+                <h3 className="font-mono font-bold text-slate-400 uppercase tracking-wider mb-2">Capacity</h3>
+                <span className="font-semibold text-white bg-[#050814]/80 px-3.5 py-2 rounded-xl inline-block border border-white/10">
                   {event.capacity ? `${event.capacity} Attendees Limit` : 'Open Campus Hall'}
                 </span>
               </div>
 
               <div>
-                <h3 className="font-bold text-[#94A3B8] uppercase tracking-wider mb-1.5">Registration Deadline</h3>
-                <span className="font-semibold text-[#F8FAFC] bg-[#0B1020] px-3 py-1.5 rounded-lg inline-block border border-[#334155]">
+                <h3 className="font-mono font-bold text-slate-400 uppercase tracking-wider mb-2">Registration Deadline</h3>
+                <span className="font-semibold text-white bg-[#050814]/80 px-3.5 py-2 rounded-xl inline-block border border-white/10">
                   {deadline ? deadline.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Until Event Start'}
                 </span>
               </div>
@@ -361,11 +367,11 @@ export const EventDetailPage: React.FC = () => {
 
             {/* Tags Ribbon */}
             {event.tags && event.tags.length > 0 && (
-              <div className="pt-4 border-t border-[#334155]">
-                <h3 className="text-xs font-bold text-[#94A3B8] uppercase tracking-wider mb-2">Category Keywords</h3>
+              <div className="pt-4 border-t border-white/[0.08]">
+                <h3 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-2.5">Category Keywords</h3>
                 <div className="flex flex-wrap gap-2">
                   {event.tags.map(t => (
-                    <span key={t} className="text-xs bg-[#7C5CFC]/15 text-[#38BDF8] border border-[#7C5CFC]/30 font-medium px-2.5 py-1 rounded-lg">
+                    <span key={t} className="text-xs font-mono bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 font-medium px-3 py-1 rounded-xl">
                       #{t}
                     </span>
                   ))}
@@ -374,31 +380,31 @@ export const EventDetailPage: React.FC = () => {
             )}
 
             {/* Host Club Details Card */}
-            <div className="pt-6 border-t border-[#334155] bg-[#0B1020]/40 p-6 rounded-2xl border">
-              <div className="flex items-start gap-4">
+            <div className="pt-6 border-t border-white/[0.08]">
+              <div className="bg-[#050814]/70 p-6 rounded-3xl border border-white/10 flex items-start gap-4">
                 <img
                   src={event.organization?.logo_url || 'https://images.unsplash.com/photo-1572021335469-31706a17aaef?auto=format&fit=crop&w=200&q=80'}
                   alt={event.organization?.name}
-                  className="w-14 h-14 rounded-2xl object-cover border border-[#334155]"
+                  className="w-14 h-14 rounded-2xl object-cover border border-white/10 shrink-0"
                 />
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
-                    <h3 className="font-bold text-[#F8FAFC] text-base">{event.organization?.name}</h3>
+                    <h3 className="font-bold text-white text-base">{event.organization?.name}</h3>
                     {event.organization?.is_verified && (
-                      <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <span className="text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
                         <CheckCircle2 className="w-3 h-3" /> Official Campus Chapter
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-[#94A3B8] mt-1 leading-relaxed">
+                  <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
                     {event.organization?.description}
                   </p>
-                  <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-[#94A3B8]">
-                    <span className="flex items-center gap-1">
-                      <Mail className="w-3.5 h-3.5 text-[#38BDF8]" /> {event.organization?.contact_email}
+                  <div className="mt-3.5 flex flex-wrap items-center gap-4 text-xs text-slate-400">
+                    <span className="flex items-center gap-1.5">
+                      <Mail className="w-3.5 h-3.5 text-cyan-400" /> {event.organization?.contact_email}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Building className="w-3.5 h-3.5 text-[#7C5CFC]" /> Lead: {event.organization?.lead_name}
+                    <span className="flex items-center gap-1.5">
+                      <Building className="w-3.5 h-3.5 text-indigo-400" /> Lead: {event.organization?.lead_name}
                     </span>
                   </div>
                 </div>
@@ -412,10 +418,10 @@ export const EventDetailPage: React.FC = () => {
           <div className="pt-8">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#38BDF8]">More Experiences</span>
-                <h2 className="text-xl font-bold text-[#F8FAFC] mt-0.5">Related Campus Events</h2>
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400">More Experiences</span>
+                <h2 className="text-2xl font-bold text-white mt-1">Related Campus Events</h2>
               </div>
-              <Link to="/discover" className="text-xs font-semibold text-[#7C5CFC] hover:underline">
+              <Link to="/discover" className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition underline">
                 View all in {event.category} →
               </Link>
             </div>
@@ -438,12 +444,12 @@ export const EventDetailPage: React.FC = () => {
       >
         <form onSubmit={handleSubmitReport} className="space-y-4">
           <div>
-            <label htmlFor="report-reason" className="block text-xs font-bold text-[#94A3B8] mb-1.5">Issue Type</label>
+            <label htmlFor="report-reason" className="block text-xs font-mono font-bold text-slate-400 mb-2">Issue Type</label>
             <select
               id="report-reason"
               value={reportReason}
               onChange={(e) => setReportReason(e.target.value)}
-              className="w-full text-xs p-2.5 bg-[#0B1020] border border-[#334155] rounded-xl text-[#F8FAFC]"
+              className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value="incorrect_details">Incorrect Timings or Date</option>
               <option value="venue_changed">Room/Venue Moved or Cancelled</option>
@@ -453,18 +459,18 @@ export const EventDetailPage: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="report-notes" className="block text-xs font-bold text-[#94A3B8] mb-1.5">Additional Details</label>
+            <label htmlFor="report-notes" className="block text-xs font-mono font-bold text-slate-400 mb-2">Additional Details</label>
             <textarea
               id="report-notes"
               rows={3}
               value={reportNotes}
               onChange={(e) => setReportNotes(e.target.value)}
               placeholder="Explain what is inaccurate (e.g. Venue moved to Block 28)..."
-              className="w-full text-xs p-3 bg-[#0B1020] border border-[#334155] rounded-xl text-[#F8FAFC]"
+              className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
 
-          <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#334155]">
+          <div className="flex items-center justify-end gap-3 pt-3 border-t border-white/[0.08]">
             <Button variant="ghost" size="sm" type="button" onClick={() => setReportModalOpen(false)}>
               Cancel
             </Button>

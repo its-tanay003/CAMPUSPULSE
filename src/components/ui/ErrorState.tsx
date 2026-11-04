@@ -14,16 +14,16 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
   onRetry
 }) => {
   return (
-    <div className="bg-rose-950/40 border border-rose-500/40 rounded-2xl p-8 text-center max-w-lg mx-auto shadow-md">
-      <div className="w-12 h-12 mx-auto rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center mb-3">
-        <AlertCircle className="w-6 h-6" />
+    <div className="glass-card bg-rose-950/20 border-rose-500/30 rounded-3xl p-8 sm:p-10 text-center max-w-lg mx-auto shadow-2xl shadow-rose-950/40">
+      <div className="w-14 h-14 mx-auto rounded-2xl bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center mb-4">
+        <AlertCircle className="w-7 h-7" />
       </div>
-      <h3 className="text-base font-bold text-rose-200">{title}</h3>
-      <p className="text-xs text-rose-300/80 mt-1.5 leading-relaxed">{message}</p>
+      <h3 className="text-lg font-bold text-rose-200 tracking-tight">{title}</h3>
+      <p className="text-xs sm:text-sm text-rose-300/80 mt-2 leading-relaxed">{message}</p>
       {onRetry && (
-        <div className="mt-5">
-          <Button variant="danger" size="sm" onClick={onRetry} className="gap-1.5">
-            <RotateCcw className="w-3.5 h-3.5" />
+        <div className="mt-6">
+          <Button variant="danger" size="md" onClick={onRetry} className="gap-2">
+            <RotateCcw className="w-4 h-4" />
             Retry Action
           </Button>
         </div>

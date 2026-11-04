@@ -33,19 +33,19 @@ export const AdminEventsDirectoryPage: React.FC = () => {
   // Access Guardian
   if (currentUser?.role !== 'admin') {
     return (
-      <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] py-16 px-4 text-center">
-        <div className="max-w-md mx-auto bg-[#151C2F] border border-rose-500/30 rounded-2xl p-8 shadow-xl">
+      <div className="min-h-screen text-slate-100 py-16 px-4 text-center">
+        <div className="max-w-md mx-auto glass-card rounded-3xl p-8 glow-indigo">
           <div className="w-14 h-14 rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center mx-auto mb-4 border border-rose-500/20">
             <ShieldCheck className="w-7 h-7" />
           </div>
-          <h2 className="text-xl font-bold text-[#F8FAFC]">Administrative Access Restricted</h2>
-          <p className="text-xs text-[#94A3B8] mt-2 leading-relaxed">
+          <h2 className="text-xl font-bold text-white">Administrative Access Restricted</h2>
+          <p className="text-xs text-slate-400 mt-2 leading-relaxed">
             Only verified administrators may access the master campus events governance directory.
           </p>
           <div className="mt-6 flex justify-center gap-3">
             <Link
               to="/home"
-              className="bg-[#0B1020] hover:bg-[#1E293B] text-xs font-semibold px-4 py-2 rounded-xl border border-[#334155] transition"
+              className="bg-[#050814]/80 hover:bg-[#0b1020] text-xs font-semibold px-4 py-2.5 rounded-2xl border border-white/10 transition"
             >
               Back to Home
             </Link>
@@ -75,13 +75,13 @@ export const AdminEventsDirectoryPage: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] py-8">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <div className="min-h-screen text-slate-100 py-10 relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between">
           <Link
             to="/admin"
-            className="inline-flex items-center gap-1.5 text-xs text-[#94A3B8] hover:text-[#F8FAFC] transition font-medium"
+            className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-white transition font-medium"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Administrator Dashboard
@@ -89,7 +89,7 @@ export const AdminEventsDirectoryPage: React.FC = () => {
 
           <Link
             to="/admin/approvals"
-            className="bg-[#7C5CFC] hover:bg-[#6B46E5] text-white font-bold text-xs px-3.5 py-1.5 rounded-xl transition flex items-center gap-1.5 shadow"
+            className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2.5 rounded-2xl transition flex items-center gap-2 shadow"
           >
             <Clock className="w-3.5 h-3.5" />
             Open Approvals Queue
@@ -97,16 +97,17 @@ export const AdminEventsDirectoryPage: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-6 shadow-md">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center justify-center font-bold">
-              <Layers className="w-5 h-5" />
+        <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-cyan-300 border border-indigo-500/30 flex items-center justify-center font-bold">
+              <Layers className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-2xl font-extrabold text-[#F8FAFC] tracking-tight">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-400">Governance Layer</span>
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-0.5">
                 Master Campus Events Governance Directory
               </h1>
-              <p className="text-xs text-[#94A3B8] mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">
                 Complete institutional oversight: search, filter, inspect status, and audit all university listings.
               </p>
             </div>
@@ -114,35 +115,35 @@ export const AdminEventsDirectoryPage: React.FC = () => {
         </div>
 
         {/* Filter Controls Bar */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        <div className="glass-card rounded-3xl p-5 sm:p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
           {/* Keyword Search */}
           <div>
-            <label htmlFor="admin-search-input" className="block text-[11px] font-semibold text-[#94A3B8] mb-1">
+            <label htmlFor="admin-search-input" className="block text-xs font-mono font-semibold text-slate-400 mb-2">
               Search Events
             </label>
             <div className="relative">
-              <Search className="w-3.5 h-3.5 text-[#94A3B8] absolute left-3 top-2.5" />
+              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3.5 top-3" />
               <input
                 id="admin-search-input"
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Title, club, venue..."
-                className="w-full text-xs pl-8 pr-3 py-2 bg-[#0B1020] border border-[#334155] rounded-xl text-[#F8FAFC] focus:ring-1 focus:ring-[#7C5CFC]"
+                className="w-full text-xs pl-9 pr-3.5 py-2.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
               />
             </div>
           </div>
 
           {/* Status Filter */}
           <div>
-            <label htmlFor="admin-status-select" className="block text-[11px] font-semibold text-[#94A3B8] mb-1">
+            <label htmlFor="admin-status-select" className="block text-xs font-mono font-semibold text-slate-400 mb-2">
               Status Filter
             </label>
             <select
               id="admin-status-select"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as any)}
-              className="w-full text-xs p-2 bg-[#0B1020] border border-[#334155] rounded-xl text-[#F8FAFC]"
+              className="w-full text-xs p-2.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
             >
               <option value="all">All Statuses ({events.length})</option>
               <option value="pending_review">Pending Review</option>
@@ -156,14 +157,14 @@ export const AdminEventsDirectoryPage: React.FC = () => {
 
           {/* Organization Filter */}
           <div>
-            <label htmlFor="admin-org-select" className="block text-[11px] font-semibold text-[#94A3B8] mb-1">
+            <label htmlFor="admin-org-select" className="block text-xs font-mono font-semibold text-slate-400 mb-2">
               Organization
             </label>
             <select
               id="admin-org-select"
               value={orgFilter}
               onChange={(e) => setOrgFilter(e.target.value)}
-              className="w-full text-xs p-2 bg-[#0B1020] border border-[#334155] rounded-xl text-[#F8FAFC]"
+              className="w-full text-xs p-2.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
             >
               <option value="all">All Organizations ({organizations.length})</option>
               {organizations.map(org => (
@@ -174,14 +175,14 @@ export const AdminEventsDirectoryPage: React.FC = () => {
 
           {/* Venue Filter */}
           <div>
-            <label htmlFor="admin-venue-select" className="block text-[11px] font-semibold text-[#94A3B8] mb-1">
+            <label htmlFor="admin-venue-select" className="block text-xs font-mono font-semibold text-slate-400 mb-2">
               Authoritative Venue
             </label>
             <select
               id="admin-venue-select"
               value={venueFilter}
               onChange={(e) => setVenueFilter(e.target.value)}
-              className="w-full text-xs p-2 bg-[#0B1020] border border-[#334155] rounded-xl text-[#F8FAFC]"
+              className="w-full text-xs p-2.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
             >
               <option value="all">All Venues ({venues.length})</option>
               {venues.map(v => (
@@ -201,7 +202,7 @@ export const AdminEventsDirectoryPage: React.FC = () => {
                 setVenueFilter('all');
                 setOrgFilter('all');
               }}
-              className="w-full bg-[#0B1020] hover:bg-[#1E293B] text-[#94A3B8] hover:text-[#F8FAFC] text-xs font-semibold py-2 rounded-xl border border-[#334155] transition"
+              className="w-full bg-[#050814]/80 hover:bg-[#0b1020] text-slate-300 hover:text-white text-xs font-semibold py-2.5 rounded-2xl border border-white/10 transition cursor-pointer"
             >
               Reset Filters
             </button>
@@ -209,27 +210,27 @@ export const AdminEventsDirectoryPage: React.FC = () => {
         </div>
 
         {/* Event List Table */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] overflow-hidden shadow-md">
-          <div className="p-4 border-b border-[#334155] flex items-center justify-between text-xs text-[#94A3B8]">
-            <span className="font-semibold text-[#F8FAFC] flex items-center gap-1.5">
-              <Filter className="w-3.5 h-3.5 text-[#38BDF8]" />
-              Matching Records: {filteredEvents.length}
+        <div className="glass-card rounded-3xl overflow-hidden glow-indigo">
+          <div className="p-5 border-b border-white/[0.08] flex items-center justify-between text-xs text-slate-400">
+            <span className="font-semibold text-white flex items-center gap-2">
+              <Filter className="w-3.5 h-3.5 text-cyan-400" />
+              Matching Records: <span className="font-mono text-cyan-300">{filteredEvents.length}</span>
             </span>
-            <span>Total Campus Registry: {events.length}</span>
+            <span className="font-mono">Total Campus Registry: {events.length}</span>
           </div>
 
           {filteredEvents.length === 0 ? (
-            <div className="p-12 text-center text-xs text-[#94A3B8]">
+            <div className="p-12 text-center text-xs text-slate-400">
               <Layers className="w-8 h-8 text-slate-500 mx-auto mb-2" />
               No events matched the selected filter criteria.
             </div>
           ) : (
-            <div className="divide-y divide-[#334155]">
+            <div className="divide-y divide-white/[0.08]">
               {filteredEvents.map(event => (
-                <div key={event.id} className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#1E293B]/40 transition">
-                  <div className="space-y-1.5 flex-1 min-w-0">
+                <div key={event.id} className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-white/[0.02] transition">
+                  <div className="space-y-2 flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className={`text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full border ${
+                      <span className={`text-[10px] font-mono font-extrabold uppercase px-2.5 py-0.5 rounded-full border ${
                         event.status === 'published'
                           ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
                           : event.status === 'pending_review'
@@ -240,39 +241,39 @@ export const AdminEventsDirectoryPage: React.FC = () => {
                           ? 'bg-rose-500/20 text-rose-300 border-rose-500/30'
                           : event.status === 'draft'
                           ? 'bg-slate-700/50 text-slate-300 border-slate-600'
-                          : 'bg-[#0B1020] text-[#94A3B8] border-[#334155]'
+                          : 'bg-[#050814]/80 text-slate-400 border-white/10'
                       }`}>
                         {event.status.replace('_', ' ')}
                       </span>
 
-                      <span className="text-xs font-semibold text-[#7C5CFC]">
+                      <span className="text-xs font-semibold text-indigo-400">
                         {event.organization?.name || 'Club'}
                       </span>
 
-                      <span className="text-[#334155]">·</span>
+                      <span className="text-white/20">·</span>
 
-                      <span className="text-xs text-[#38BDF8] font-medium">
+                      <span className="text-xs text-cyan-300 font-medium">
                         {event.category}
                       </span>
 
                       {/* Public Visibility Indicator */}
                       {event.status === 'published' ? (
-                        <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded font-semibold">
+                        <span className="text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2.5 py-0.5 rounded-full font-semibold">
                           Public Live Feed
                         </span>
                       ) : (
-                        <span className="text-[10px] bg-slate-800 text-slate-400 border border-slate-700 px-2 py-0.5 rounded font-semibold">
+                        <span className="text-[10px] font-mono bg-slate-800 text-slate-400 border border-white/10 px-2.5 py-0.5 rounded-full font-semibold">
                           Hidden from Public
                         </span>
                       )}
                     </div>
 
-                    <h3 className="font-bold text-[#F8FAFC] text-base truncate">
+                    <h3 className="font-bold text-white text-base truncate">
                       {event.title}
                     </h3>
 
-                    <div className="text-xs text-[#94A3B8] flex flex-wrap items-center gap-4">
-                      <span className="flex items-center gap-1">
+                    <div className="text-xs text-slate-400 flex flex-wrap items-center gap-4">
+                      <span className="flex items-center gap-1.5 font-mono">
                         <Calendar className="w-3.5 h-3.5 text-slate-400" />
                         {new Date(event.start_time).toLocaleString('en-IN', {
                           dateStyle: 'medium',
@@ -281,14 +282,14 @@ export const AdminEventsDirectoryPage: React.FC = () => {
                       </span>
                       <span>Venue: <strong className="text-slate-300">{event.venue?.name || 'Assigned Hall'}</strong></span>
                       <span>Admission: <strong className="text-slate-300">{event.cost}</strong></span>
-                      <span>Capacity: <strong className="text-slate-300">{event.capacity || 'Open'}</strong></span>
+                      <span>Capacity: <strong className="text-slate-300 font-mono">{event.capacity || 'Open'}</strong></span>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-[#334155]">
+                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-white/[0.08]">
                     <Link
                       to={`/events/${event.id}`}
-                      className="text-xs bg-[#0B1020] hover:bg-[#1E293B] text-[#94A3B8] hover:text-[#F8FAFC] font-semibold px-3 py-2 rounded-xl border border-[#334155] transition flex items-center gap-1"
+                      className="text-xs bg-[#050814]/80 hover:bg-[#0b1020] text-slate-300 hover:text-white font-semibold px-3.5 py-2 rounded-xl border border-white/10 transition flex items-center gap-1.5"
                     >
                       <Eye className="w-3.5 h-3.5" />
                       View Details
@@ -297,7 +298,7 @@ export const AdminEventsDirectoryPage: React.FC = () => {
                     {event.status === 'pending_review' && (
                       <Link
                         to="/admin/approvals"
-                        className="text-xs bg-purple-600 hover:bg-purple-500 text-white font-bold px-3 py-2 rounded-xl transition flex items-center gap-1 shadow"
+                        className="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow"
                       >
                         Clearance Review →
                       </Link>

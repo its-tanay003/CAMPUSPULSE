@@ -37,21 +37,21 @@ export const StatusTimeline: React.FC<StatusTimelineProps> = ({
   );
 
   return (
-    <div className="bg-[#151C2F] border border-[#334155] rounded-2xl p-6 shadow-md space-y-6">
-      <div className="flex items-center justify-between border-b border-[#334155] pb-4">
+    <div className="glass-card rounded-3xl p-6 sm:p-7 glow-indigo space-y-6">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
         <div>
-          <h3 className="font-extrabold text-[#F8FAFC] text-base flex items-center gap-2">
-            <Clock className="w-4 h-4 text-[#38BDF8]" />
+          <h3 className="font-extrabold text-white text-base flex items-center gap-2">
+            <Clock className="w-4 h-4 text-cyan-400" />
             Event Lifecycle Status Timeline
           </h3>
-          <p className="text-xs text-[#94A3B8] mt-0.5">
+          <p className="text-xs text-slate-400 mt-0.5">
             Transparent tracking from initial club draft to administrative approval and public publishing.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs text-[#94A3B8]">Current State:</span>
-          <span className={`text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-full border ${
+          <span className="text-xs text-slate-400 font-mono">Current State:</span>
+          <span className={`text-[11px] font-mono font-extrabold uppercase px-2.5 py-0.5 rounded-full border ${
             status === 'published'
               ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
               : status === 'pending_review'
@@ -62,7 +62,7 @@ export const StatusTimeline: React.FC<StatusTimelineProps> = ({
               ? 'bg-rose-500/20 text-rose-300 border-rose-500/30'
               : status === 'draft'
               ? 'bg-slate-700/50 text-slate-300 border-slate-600'
-              : 'bg-[#0B1020] text-[#94A3B8] border-[#334155]'
+              : 'bg-[#050814]/80 text-slate-400 border-white/10'
           }`}>
             {status.replace('_', ' ')}
           </span>
@@ -71,10 +71,10 @@ export const StatusTimeline: React.FC<StatusTimelineProps> = ({
 
       {/* Reviewer Feedback Callout when changes requested or rejected */}
       {(status === 'changes_requested' || status === 'rejected') && (
-        <div className={`p-4 rounded-xl border flex items-start gap-3 shadow-sm ${
+        <div className={`p-4 rounded-2xl border flex items-start gap-3.5 ${
           status === 'changes_requested'
-            ? 'bg-orange-950/40 border-orange-500/40 text-orange-100'
-            : 'bg-rose-950/40 border-rose-500/40 text-rose-100'
+            ? 'glass-card border-orange-500/50 bg-orange-950/20 text-orange-100'
+            : 'glass-card border-rose-500/50 bg-rose-950/20 text-rose-100'
         }`}>
           {status === 'changes_requested' ? (
             <AlertCircle className="w-5 h-5 text-orange-400 shrink-0 mt-0.5" />
@@ -82,22 +82,22 @@ export const StatusTimeline: React.FC<StatusTimelineProps> = ({
             <XCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
           )}
 
-          <div className="space-y-1.5 flex-1 text-xs">
+          <div className="space-y-2 flex-1 text-xs">
             <div className="font-bold flex items-center justify-between">
-              <span>Administrative Review Outcome: {status === 'changes_requested' ? 'Action Required' : 'Proposal Rejected'}</span>
+              <span className="text-white">Administrative Review Outcome: {status === 'changes_requested' ? 'Action Required' : 'Proposal Rejected'}</span>
               {approvalsHistory[0]?.created_at && (
-                <span className="text-[10px] opacity-75 font-mono">
+                <span className="text-[10px] text-slate-400 font-mono">
                   {new Date(approvalsHistory[0].created_at).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}
                 </span>
               )}
             </div>
 
-            <div className="bg-black/30 p-2.5 rounded-lg border border-white/5 space-y-1">
-              <div className="text-[#94A3B8] flex items-center gap-1.5 font-medium">
-                <UserCheck className="w-3.5 h-3.5 text-[#38BDF8]" />
+            <div className="bg-[#050814]/80 p-3 rounded-xl border border-white/10 space-y-1.5">
+              <div className="text-slate-400 flex items-center gap-1.5 font-medium">
+                <UserCheck className="w-3.5 h-3.5 text-cyan-400" />
                 Reviewer: <strong className="text-white">{approvalsHistory[0]?.reviewer_name || 'Dean of Student Welfare'}</strong>
               </div>
-              <p className="text-white leading-relaxed font-normal">
+              <p className="text-slate-300 leading-relaxed font-normal">
                 "{approvalsHistory[0]?.reason || 'Please review the requested changes or rejection rationale.'}"
               </p>
             </div>
@@ -107,7 +107,7 @@ export const StatusTimeline: React.FC<StatusTimelineProps> = ({
                 <button
                   type="button"
                   onClick={onActionClick}
-                  className="bg-[#7C5CFC] hover:bg-[#6B46E5] text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition inline-flex items-center gap-1.5 shadow"
+                  className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2 rounded-xl transition inline-flex items-center gap-2 shadow cursor-pointer"
                 >
                   <FileEdit className="w-3.5 h-3.5" />
                   {actionButtonLabel}
@@ -119,7 +119,7 @@ export const StatusTimeline: React.FC<StatusTimelineProps> = ({
       )}
 
       {/* Stepper Timeline List */}
-      <div className="relative pl-6 space-y-6 before:absolute before:left-2.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-[#334155]">
+      <div className="relative pl-6 space-y-6 before:absolute before:left-2.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-white/10">
         {steps.map((step, idx) => {
           const isDone = step.isCompleted;
           const isCurrent = step.isCurrent;
@@ -129,10 +129,10 @@ export const StatusTimeline: React.FC<StatusTimelineProps> = ({
               {/* Timeline Bullet */}
               <div className={`absolute -left-6 top-1 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold border transition ${
                 isCurrent
-                  ? 'bg-[#7C5CFC] border-[#38BDF8] text-white ring-4 ring-[#7C5CFC]/20'
+                  ? 'bg-indigo-600 border-cyan-400 text-white ring-4 ring-indigo-500/20'
                   : isDone
                   ? 'bg-emerald-500 border-emerald-400 text-white'
-                  : 'bg-[#151C2F] border-[#334155] text-[#94A3B8]'
+                  : 'bg-[#050814] border-white/20 text-slate-400'
               }`}>
                 {isDone ? (
                   <CheckCircle2 className="w-3 h-3" />
@@ -144,23 +144,23 @@ export const StatusTimeline: React.FC<StatusTimelineProps> = ({
               </div>
 
               {/* Step Content */}
-              <div className={`rounded-xl p-4 border transition ${
+              <div className={`rounded-2xl p-4 sm:p-5 border transition ${
                 isCurrent 
-                  ? 'bg-[#1E293B] border-[#7C5CFC]/60 shadow-md' 
-                  : 'bg-[#0B1020]/60 border-[#334155]'
+                  ? 'bg-indigo-950/20 border-indigo-500/50 shadow-md' 
+                  : 'bg-[#050814]/60 border-white/10'
               }`}>
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
-                  <h4 className="font-bold text-[#F8FAFC] text-sm flex items-center gap-2">
+                  <h4 className="font-bold text-white text-sm flex items-center gap-2">
                     {step.title}
                     {isCurrent && (
-                      <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-[#7C5CFC]/30 text-[#38BDF8] border border-[#7C5CFC]/40">
+                      <span className="text-[10px] font-mono font-extrabold uppercase px-2 py-0.5 rounded-full bg-indigo-500/20 text-cyan-300 border border-indigo-500/40">
                         Current Step
                       </span>
                     )}
                   </h4>
 
                   {step.timestamp && (
-                    <span className="text-[11px] text-[#94A3B8] font-mono">
+                    <span className="text-[11px] text-slate-400 font-mono">
                       {new Date(step.timestamp).toLocaleString('en-IN', {
                         dateStyle: 'medium',
                         timeStyle: 'short'
@@ -169,18 +169,18 @@ export const StatusTimeline: React.FC<StatusTimelineProps> = ({
                   )}
                 </div>
 
-                <p className="text-xs text-[#94A3B8] leading-relaxed">
+                <p className="text-xs text-slate-300 leading-relaxed">
                   {step.description}
                 </p>
 
                 {step.decisionNote && (
-                  <div className="mt-2 text-xs bg-black/40 p-2 rounded-lg border border-white/5 text-slate-300">
+                  <div className="mt-2.5 text-xs bg-[#050814]/80 p-2.5 rounded-xl border border-white/10 text-slate-300">
                     <strong className="text-white">Note:</strong> {step.decisionNote}
                   </div>
                 )}
 
                 {step.actionRequired && (
-                  <div className="mt-2.5 pt-2 border-t border-[#334155] text-xs font-semibold flex items-center gap-1.5 text-[#38BDF8]">
+                  <div className="mt-3 pt-2.5 border-t border-white/[0.08] text-xs font-semibold flex items-center gap-1.5 text-cyan-400">
                     <ArrowRight className="w-3.5 h-3.5" />
                     <span>Next Action: {step.actionRequired}</span>
                   </div>

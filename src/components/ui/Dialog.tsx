@@ -82,7 +82,7 @@ export const Dialog: React.FC<DialogProps> = ({
       aria-modal="true"
       aria-labelledby="dialog-title"
       aria-describedby={description ? "dialog-description" : undefined}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0B1020]/80 backdrop-blur-sm animate-fadeIn"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050814]/85 backdrop-blur-md animate-fadeIn"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -90,27 +90,27 @@ export const Dialog: React.FC<DialogProps> = ({
       <div
         ref={dialogRef}
         tabIndex={-1}
-        className="w-full max-w-lg bg-[#151C2F] border border-[#334155] rounded-2xl shadow-2xl overflow-hidden p-6 space-y-4 animate-scaleUp focus:outline-none"
+        className="w-full max-w-lg glass-card rounded-3xl overflow-hidden p-6 sm:p-7 space-y-4 animate-scaleUp focus:outline-none glow-indigo"
       >
-        <div className="flex items-start justify-between border-b border-[#334155] pb-3">
+        <div className="flex items-start justify-between border-b border-white/10 pb-4">
           <div>
-            <h2 id="dialog-title" className="text-lg font-bold text-[#F8FAFC]">
+            <h2 id="dialog-title" className="text-xl font-extrabold text-white tracking-tight">
               {title}
             </h2>
             {description && (
-              <p id="dialog-description" className="text-xs text-[#94A3B8] mt-0.5">{description}</p>
+              <p id="dialog-description" className="text-xs text-slate-400 mt-1 leading-relaxed">{description}</p>
             )}
           </div>
           <button
             onClick={onClose}
             aria-label="Close dialog"
-            className="p-2 min-w-[40px] min-h-[40px] flex items-center justify-center text-[#94A3B8] hover:text-[#F8FAFC] rounded-lg transition"
+            className="p-2 min-w-[40px] min-h-[40px] flex items-center justify-center text-slate-400 hover:text-white rounded-xl hover:bg-white/[0.08] transition"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="text-xs text-[#F8FAFC]">{children}</div>
+        <div className="text-xs text-slate-200">{children}</div>
       </div>
     </div>
   );

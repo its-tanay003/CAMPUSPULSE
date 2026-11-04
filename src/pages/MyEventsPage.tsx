@@ -31,7 +31,7 @@ export const MyEventsPage: React.FC = () => {
   // 1. Authenticated User Check (Signed-out fallback state)
   if (!currentUser) {
     return (
-      <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] py-16 px-4">
+      <div className="min-h-screen text-slate-100 py-16 px-4">
         <EmptyState
           icon={Bookmark}
           title="Sign In Required"
@@ -58,43 +58,43 @@ export const MyEventsPage: React.FC = () => {
     .filter((item): item is { reg: typeof item.reg; event: NonNullable<typeof item.event> } => Boolean(item.event));
 
   return (
-    <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] py-8">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <div className="min-h-screen text-slate-100 py-10 relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Header with Segregated Switcher */}
-        <div className="bg-[#151C2F] rounded-2xl border border-[#334155] p-6 shadow-md">
+        <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">
                 <Badge variant="primary">Student Workspace</Badge>
-                <span className="text-xs text-[#94A3B8]">· {currentUser.full_name}</span>
+                <span className="text-xs font-mono text-slate-400">· {currentUser.full_name}</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F8FAFC] tracking-tight mt-1">
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-1.5">
                 My Campus Schedule
               </h1>
-              <p className="text-xs sm:text-sm text-[#94A3B8] mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl leading-relaxed">
                 Private personal agenda: distinguishing bookmarked interests from verified admission passes.
               </p>
             </div>
 
-            <div className="flex bg-[#0B1020] p-1.5 rounded-xl border border-[#334155] text-xs font-semibold">
+            <div className="flex bg-[#050814]/80 p-1.5 rounded-2xl border border-white/10 text-xs font-semibold">
               <button
                 onClick={() => setActiveTab('saved')}
-                className={`px-4 py-2 rounded-lg transition flex items-center gap-1.5 ${
+                className={`px-4 py-2 min-h-[38px] rounded-xl transition flex items-center gap-2 cursor-pointer ${
                   activeTab === 'saved'
-                    ? 'bg-[#7C5CFC] text-white shadow font-bold'
-                    : 'text-[#94A3B8] hover:text-[#F8FAFC]'
+                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 font-bold'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
-                <Bookmark className="w-3.5 h-3.5 text-[#38BDF8]" />
+                <Bookmark className="w-3.5 h-3.5 text-cyan-400" />
                 Saved Bookmarks ({userSaved.length})
               </button>
               <button
                 onClick={() => setActiveTab('registered')}
-                className={`px-4 py-2 rounded-lg transition flex items-center gap-1.5 ${
+                className={`px-4 py-2 min-h-[38px] rounded-xl transition flex items-center gap-2 cursor-pointer ${
                   activeTab === 'registered'
-                    ? 'bg-[#7C5CFC] text-white shadow font-bold'
-                    : 'text-[#94A3B8] hover:text-[#F8FAFC]'
+                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 font-bold'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
@@ -104,11 +104,11 @@ export const MyEventsPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Informational Guidance Notice (P17 Section 07) */}
-        <aside aria-label="Schedule state distinction notice" className="bg-[#151C2F]/50 border border-[#334155] p-3.5 rounded-xl text-xs text-[#94A3B8] flex items-center gap-2.5">
-          <Info className="w-4 h-4 text-[#38BDF8] shrink-0" />
+        {/* Informational Guidance Notice */}
+        <aside aria-label="Schedule state distinction notice" className="glass-card p-4 rounded-2xl text-xs text-slate-300 flex items-center gap-3">
+          <Info className="w-4 h-4 text-cyan-400 shrink-0" />
           <span>
-            <strong className="text-[#F8FAFC]">Important Distinction:</strong> Saving an event bookmarks it to your personal timeline for planning; it does not guarantee a seat or reserve internal registration.
+            <strong className="text-white">Important Distinction:</strong> Saving an event bookmarks it to your personal timeline for planning; it does not guarantee a seat or reserve internal registration.
           </span>
         </aside>
 
@@ -119,21 +119,21 @@ export const MyEventsPage: React.FC = () => {
               userSaved.map(event => (
                 <div
                   key={event.id}
-                  className="bg-[#151C2F] rounded-2xl border border-[#334155] p-5 shadow-sm hover:border-[#7C5CFC]/50 transition flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                  className="glass-card rounded-3xl p-5 sm:p-6 transition flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-xs text-[#94A3B8]">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2 text-xs text-slate-400">
                       <Badge variant="secondary">{event.category}</Badge>
                       <span>•</span>
-                      <span className="font-semibold text-[#F8FAFC]">{event.organization?.name}</span>
+                      <span className="font-semibold text-white">{event.organization?.name}</span>
                     </div>
 
-                    <h3 className="font-bold text-[#F8FAFC] text-base hover:text-[#38BDF8] transition">
+                    <h3 className="font-bold text-white text-base hover:text-cyan-300 transition">
                       <Link to={`/events/${event.id}`}>{event.title}</Link>
                     </h3>
 
-                    <div className="text-xs text-[#94A3B8] flex flex-wrap items-center gap-3 pt-1">
-                      <span>{new Date(event.start_time).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</span>
+                    <div className="text-xs text-slate-400 flex flex-wrap items-center gap-3 pt-1">
+                      <span className="font-mono">{new Date(event.start_time).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</span>
                       <span>·</span>
                       <span>{event.venue?.name}</span>
                       <span>·</span>
@@ -141,7 +141,7 @@ export const MyEventsPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-[#334155]">
+                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-white/[0.08]">
                     <Button
                       variant="secondary"
                       size="sm"
@@ -149,9 +149,9 @@ export const MyEventsPage: React.FC = () => {
                         generateICS(event);
                         setToastMessage({ type: 'success', text: 'Exported .ics calendar file.' });
                       }}
-                      className="gap-1.5"
+                      className="gap-1.5 rounded-xl"
                     >
-                      <Download className="w-3.5 h-3.5 text-[#38BDF8]" /> .ics
+                      <Download className="w-3.5 h-3.5 text-cyan-400" /> .ics
                     </Button>
                     <Button
                       variant="ghost"
@@ -160,12 +160,12 @@ export const MyEventsPage: React.FC = () => {
                         toggleSaveEvent(event.id);
                         setToastMessage({ type: 'warning', text: `Removed "${event.title}" from saved bookmarks.` });
                       }}
-                      className="gap-1.5 text-rose-400 hover:text-rose-300 hover:bg-rose-500/10"
+                      className="gap-1.5 text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-xl"
                     >
                       <Trash2 className="w-3.5 h-3.5" /> Remove
                     </Button>
                     <Link to={`/events/${event.id}`}>
-                      <Button variant="primary" size="sm" className="gap-1">
+                      <Button variant="primary" size="sm" className="gap-1 rounded-xl">
                         Details <ChevronRight className="w-3.5 h-3.5" />
                       </Button>
                     </Link>
@@ -191,35 +191,35 @@ export const MyEventsPage: React.FC = () => {
               userRegistered.map(({ reg, event }) => (
                 <div
                   key={reg.id}
-                  className="bg-[#151C2F] rounded-2xl border border-[#334155] p-5 shadow-sm hover:border-emerald-500/40 transition flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                  className="glass-card rounded-3xl p-5 sm:p-6 transition flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
-                  <div className="space-y-1">
+                  <div className="space-y-1.5">
                     <div className="flex items-center gap-2 text-xs">
                       <Badge variant="success">{reg.status}</Badge>
-                      <span className="text-[#334155]">·</span>
-                      <span className="text-[#94A3B8] font-mono text-[11px]">Pass ID: {reg.id}</span>
-                      <span className="text-[#334155]">·</span>
-                      <span className="text-[#38BDF8]">{event.organization?.name}</span>
+                      <span className="text-white/20">·</span>
+                      <span className="text-slate-400 font-mono text-[11px]">Pass ID: {reg.id}</span>
+                      <span className="text-white/20">·</span>
+                      <span className="text-cyan-400 font-semibold">{event.organization?.name}</span>
                     </div>
 
-                    <h3 className="font-bold text-[#F8FAFC] text-base hover:text-[#38BDF8] transition">
+                    <h3 className="font-bold text-white text-base hover:text-cyan-300 transition">
                       <Link to={`/events/${event.id}`}>{event.title}</Link>
                     </h3>
 
-                    <div className="text-xs text-[#94A3B8] flex flex-wrap items-center gap-3 pt-1">
-                      <span>{new Date(event.start_time).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</span>
+                    <div className="text-xs text-slate-400 flex flex-wrap items-center gap-3 pt-1">
+                      <span className="font-mono">{new Date(event.start_time).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</span>
                       <span>·</span>
                       <span>{event.venue?.name}</span>
                     </div>
 
                     {reg.notes && (
-                      <div className="mt-2 text-xs text-[#94A3B8] bg-[#0B1020] p-2.5 rounded-xl border border-[#334155]">
-                        <strong className="text-[#F8FAFC]">Admission Pass Details:</strong> {reg.notes}
+                      <div className="mt-2.5 text-xs text-slate-300 bg-[#050814]/80 p-3 rounded-2xl border border-white/10">
+                        <strong className="text-white">Admission Pass Details:</strong> {reg.notes}
                       </div>
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-[#334155]">
+                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-white/[0.08]">
                     <Button
                       variant="secondary"
                       size="sm"
@@ -227,12 +227,12 @@ export const MyEventsPage: React.FC = () => {
                         generateICS(event);
                         setToastMessage({ type: 'success', text: 'Downloaded .ics calendar invite.' });
                       }}
-                      className="gap-1.5"
+                      className="gap-1.5 rounded-xl"
                     >
-                      <Download className="w-3.5 h-3.5 text-[#38BDF8]" /> Export
+                      <Download className="w-3.5 h-3.5 text-cyan-400" /> Export
                     </Button>
                     <Link to={`/events/${event.id}`}>
-                      <Button variant="primary" size="sm" className="gap-1">
+                      <Button variant="primary" size="sm" className="gap-1 rounded-xl">
                         Pass & Venue <ChevronRight className="w-3.5 h-3.5" />
                       </Button>
                     </Link>

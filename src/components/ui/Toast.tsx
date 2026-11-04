@@ -14,15 +14,15 @@ export const Toast: React.FC<ToastProps> = ({
 }) => {
   const configs = {
     success: {
-      bg: 'bg-emerald-950/90 border-emerald-500/50 text-emerald-200',
+      bg: 'bg-emerald-950/80 border-emerald-500/40 text-emerald-200 shadow-emerald-950/50',
       icon: <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" aria-hidden="true" />
     },
     warning: {
-      bg: 'bg-amber-950/90 border-amber-500/50 text-amber-200',
+      bg: 'bg-amber-950/80 border-amber-500/40 text-amber-200 shadow-amber-950/50',
       icon: <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" aria-hidden="true" />
     },
     error: {
-      bg: 'bg-rose-950/90 border-rose-500/50 text-rose-200',
+      bg: 'bg-rose-950/80 border-rose-500/40 text-rose-200 shadow-rose-950/50',
       icon: <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" aria-hidden="true" />
     }
   };
@@ -33,7 +33,7 @@ export const Toast: React.FC<ToastProps> = ({
     <div
       role={type === 'error' ? 'alert' : 'status'}
       aria-live={type === 'error' ? 'assertive' : 'polite'}
-      className={`fixed bottom-4 right-4 z-50 flex items-center gap-2.5 p-3.5 rounded-xl border shadow-2xl backdrop-blur-md text-xs font-semibold ${current.bg} animate-slideUp max-w-[90vw]`}
+      className={`fixed bottom-5 right-5 z-50 flex items-center gap-3 p-4 rounded-2xl border shadow-2xl backdrop-blur-xl text-xs sm:text-sm font-medium ${current.bg} animate-slideUp max-w-[90vw]`}
     >
       {current.icon}
       <span>{message}</span>
