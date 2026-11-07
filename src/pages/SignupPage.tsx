@@ -110,13 +110,13 @@ export const SignupPage: React.FC = () => {
                 type="text"
                 value={campus}
                 onChange={(e) => setCampus(e.target.value)}
-                className="w-full text-xs p-3.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                className="w-full text-xs p-3.5 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
                 required
               />
             </div>
 
-            <div className="p-3.5 bg-[#050814]/80 rounded-2xl border border-white/10 text-xs text-slate-400 flex items-start gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+            <div className="p-3.5 bg-white rounded-2xl border border-slate-200 text-xs text-slate-400 flex items-start gap-2.5">
+              <CheckCircle2 className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
               <span>
                 Standard Student Profile: Organizer permissions require verified club appointment by Campus Administration.
               </span>
@@ -134,9 +134,9 @@ export const SignupPage: React.FC = () => {
             </Button>
           </form>
 
-          <div className="mt-6 pt-4 border-t border-white/[0.08] text-center text-xs text-slate-400">
+          <div className="mt-6 pt-4 border-t border-slate-200 text-center text-xs text-slate-400">
             Already have an account?{' '}
-            <Link to="/login" className="font-bold text-cyan-400 hover:text-cyan-300 underline">
+            <Link to="/login" className="font-bold text-indigo-600 hover:text-indigo-600 underline">
               Sign In Instead
             </Link>
           </div>

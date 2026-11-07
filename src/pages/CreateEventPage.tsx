@@ -256,7 +256,7 @@ export const CreateEventPage: React.FC = () => {
           <div className="mt-6 flex justify-center gap-3">
             <Link
               to="/home"
-              className="glass-card hover:border-white/20 text-xs font-bold px-4 py-2 rounded-xl transition"
+              className="glass-card hover:border-slate-300 text-xs font-bold px-4 py-2 rounded-xl transition"
             >
               Back to Home
             </Link>
@@ -273,7 +273,7 @@ export const CreateEventPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <Link
             to="/organizer"
-            className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-white transition font-medium"
+            className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-indigo-600 transition font-medium"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Organizer Studio
@@ -282,7 +282,7 @@ export const CreateEventPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setShowPreviewModal(true)}
-            className="text-xs bg-[#050814]/80 hover:bg-[#0b1020] text-cyan-300 border border-white/10 font-semibold px-4 py-2 rounded-xl transition flex items-center gap-2 cursor-pointer"
+            className="text-xs bg-white hover:bg-white text-indigo-600 border border-slate-200 font-semibold px-4 py-2 rounded-xl transition flex items-center gap-2 cursor-pointer"
           >
             <Eye className="w-3.5 h-3.5" />
             Live Preview
@@ -292,7 +292,7 @@ export const CreateEventPage: React.FC = () => {
         {/* Title Header */}
         <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-cyan-300 border border-indigo-500/30 flex items-center justify-center font-bold">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-600 border border-indigo-500/30 flex items-center justify-center font-bold">
               <PlusCircle className="w-6 h-6" />
             </div>
             <div>
@@ -332,7 +332,7 @@ export const CreateEventPage: React.FC = () => {
           <form onSubmit={(e) => handleSubmit(e, false)} className="lg:col-span-8 space-y-6">
             {/* Section 1: Event Information */}
             <div className="glass-card rounded-3xl p-6 sm:p-7 space-y-5">
-              <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2.5 border-b border-white/[0.08] pb-4">
+              <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2.5 border-b border-slate-200 pb-4">
                 <span className="w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-mono font-bold">1</span>
                 Event Specifications
               </h2>
@@ -352,7 +352,7 @@ export const CreateEventPage: React.FC = () => {
                     }
                   }}
                   placeholder="e.g. Annual Autonomous Drone Racing League 2026"
-                  className="w-full text-sm p-3.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                  className="w-full text-sm p-3.5 bg-white border border-slate-200 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
                 />
                 {validationErrors.title && (
                   <p className="text-rose-400 text-xs mt-1.5 font-medium">{validationErrors.title}</p>
@@ -374,7 +374,7 @@ export const CreateEventPage: React.FC = () => {
                     }
                   }}
                   placeholder="Explain event outcomes, agenda, prerequisites, kit requirements, and who should attend..."
-                  className="w-full text-sm p-3.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition leading-relaxed"
+                  className="w-full text-sm p-3.5 bg-white border border-slate-200 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition leading-relaxed"
                 />
                 {validationErrors.description && (
                   <p className="text-rose-400 text-xs mt-1.5 font-medium">{validationErrors.description}</p>
@@ -388,7 +388,7 @@ export const CreateEventPage: React.FC = () => {
                     id="event-cat"
                     value={category}
                     onChange={(e) => setCategory(e.target.value as EventCategory)}
-                    className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+                    className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
                   >
                     {CATEGORIES.map(c => (
                       <option key={c} value={c}>{c}</option>
@@ -404,7 +404,7 @@ export const CreateEventPage: React.FC = () => {
                     id="event-org"
                     value={organizationId}
                     onChange={(e) => setOrganizationId(e.target.value)}
-                    className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+                    className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
                   >
                     {authorizedOrgs.map(o => (
                       <option key={o.id} value={o.id}>{o.name}</option>
@@ -425,7 +425,7 @@ export const CreateEventPage: React.FC = () => {
                     value={targetAudience}
                     onChange={(e) => setTargetAudience(e.target.value)}
                     placeholder="e.g. All Students, B.Tech 2nd/3rd Year"
-                    className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
 
@@ -437,7 +437,7 @@ export const CreateEventPage: React.FC = () => {
                     value={eligibility}
                     onChange={(e) => setEligibility(e.target.value)}
                     placeholder="e.g. Open to all students with ID card"
-                    className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
               </div>
@@ -450,7 +450,7 @@ export const CreateEventPage: React.FC = () => {
                   value={contactEmail}
                   onChange={(e) => setContactEmail(e.target.value)}
                   placeholder="organizer@campus.edu"
-                  className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
                 {validationErrors.contactEmail && (
                   <p className="text-rose-400 text-xs mt-1.5 font-medium">{validationErrors.contactEmail}</p>
@@ -460,7 +460,7 @@ export const CreateEventPage: React.FC = () => {
 
             {/* Section 2: Schedule & Authoritative Venue */}
             <div className="glass-card rounded-3xl p-6 sm:p-7 space-y-5">
-              <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2.5 border-b border-white/[0.08] pb-4">
+              <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2.5 border-b border-slate-200 pb-4">
                 <span className="w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-mono font-bold">2</span>
                 Schedule & Authoritative Venue
               </h2>
@@ -480,7 +480,7 @@ export const CreateEventPage: React.FC = () => {
                         setValidationErrors(prev => ({ ...prev, time: '' }));
                       }
                     }}
-                    className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                   {validationErrors.startDate && (
                     <p className="text-rose-400 text-xs mt-1.5 font-medium">{validationErrors.startDate}</p>
@@ -501,7 +501,7 @@ export const CreateEventPage: React.FC = () => {
                         setValidationErrors(prev => ({ ...prev, time: '' }));
                       }
                     }}
-                    className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                   {validationErrors.endDate && (
                     <p className="text-rose-400 text-xs mt-1.5 font-medium">{validationErrors.endDate}</p>
@@ -521,7 +521,7 @@ export const CreateEventPage: React.FC = () => {
                     id="venue-alloc"
                     value={venueId}
                     onChange={(e) => setVenueId(e.target.value)}
-                    className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+                    className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
                   >
                     {venues.map(v => (
                       <option key={v.id} value={v.id}>
@@ -543,7 +543,7 @@ export const CreateEventPage: React.FC = () => {
                     type="datetime-local"
                     value={regDeadline}
                     onChange={(e) => setRegDeadline(e.target.value)}
-                    className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                   {validationErrors.regDeadline && (
                     <p className="text-rose-400 text-xs mt-1.5 font-medium">{validationErrors.regDeadline}</p>
@@ -554,7 +554,7 @@ export const CreateEventPage: React.FC = () => {
 
             {/* Section 3: Registration & Admission */}
             <div className="glass-card rounded-3xl p-6 sm:p-7 space-y-5">
-              <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2.5 border-b border-white/[0.08] pb-4">
+              <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2.5 border-b border-slate-200 pb-4">
                 <span className="w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-mono font-bold">3</span>
                 Registration & Capacity Requirements
               </h2>
@@ -568,7 +568,7 @@ export const CreateEventPage: React.FC = () => {
                     value={cost}
                     onChange={(e) => setCost(e.target.value)}
                     placeholder="e.g. Free or ₹100 per team"
-                    className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
 
@@ -580,7 +580,7 @@ export const CreateEventPage: React.FC = () => {
                     value={capacity}
                     onChange={(e) => setCapacity(e.target.value)}
                     placeholder="e.g. 150"
-                    className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
+                    className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
                   />
                 </div>
               </div>
@@ -594,7 +594,7 @@ export const CreateEventPage: React.FC = () => {
                     className={`p-3 rounded-2xl text-xs font-semibold border transition cursor-pointer ${
                       regMethod === 'internal'
                         ? 'bg-indigo-600 text-white border-indigo-400/40 shadow-md shadow-indigo-600/30'
-                        : 'bg-[#050814]/80 border-white/10 text-slate-400 hover:text-white'
+                        : 'bg-white border-slate-200 text-slate-400 hover:text-indigo-600'
                     }`}
                   >
                     CampusPulse 1-Click
@@ -605,7 +605,7 @@ export const CreateEventPage: React.FC = () => {
                     className={`p-3 rounded-2xl text-xs font-semibold border transition cursor-pointer ${
                       regMethod === 'external'
                         ? 'bg-indigo-600 text-white border-indigo-400/40 shadow-md shadow-indigo-600/30'
-                        : 'bg-[#050814]/80 border-white/10 text-slate-400 hover:text-white'
+                        : 'bg-white border-slate-200 text-slate-400 hover:text-indigo-600'
                     }`}
                   >
                     External Link
@@ -616,7 +616,7 @@ export const CreateEventPage: React.FC = () => {
                     className={`p-3 rounded-2xl text-xs font-semibold border transition cursor-pointer ${
                       regMethod === 'none'
                         ? 'bg-indigo-600 text-white border-indigo-400/40 shadow-md shadow-indigo-600/30'
-                        : 'bg-[#050814]/80 border-white/10 text-slate-400 hover:text-white'
+                        : 'bg-white border-slate-200 text-slate-400 hover:text-indigo-600'
                     }`}
                   >
                     Open Walk-in
@@ -633,7 +633,7 @@ export const CreateEventPage: React.FC = () => {
                     value={regUrl}
                     onChange={(e) => setRegUrl(e.target.value)}
                     placeholder="https://unstop.com/... or Google Form"
-                    className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                   {validationErrors.regUrl && (
                     <p className="text-rose-400 text-xs mt-1.5 font-medium">{validationErrors.regUrl}</p>
@@ -649,19 +649,19 @@ export const CreateEventPage: React.FC = () => {
                   value={coverUrl}
                   onChange={(e) => setCoverUrl(e.target.value)}
                   placeholder="https://images.unsplash.com/..."
-                  className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
             </div>
 
             {/* Actions Bar */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/[0.08]">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200">
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <button
                   type="button"
                   onClick={(e) => handleSubmit(e, true)}
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto bg-[#050814]/80 hover:bg-[#0b1020] text-slate-200 text-xs font-bold px-5 py-3 rounded-2xl border border-white/10 transition flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto bg-white hover:bg-white text-slate-200 text-xs font-bold px-5 py-3 rounded-2xl border border-slate-200 transition flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <FileText className="w-3.5 h-3.5" />
                   Save as Draft (Private)
@@ -670,7 +670,7 @@ export const CreateEventPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowPreviewModal(true)}
-                  className="w-full sm:w-auto bg-[#050814]/80 hover:bg-[#0b1020] text-cyan-300 text-xs font-bold px-4 py-3 rounded-2xl border border-white/10 transition flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto bg-white hover:bg-white text-indigo-600 text-xs font-bold px-4 py-3 rounded-2xl border border-slate-200 transition flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Eye className="w-3.5 h-3.5" />
                   Preview
@@ -682,7 +682,7 @@ export const CreateEventPage: React.FC = () => {
                 disabled={isSubmitting || hasHardConflict}
                 className={`w-full sm:w-auto text-xs font-bold px-6 py-3 rounded-2xl transition flex items-center justify-center gap-2 shadow-lg cursor-pointer ${
                   hasHardConflict
-                    ? 'bg-slate-800 text-slate-500 cursor-not-allowed border border-white/10'
+                    ? 'bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-200'
                     : 'bg-gradient-to-r from-indigo-500 via-indigo-600 to-cyan-500 hover:opacity-95 text-white shadow-indigo-500/25'
                 }`}
               >
@@ -694,8 +694,8 @@ export const CreateEventPage: React.FC = () => {
           {/* Right Column: Live Clash Radar */}
           <div className="lg:col-span-4 space-y-6">
             <div className="glass-card rounded-3xl p-6 glow-indigo sticky top-24">
-              <div className="flex items-center gap-2 pb-4 border-b border-white/[0.08]">
-                <Sparkles className="w-4 h-4 text-cyan-400" />
+              <div className="flex items-center gap-2 pb-4 border-b border-slate-200">
+                <Sparkles className="w-4 h-4 text-indigo-600" />
                 <h3 className="font-bold text-white text-sm">Real-time Clash Checker</h3>
               </div>
 
@@ -706,7 +706,7 @@ export const CreateEventPage: React.FC = () => {
                 />
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/[0.08] text-[11px] text-slate-400 space-y-2">
+              <div className="mt-6 pt-4 border-t border-slate-200 text-[11px] text-slate-400 space-y-2">
                 <div className="font-bold text-white font-mono">Venue Booking Rule:</div>
                 <div>• <strong className="text-slate-300">Hard Conflict:</strong> Exact venue double-booking prevents submission for administrative review.</div>
                 <div>• <strong className="text-slate-300">Drafts:</strong> May be saved privately regardless of warnings.</div>
@@ -720,15 +720,15 @@ export const CreateEventPage: React.FC = () => {
       {showPreviewModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
           <div className="glass-card rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-7 glow-indigo relative">
-            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-5">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-200 mb-5">
               <div className="flex items-center gap-2">
-                <Eye className="w-4 h-4 text-cyan-400" />
+                <Eye className="w-4 h-4 text-indigo-600" />
                 <h3 className="font-bold text-sm text-white">Public Event Page Preview</h3>
               </div>
               <button
                 type="button"
                 onClick={() => setShowPreviewModal(false)}
-                className="text-xs bg-[#050814]/80 hover:bg-[#0b1020] text-slate-400 hover:text-white px-3 py-1.5 rounded-xl border border-white/10 transition cursor-pointer"
+                className="text-xs bg-white hover:bg-white text-slate-400 hover:text-indigo-600 px-3 py-1.5 rounded-xl border border-slate-200 transition cursor-pointer"
               >
                 Close Preview
               </button>
@@ -736,12 +736,12 @@ export const CreateEventPage: React.FC = () => {
 
             {/* Simulated Event Detail Header */}
             <div className="space-y-4">
-              <div className="h-44 rounded-2xl overflow-hidden relative border border-white/10">
+              <div className="h-44 rounded-2xl overflow-hidden relative border border-slate-200">
                 <img src={coverUrl} alt="Cover preview" className="w-full h-full object-cover" />
-                <div className="absolute top-3 left-3 bg-[#050814]/90 backdrop-blur text-cyan-300 border border-white/10 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full uppercase">
+                <div className="absolute top-3 left-3 bg-white backdrop-blur text-indigo-600 border border-slate-200 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full uppercase">
                   {category}
                 </div>
-                <div className="absolute top-3 right-3 bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full uppercase">
+                <div className="absolute top-3 right-3 bg-amber-500/20 text-amber-800 border border-amber-500/30 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full uppercase">
                   Preview Simulation
                 </div>
               </div>
@@ -751,21 +751,21 @@ export const CreateEventPage: React.FC = () => {
                 <h2 className="text-xl font-black text-white mt-0.5">{title || 'Untitled Campus Event'}</h2>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 text-xs bg-[#050814]/80 p-4 rounded-2xl border border-white/10">
+              <div className="grid grid-cols-2 gap-3 text-xs bg-white p-4 rounded-2xl border border-slate-200">
                 <div className="flex items-center gap-2 text-slate-300">
-                  <Calendar className="w-4 h-4 text-cyan-400" />
+                  <Calendar className="w-4 h-4 text-indigo-600" />
                   <span>{startDate ? new Date(startDate).toLocaleDateString('en-IN', { dateStyle: 'medium' }) : 'Date TBD'}</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-300">
-                  <Clock className="w-4 h-4 text-cyan-400" />
+                  <Clock className="w-4 h-4 text-indigo-600" />
                   <span>{startDate ? new Date(startDate).toLocaleTimeString('en-IN', { timeStyle: 'short' }) : 'Time TBD'}</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-300">
-                  <MapPin className="w-4 h-4 text-cyan-400" />
+                  <MapPin className="w-4 h-4 text-indigo-600" />
                   <span className="truncate">{selectedVenue?.name || 'Venue'}</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-300">
-                  <Building2 className="w-4 h-4 text-cyan-400" />
+                  <Building2 className="w-4 h-4 text-indigo-600" />
                   <span>Admission: {cost || 'Free'}</span>
                 </div>
               </div>

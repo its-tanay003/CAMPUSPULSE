@@ -2,33 +2,33 @@
 
 @layer base {
   :root {
-    /* Brand Color System */
+    /* Brand Color System (Light Theme Foundation) */
     --color-primary-indigo: #4F46E5;
     --color-primary-indigo-hover: #4338CA;
-    --color-deep-navy: #101828;
+    --color-deep-navy: #0F172A;
     --color-soft-indigo: #EEF2FF;
     
-    --color-accent-lime: #C7F36B;
-    --color-accent-lime-hover: #D4F882;
-    --color-accent-purple: #8B5CF6;
-    --color-accent-cyan: #22D3EE;
+    --color-accent-lime: #16A34A;
+    --color-accent-lime-hover: #15803D;
+    --color-accent-purple: #7C3AED;
+    --color-accent-cyan: #0284C7;
     
-    --color-canvas: #070A13;
-    --color-surface-panel: rgba(16, 24, 40, 0.75);
-    --color-surface-card: #11182B;
-    --color-surface-elevated: #18223C;
-    --color-surface-highlight: #212E4E;
+    --color-canvas: #F8FAFC;
+    --color-surface-panel: rgba(255, 255, 255, 0.92);
+    --color-surface-card: #FFFFFF;
+    --color-surface-elevated: #FFFFFF;
+    --color-surface-highlight: #F1F5F9;
     
-    --color-text-main: #F8FAFC;
-    --color-text-secondary: #94A3B8;
+    --color-text-main: #0F172A;
+    --color-text-secondary: #475569;
     --color-text-muted: #64748B;
     
-    --color-border-subtle: rgba(255, 255, 255, 0.08);
-    --color-border-card: rgba(255, 255, 255, 0.06);
-    --color-border-focus: #C7F36B;
+    --color-border-subtle: #E2E8F0;
+    --color-border-card: #E2E8F0;
+    --color-border-focus: #4F46E5;
     
     --color-success: #16A34A;
-    --color-warning: #F59E0B;
+    --color-warning: #D97706;
     --color-error: #DC2626;
     --color-info: #2563EB;
 
@@ -40,16 +40,16 @@
   body {
     margin: 0;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color: #F8FAFC;
-    background-color: #070A13;
+    color: #0F172A;
+    background-color: #F8FAFC;
     min-height: 100vh;
     background-image: 
-      radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.18) 0px, transparent 48%),
-      radial-gradient(at 100% 0%, rgba(34, 211, 238, 0.12) 0px, transparent 42%),
-      radial-gradient(at 50% 100%, rgba(199, 243, 107, 0.07) 0px, transparent 48%),
-      radial-gradient(at 80% 50%, rgba(139, 92, 246, 0.08) 0px, transparent 38%);
+      radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.07) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(2, 132, 199, 0.06) 0px, transparent 45%),
+      radial-gradient(at 50% 100%, rgba(22, 163, 74, 0.04) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, rgba(124, 58, 237, 0.05) 0px, transparent 40%);
     background-attachment: fixed;
-    letter-spacing: -0.018em;
+    letter-spacing: -0.015em;
     overflow-x: hidden;
   }
 
@@ -67,26 +67,26 @@
   input:focus-visible,
   select:focus-visible,
   textarea:focus-visible {
-    outline: 2px solid #C7F36B;
-    outline-offset: 3px;
-    box-shadow: 0 0 20px rgba(199, 243, 107, 0.55);
+    outline: 2px solid #4F46E5;
+    outline-offset: 2px;
+    box-shadow: 0 0 16px rgba(79, 70, 229, 0.3);
   }
 
-  /* Custom Sleek Scrollbar */
+  /* Custom Clean Scrollbar for Light Theme */
   ::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #070A13;
+    background: #F1F5F9;
   }
   ::-webkit-scrollbar-thumb {
-    background: #18223C;
+    background: #CBD5E1;
     border-radius: 9999px;
-    border: 2px solid #070A13;
+    border: 2px solid #F1F5F9;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #4F46E5;
+    background: #94A3B8;
   }
 
   /* Screen reader only utility class */
@@ -102,38 +102,41 @@
     border-width: 0;
   }
 
-  /* Glassmorphism & Aurora Depth utilities */
+  /* Glassmorphism & Depth utilities (Crisp White Light Glass) */
   .glass-card {
-    background: rgba(17, 24, 43, 0.72);
-    backdrop-filter: blur(24px) saturate(160%);
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid rgba(226, 232, 240, 0.85);
     box-shadow: 
-      0 20px 45px -15px rgba(0, 0, 0, 0.65), 
-      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      0 10px 30px -10px rgba(15, 23, 42, 0.06),
+      0 4px 6px -2px rgba(15, 23, 42, 0.03),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
                 box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
                 border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .glass-panel {
-    background: rgba(14, 21, 37, 0.85);
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.7);
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid #E2E8F0;
+    box-shadow: 
+      0 20px 40px -15px rgba(15, 23, 42, 0.08),
+      0 1px 3px rgba(15, 23, 42, 0.04);
   }
 
   .glow-indigo {
-    box-shadow: 0 0 35px -5px rgba(79, 70, 229, 0.45);
+    box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.25);
   }
 
   .glow-lime {
-    box-shadow: 0 0 30px -5px rgba(199, 243, 107, 0.38);
+    box-shadow: 0 10px 25px -5px rgba(22, 163, 74, 0.22);
   }
 
   .glow-cyan {
-    box-shadow: 0 0 30px -5px rgba(34, 211, 238, 0.35);
+    box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.22);
   }
 
   /* Micro-motion classes */
@@ -143,6 +146,7 @@
   }
   .hover-lift:hover {
     transform: translateY(-3px);
+    box-shadow: 0 16px 32px -10px rgba(15, 23, 42, 0.1);
   }
 
   .active-press {
@@ -156,7 +160,7 @@
   @keyframes pageFadeIn {
     from {
       opacity: 0;
-      transform: translateY(12px);
+      transform: translateY(10px);
     }
     to {
       opacity: 1;
@@ -165,7 +169,7 @@
   }
 
   .animate-page-enter {
-    animation: pageFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: pageFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   /* Respect prefers-reduced-motion for user accessibility */

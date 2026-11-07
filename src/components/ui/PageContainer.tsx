@@ -19,11 +19,10 @@ export const PageContainer: React.FC<PageContainerProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#0B1020] text-[#F8FAFC] py-8">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 py-8">
       <div className={`mx-auto px-4 sm:px-6 lg:px-8 ${maxSizes[size]} ${className}`}>
         {children}
       </div>
     </div>
   );
 };
-

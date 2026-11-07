@@ -19,7 +19,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 }) => {
   return (
     <div className="glass-card rounded-3xl p-10 sm:p-14 text-center max-w-lg mx-auto glow-indigo">
-      <div className="w-16 h-16 mx-auto rounded-3xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-cyan-400 mb-5 shadow-lg shadow-indigo-950/50">
+      <div className="w-16 h-16 mx-auto rounded-3xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-600 mb-5 shadow-lg shadow-indigo-950/50">
         <Icon className="w-8 h-8" />
       </div>
       <h3 className="text-lg font-extrabold text-white tracking-tight">{title}</h3>

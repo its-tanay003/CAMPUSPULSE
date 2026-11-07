@@ -108,9 +108,9 @@ export const LoginPage: React.FC = () => {
             </Button>
           </form>
 
-          <div className="mt-6 pt-4 border-t border-white/[0.08] text-center text-xs text-slate-400">
+          <div className="mt-6 pt-4 border-t border-slate-200 text-center text-xs text-slate-400">
             Don't have an account yet?{' '}
-            <Link to="/signup" className="font-bold text-cyan-400 hover:text-cyan-300 underline">
+            <Link to="/signup" className="font-bold text-indigo-600 hover:text-indigo-600 underline">
               Create Student Account
             </Link>
           </div>
@@ -126,7 +126,7 @@ export const LoginPage: React.FC = () => {
               setEmail('student.tanay@campus.edu');
               setPassword('demoPassword123');
             }}
-            className="text-[11px] font-bold text-indigo-400 hover:text-cyan-300 underline cursor-pointer"
+            className="text-[11px] font-bold text-indigo-400 hover:text-indigo-600 underline cursor-pointer"
           >
             Auto-fill Demo Student Credentials
           </button>

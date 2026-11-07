@@ -51,7 +51,7 @@ export const ProfilePage: React.FC = () => {
         <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo relative overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center gap-6 relative z-10">
             <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-[#C7F36B] p-0.5 shadow-xl glow-indigo">
-              <div className="w-full h-full bg-[#101828] rounded-[22px] flex items-center justify-center font-black text-2xl text-white">
+              <div className="w-full h-full bg-white rounded-[22px] flex items-center justify-center font-black text-2xl text-white">
                 {currentUser?.full_name?.charAt(0) || 'U'}
               </div>
             </div>
@@ -59,13 +59,13 @@ export const ProfilePage: React.FC = () => {
             <div className="space-y-1.5 flex-1">
               <div className="flex items-center gap-2.5">
                 <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">{currentUser?.full_name}</h1>
-                <span className="text-[10px] font-mono uppercase font-bold px-3 py-1 rounded-full bg-[#C7F36B]/20 text-[#C7F36B] border border-[#C7F36B]/40">
+                <span className="text-[10px] font-mono uppercase font-bold px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-200">
                   {currentUser?.role} persona
                 </span>
               </div>
               <p className="text-xs text-slate-400 font-mono">{currentUser?.email}</p>
               <div className="text-xs font-medium text-slate-400 flex items-center gap-2 pt-1 font-mono">
-                <Building className="w-3.5 h-3.5 text-cyan-400" />
+                <Building className="w-3.5 h-3.5 text-indigo-600" />
                 <span>{currentUser?.campus}</span>
               </div>
             </div>
@@ -74,9 +74,9 @@ export const ProfilePage: React.FC = () => {
 
         {/* Interest Taxonomy */}
         <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo space-y-6">
-          <div className="border-b border-white/[0.08] pb-4">
+          <div className="border-b border-slate-200 pb-4">
             <h2 className="text-lg font-bold text-white flex items-center gap-2.5">
-              <Tag className="w-5 h-5 text-[#C7F36B]" />
+              <Tag className="w-5 h-5 text-indigo-600" />
               Interest Taxonomy & Feed Personalization
             </h2>
             <p className="text-xs text-slate-300 mt-1">
@@ -94,7 +94,7 @@ export const ProfilePage: React.FC = () => {
                   className={`px-4 py-2 min-h-[38px] rounded-xl text-xs font-semibold transition border cursor-pointer ${
                     active
                       ? 'bg-[#4F46E5] text-white border-indigo-400/50 shadow-md font-bold'
-                      : 'bg-black/40 hover:bg-black/60 text-slate-400 hover:text-white border-white/10'
+                      : 'bg-slate-100 hover:bg-black/60 text-slate-400 hover:text-indigo-600 border-slate-200'
                   }`}
                 >
                   {interest} {active && '✓'}
@@ -103,7 +103,7 @@ export const ProfilePage: React.FC = () => {
             })}
           </div>
 
-          <div className="pt-4 flex items-center justify-between border-t border-white/[0.08]">
+          <div className="pt-4 flex items-center justify-between border-t border-slate-200">
             <span className="text-xs text-slate-400 font-mono">
               {selectedInterests.length} categories active
             </span>
@@ -117,8 +117,8 @@ export const ProfilePage: React.FC = () => {
           </div>
 
           {savedSuccess && (
-            <div className="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 text-xs font-semibold flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <div className="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 text-emerald-700 text-xs font-semibold flex items-center gap-2.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-700" />
               Preferences successfully updated!
             </div>
           )}
@@ -127,18 +127,18 @@ export const ProfilePage: React.FC = () => {
         {/* Notification Settings */}
         <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
           <h2 className="text-lg font-bold text-white flex items-center gap-2.5">
-            <Bell className="w-5 h-5 text-cyan-400" />
+            <Bell className="w-5 h-5 text-indigo-600" />
             Alerts & Opt-in Controls
           </h2>
           <div className="space-y-3 text-xs text-slate-400">
-            <label className="flex items-center gap-3.5 p-4 bg-black/40 rounded-2xl border border-white/10 cursor-pointer">
+            <label className="flex items-center gap-3.5 p-4 bg-slate-100 rounded-2xl border border-slate-200 cursor-pointer">
               <input type="checkbox" defaultChecked className="rounded text-indigo-600 focus:ring-indigo-500" />
               <div>
                 <div className="font-semibold text-white">Event Schedule Conflict Warnings</div>
                 <div className="text-[11px] text-slate-400">Notify me when 2 saved events overlap in time</div>
               </div>
             </label>
-            <label className="flex items-center gap-3.5 p-4 bg-black/40 rounded-2xl border border-white/10 cursor-pointer">
+            <label className="flex items-center gap-3.5 p-4 bg-slate-100 rounded-2xl border border-slate-200 cursor-pointer">
               <input type="checkbox" defaultChecked className="rounded text-indigo-600 focus:ring-indigo-500" />
               <div>
                 <div className="font-semibold text-white">Registered Event Material Changes</div>

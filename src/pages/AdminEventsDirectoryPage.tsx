@@ -45,7 +45,7 @@ export const AdminEventsDirectoryPage: React.FC = () => {
           <div className="mt-6 flex justify-center gap-3">
             <Link
               to="/home"
-              className="bg-[#050814]/80 hover:bg-[#0b1020] text-xs font-semibold px-4 py-2.5 rounded-2xl border border-white/10 transition"
+              className="bg-white hover:bg-white text-xs font-semibold px-4 py-2.5 rounded-2xl border border-slate-200 transition"
             >
               Back to Home
             </Link>
@@ -81,7 +81,7 @@ export const AdminEventsDirectoryPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <Link
             to="/admin"
-            className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-white transition font-medium"
+            className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-indigo-600 transition font-medium"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Administrator Dashboard
@@ -99,7 +99,7 @@ export const AdminEventsDirectoryPage: React.FC = () => {
         {/* Header */}
         <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-cyan-300 border border-indigo-500/30 flex items-center justify-center font-bold">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-600 border border-indigo-500/30 flex items-center justify-center font-bold">
               <Layers className="w-6 h-6" />
             </div>
             <div>
@@ -129,7 +129,7 @@ export const AdminEventsDirectoryPage: React.FC = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Title, club, venue..."
-                className="w-full text-xs pl-9 pr-3.5 py-2.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                className="w-full text-xs pl-9 pr-3.5 py-2.5 bg-white border border-slate-200 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
               />
             </div>
           </div>
@@ -143,7 +143,7 @@ export const AdminEventsDirectoryPage: React.FC = () => {
               id="admin-status-select"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as any)}
-              className="w-full text-xs p-2.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+              className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
             >
               <option value="all">All Statuses ({events.length})</option>
               <option value="pending_review">Pending Review</option>
@@ -164,7 +164,7 @@ export const AdminEventsDirectoryPage: React.FC = () => {
               id="admin-org-select"
               value={orgFilter}
               onChange={(e) => setOrgFilter(e.target.value)}
-              className="w-full text-xs p-2.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+              className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
             >
               <option value="all">All Organizations ({organizations.length})</option>
               {organizations.map(org => (
@@ -182,7 +182,7 @@ export const AdminEventsDirectoryPage: React.FC = () => {
               id="admin-venue-select"
               value={venueFilter}
               onChange={(e) => setVenueFilter(e.target.value)}
-              className="w-full text-xs p-2.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+              className="w-full text-xs p-2.5 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
             >
               <option value="all">All Venues ({venues.length})</option>
               {venues.map(v => (
@@ -202,7 +202,7 @@ export const AdminEventsDirectoryPage: React.FC = () => {
                 setVenueFilter('all');
                 setOrgFilter('all');
               }}
-              className="w-full bg-[#050814]/80 hover:bg-[#0b1020] text-slate-300 hover:text-white text-xs font-semibold py-2.5 rounded-2xl border border-white/10 transition cursor-pointer"
+              className="w-full bg-white hover:bg-white text-slate-300 hover:text-indigo-600 text-xs font-semibold py-2.5 rounded-2xl border border-slate-200 transition cursor-pointer"
             >
               Reset Filters
             </button>
@@ -211,10 +211,10 @@ export const AdminEventsDirectoryPage: React.FC = () => {
 
         {/* Event List Table */}
         <div className="glass-card rounded-3xl overflow-hidden glow-indigo">
-          <div className="p-5 border-b border-white/[0.08] flex items-center justify-between text-xs text-slate-400">
+          <div className="p-5 border-b border-slate-200 flex items-center justify-between text-xs text-slate-400">
             <span className="font-semibold text-white flex items-center gap-2">
-              <Filter className="w-3.5 h-3.5 text-cyan-400" />
-              Matching Records: <span className="font-mono text-cyan-300">{filteredEvents.length}</span>
+              <Filter className="w-3.5 h-3.5 text-indigo-600" />
+              Matching Records: <span className="font-mono text-indigo-600">{filteredEvents.length}</span>
             </span>
             <span className="font-mono">Total Campus Registry: {events.length}</span>
           </div>
@@ -232,16 +232,16 @@ export const AdminEventsDirectoryPage: React.FC = () => {
                     <div className="flex flex-wrap items-center gap-2">
                       <span className={`text-[10px] font-mono font-extrabold uppercase px-2.5 py-0.5 rounded-full border ${
                         event.status === 'published'
-                          ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+                          ? 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30'
                           : event.status === 'pending_review'
-                          ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                          ? 'bg-amber-500/20 text-amber-800 border-amber-500/30'
                           : event.status === 'changes_requested'
                           ? 'bg-orange-500/20 text-orange-300 border-orange-500/30'
                           : event.status === 'rejected'
                           ? 'bg-rose-500/20 text-rose-300 border-rose-500/30'
                           : event.status === 'draft'
                           ? 'bg-slate-700/50 text-slate-300 border-slate-600'
-                          : 'bg-[#050814]/80 text-slate-400 border-white/10'
+                          : 'bg-white text-slate-400 border-slate-200'
                       }`}>
                         {event.status.replace('_', ' ')}
                       </span>
@@ -252,17 +252,17 @@ export const AdminEventsDirectoryPage: React.FC = () => {
 
                       <span className="text-white/20">·</span>
 
-                      <span className="text-xs text-cyan-300 font-medium">
+                      <span className="text-xs text-indigo-600 font-medium">
                         {event.category}
                       </span>
 
                       {/* Public Visibility Indicator */}
                       {event.status === 'published' ? (
-                        <span className="text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2.5 py-0.5 rounded-full font-semibold">
+                        <span className="text-[10px] font-mono bg-emerald-500/10 text-emerald-700 border border-emerald-500/30 px-2.5 py-0.5 rounded-full font-semibold">
                           Public Live Feed
                         </span>
                       ) : (
-                        <span className="text-[10px] font-mono bg-slate-800 text-slate-400 border border-white/10 px-2.5 py-0.5 rounded-full font-semibold">
+                        <span className="text-[10px] font-mono bg-slate-800 text-slate-400 border border-slate-200 px-2.5 py-0.5 rounded-full font-semibold">
                           Hidden from Public
                         </span>
                       )}
@@ -286,10 +286,10 @@ export const AdminEventsDirectoryPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-white/[0.08]">
+                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-slate-200">
                     <Link
                       to={`/events/${event.id}`}
-                      className="text-xs bg-[#050814]/80 hover:bg-[#0b1020] text-slate-300 hover:text-white font-semibold px-3.5 py-2 rounded-xl border border-white/10 transition flex items-center gap-1.5"
+                      className="text-xs bg-white hover:bg-white text-slate-300 hover:text-indigo-600 font-semibold px-3.5 py-2 rounded-xl border border-slate-200 transition flex items-center gap-1.5"
                     >
                       <Eye className="w-3.5 h-3.5" />
                       View Details

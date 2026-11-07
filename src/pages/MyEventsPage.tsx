@@ -68,7 +68,7 @@ export const MyEventsPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-mono">
-                <Sparkles className="w-3.5 h-3.5 text-[#C7F36B]" />
+                <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
                 <span>Student Hub</span>
                 <span className="text-slate-500">·</span>
                 <span className="text-slate-300">{currentUser.full_name}</span>
@@ -81,16 +81,16 @@ export const MyEventsPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="flex bg-black/40 p-1.5 rounded-2xl border border-white/10 text-xs font-semibold">
+            <div className="flex bg-slate-100 p-1.5 rounded-2xl border border-slate-200 text-xs font-semibold">
               <button
                 onClick={() => setActiveTab('saved')}
                 className={`px-4 py-2 min-h-[38px] rounded-xl transition flex items-center gap-2 cursor-pointer ${
                   activeTab === 'saved'
                     ? 'bg-[#4F46E5] text-white shadow-md font-bold'
-                    : 'text-slate-400 hover:text-white'
+                    : 'text-slate-400 hover:text-indigo-600'
                 }`}
               >
-                <Bookmark className="w-3.5 h-3.5 text-[#C7F36B]" />
+                <Bookmark className="w-3.5 h-3.5 text-indigo-600" />
                 Saved Bookmarks ({userSaved.length})
               </button>
               <button
@@ -98,10 +98,10 @@ export const MyEventsPage: React.FC = () => {
                 className={`px-4 py-2 min-h-[38px] rounded-xl transition flex items-center gap-2 cursor-pointer ${
                   activeTab === 'registered'
                     ? 'bg-[#4F46E5] text-white shadow-md font-bold'
-                    : 'text-slate-400 hover:text-white'
+                    : 'text-slate-400 hover:text-indigo-600'
                 }`}
               >
-                <Ticket className="w-3.5 h-3.5 text-emerald-400" />
+                <Ticket className="w-3.5 h-3.5 text-emerald-700" />
                 Confirmed Passes ({userRegistered.length})
               </button>
             </div>
@@ -109,8 +109,8 @@ export const MyEventsPage: React.FC = () => {
         </div>
 
         {/* Informational Guidance Notice */}
-        <aside aria-label="Schedule state distinction notice" className="glass-panel p-4.5 rounded-2xl text-xs text-slate-300 flex items-center gap-3 border border-white/10">
-          <Info className="w-4 h-4 text-[#C7F36B] shrink-0" />
+        <aside aria-label="Schedule state distinction notice" className="glass-panel p-4.5 rounded-2xl text-xs text-slate-300 flex items-center gap-3 border border-slate-200">
+          <Info className="w-4 h-4 text-indigo-600 shrink-0" />
           <span>
             <strong className="text-white">Planning Note:</strong> Saving an event bookmarks it to your personal timeline for planning; it does not reserve admission. Use 1-Click Registration on the event page to confirm your pass.
           </span>
@@ -132,7 +132,7 @@ export const MyEventsPage: React.FC = () => {
                       <span className="font-semibold text-white">{event.organization?.name}</span>
                     </div>
 
-                    <h3 className="font-bold text-white text-base hover:text-[#C7F36B] transition">
+                    <h3 className="font-bold text-white text-base hover:text-indigo-600 transition">
                       <Link to={`/events/${event.id}`}>{event.title}</Link>
                     </h3>
 
@@ -141,11 +141,11 @@ export const MyEventsPage: React.FC = () => {
                       <span>·</span>
                       <span>{event.venue?.name}</span>
                       <span>·</span>
-                      <span className="text-[#C7F36B] font-mono font-semibold">{event.cost}</span>
+                      <span className="text-indigo-600 font-mono font-semibold">{event.cost}</span>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-white/[0.08]">
+                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-slate-200">
                     <Button
                       variant="secondary"
                       size="sm"
@@ -155,7 +155,7 @@ export const MyEventsPage: React.FC = () => {
                       }}
                       className="gap-1.5 rounded-xl text-xs"
                     >
-                      <Download className="w-3.5 h-3.5 text-cyan-400" /> .ics
+                      <Download className="w-3.5 h-3.5 text-indigo-600" /> .ics
                     </Button>
                     <Button
                       variant="ghost"
@@ -199,16 +199,16 @@ export const MyEventsPage: React.FC = () => {
                 >
                   <div className="space-y-1.5">
                     <div className="flex items-center gap-2 text-xs">
-                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 border border-emerald-500/30">
                         {reg.status}
                       </span>
                       <span className="text-white/20">·</span>
                       <span className="text-slate-400 font-mono text-[11px]">Pass ID: {reg.id}</span>
                       <span className="text-white/20">·</span>
-                      <span className="text-[#C7F36B] font-semibold">{event.organization?.name}</span>
+                      <span className="text-indigo-600 font-semibold">{event.organization?.name}</span>
                     </div>
 
-                    <h3 className="font-bold text-white text-base hover:text-[#C7F36B] transition">
+                    <h3 className="font-bold text-white text-base hover:text-indigo-600 transition">
                       <Link to={`/events/${event.id}`}>{event.title}</Link>
                     </h3>
 
@@ -219,13 +219,13 @@ export const MyEventsPage: React.FC = () => {
                     </div>
 
                     {reg.notes && (
-                      <div className="mt-2.5 text-xs text-slate-300 bg-black/40 p-3 rounded-2xl border border-white/10">
+                      <div className="mt-2.5 text-xs text-slate-300 bg-slate-100 p-3 rounded-2xl border border-slate-200">
                         <strong className="text-white">Admission Pass Details:</strong> {reg.notes}
                       </div>
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-white/[0.08]">
+                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-slate-200">
                     <Button
                       variant="secondary"
                       size="sm"
@@ -235,7 +235,7 @@ export const MyEventsPage: React.FC = () => {
                       }}
                       className="gap-1.5 rounded-xl text-xs"
                     >
-                      <Download className="w-3.5 h-3.5 text-cyan-400" /> Export
+                      <Download className="w-3.5 h-3.5 text-indigo-600" /> Export
                     </Button>
                     <Link to={`/events/${event.id}`}>
                       <Button variant="primary" size="sm" className="gap-1 rounded-xl text-xs">

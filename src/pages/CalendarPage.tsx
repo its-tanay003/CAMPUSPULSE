@@ -57,7 +57,7 @@ export const CalendarPage: React.FC = () => {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-mono">
-                <Sparkles className="w-3.5 h-3.5 text-[#C7F36B]" />
+                <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
                 <span>Campus Master Schedule</span>
                 <span className="text-slate-500">·</span>
                 <span className="text-slate-300">Asia/Kolkata (IST)</span>
@@ -71,16 +71,16 @@ export const CalendarPage: React.FC = () => {
             </div>
 
             {/* Scope Switcher: My Agenda vs Master Feed */}
-            <div className="flex bg-black/40 p-1.5 rounded-2xl border border-white/10 text-xs font-semibold">
+            <div className="flex bg-slate-100 p-1.5 rounded-2xl border border-slate-200 text-xs font-semibold">
               <button
                 onClick={() => setFilterMode('my_agenda')}
                 className={`px-4 py-2 min-h-[38px] rounded-xl transition flex items-center gap-2 cursor-pointer ${
                   filterMode === 'my_agenda'
                     ? 'bg-[#4F46E5] text-white shadow-md font-bold'
-                    : 'text-slate-400 hover:text-white'
+                    : 'text-slate-400 hover:text-indigo-600'
                 }`}
               >
-                <Bookmark className="w-3.5 h-3.5 text-[#C7F36B]" />
+                <Bookmark className="w-3.5 h-3.5 text-indigo-600" />
                 My Schedule ({userScheduleEvents.length})
               </button>
               <button
@@ -88,25 +88,25 @@ export const CalendarPage: React.FC = () => {
                 className={`px-4 py-2 min-h-[38px] rounded-xl transition flex items-center gap-2 cursor-pointer ${
                   filterMode === 'campus_master'
                     ? 'bg-[#4F46E5] text-white shadow-md font-bold'
-                    : 'text-slate-400 hover:text-white'
+                    : 'text-slate-400 hover:text-indigo-600'
                 }`}
               >
-                <List className="w-3.5 h-3.5 text-[#C7F36B]" />
+                <List className="w-3.5 h-3.5 text-indigo-600" />
                 Master Feed ({events.filter(e => e.status === 'published').length})
               </button>
             </div>
           </div>
 
           {/* Subtoolbar: Layout Mode (Agenda default) + Prev/Next/Today Controls */}
-          <div className="mt-6 pt-5 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-3 text-xs relative z-10">
+          <div className="mt-6 pt-5 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs relative z-10">
             <div className="flex items-center gap-2.5">
               <span className="text-slate-400 font-mono text-[11px]">DISPLAY MODE:</span>
-              <div className="flex bg-black/40 p-1 rounded-xl border border-white/10">
+              <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200">
                 <button
                   onClick={() => setViewType('agenda')}
                   aria-pressed={viewType === 'agenda'}
                   className={`px-3.5 py-1.5 min-h-[36px] rounded-lg font-semibold transition cursor-pointer ${
-                    viewType === 'agenda' ? 'bg-indigo-600/40 text-[#C7F36B] shadow' : 'text-slate-400 hover:text-white'
+                    viewType === 'agenda' ? 'bg-indigo-600/40 text-indigo-600 shadow' : 'text-slate-400 hover:text-indigo-600'
                   }`}
                 >
                   Agenda List (Accessible)
@@ -115,7 +115,7 @@ export const CalendarPage: React.FC = () => {
                   onClick={() => setViewType('week')}
                   aria-pressed={viewType === 'week'}
                   className={`hidden sm:inline-block px-3.5 py-1.5 min-h-[36px] rounded-lg font-semibold transition cursor-pointer ${
-                    viewType === 'week' ? 'bg-indigo-600/40 text-[#C7F36B] shadow' : 'text-slate-400 hover:text-white'
+                    viewType === 'week' ? 'bg-indigo-600/40 text-indigo-600 shadow' : 'text-slate-400 hover:text-indigo-600'
                   }`}
                 >
                   Weekly View
@@ -136,7 +136,7 @@ export const CalendarPage: React.FC = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => setCurrentWeekOffset(0)}
-                className="font-bold text-[#C7F36B] hover:underline"
+                className="font-bold text-indigo-600 hover:underline"
               >
                 Today
               </Button>
@@ -157,13 +157,13 @@ export const CalendarPage: React.FC = () => {
           <aside aria-label="Personal scheduling collision" className="glass-card border-l-4 border-l-amber-500 rounded-3xl p-6 text-amber-100 shadow-xl">
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center shrink-0">
-                <AlertTriangle className="w-5 h-5 text-amber-400" />
+                <AlertTriangle className="w-5 h-5 text-amber-700" />
               </div>
               <div className="space-y-3 flex-1">
                 <div>
-                  <h3 className="font-bold text-base text-amber-300 flex items-center gap-2">
+                  <h3 className="font-bold text-base text-amber-800 flex items-center gap-2">
                     <span>Personal Schedule Conflict Detected</span>
-                    <span className="text-[11px] font-mono bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/30">
+                    <span className="text-[11px] font-mono bg-amber-500/20 text-amber-800 px-2 py-0.5 rounded-full border border-amber-500/30">
                       {personalOverlaps.length} collisions
                     </span>
                   </h3>
@@ -176,13 +176,13 @@ export const CalendarPage: React.FC = () => {
                   {personalOverlaps.map((overlap, idx) => (
                     <div
                       key={idx}
-                      className="bg-black/40 p-4 rounded-2xl border border-amber-500/30 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                      className="bg-slate-100 p-4 rounded-2xl border border-amber-500/30 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                     >
                       <div className="space-y-1.5">
                         <div className="font-bold text-white text-sm">
-                          <span className="text-cyan-300 underline decoration-cyan-500/40">{overlap.eventA.title}</span>
+                          <span className="text-indigo-600 underline decoration-cyan-500/40">{overlap.eventA.title}</span>
                           <span className="text-slate-400 font-normal mx-2.5">overlaps with</span>
-                          <span className="text-amber-300 underline decoration-amber-500/40">{overlap.eventB.title}</span>
+                          <span className="text-amber-800 underline decoration-amber-500/40">{overlap.eventB.title}</span>
                         </div>
                         <div className="text-[11px] font-mono text-slate-400">
                           A: {new Date(overlap.eventA.start_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} ({overlap.eventA.venue?.name}) | 
@@ -191,7 +191,7 @@ export const CalendarPage: React.FC = () => {
                       </div>
 
                       <div className="flex items-center gap-2 shrink-0">
-                        <span className="text-[11px] font-mono bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-lg border border-amber-500/30">
+                        <span className="text-[11px] font-mono bg-amber-500/20 text-amber-800 px-2.5 py-1 rounded-lg border border-amber-500/30">
                           Collision: {overlap.overlapTime}
                         </span>
                         <Link to={`/events/${overlap.eventA.id}`}>
@@ -225,14 +225,14 @@ export const CalendarPage: React.FC = () => {
                 >
                   <div className="flex items-start gap-4">
                     {/* Date Block */}
-                    <div className="w-16 h-16 rounded-2xl bg-black/40 border border-white/10 flex flex-col items-center justify-center text-center shrink-0 shadow-inner">
+                    <div className="w-16 h-16 rounded-2xl bg-slate-100 border border-slate-200 flex flex-col items-center justify-center text-center shrink-0 shadow-inner">
                       <span className="text-[10px] font-mono font-bold text-slate-400 uppercase">
                         {startDate.toLocaleDateString('en-IN', { month: 'short' })}
                       </span>
                       <span className="text-xl font-mono font-extrabold text-white leading-none">
                         {startDate.getDate()}
                       </span>
-                      <span className="text-[10px] font-mono text-[#C7F36B] font-bold">
+                      <span className="text-[10px] font-mono text-indigo-600 font-bold">
                         {startDate.toLocaleDateString('en-IN', { weekday: 'short' })}
                       </span>
                     </div>
@@ -244,7 +244,7 @@ export const CalendarPage: React.FC = () => {
                         <span>•</span>
                         <span>{event.organization?.name}</span>
                         {isRegistered && (
-                          <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                          <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 border border-emerald-500/30">
                             Confirmed Pass
                           </span>
                         )}
@@ -255,13 +255,13 @@ export const CalendarPage: React.FC = () => {
                         )}
                       </div>
 
-                      <h3 className="font-bold text-white hover:text-[#C7F36B] text-base leading-snug transition">
+                      <h3 className="font-bold text-white hover:text-indigo-600 text-base leading-snug transition">
                         <Link to={`/events/${event.id}`}>{event.title}</Link>
                       </h3>
 
                       <div className="mt-2.5 flex flex-wrap items-center gap-4 text-xs text-slate-400">
                         <span className="flex items-center gap-1.5 font-medium font-mono text-white">
-                          <Clock className="w-3.5 h-3.5 text-[#C7F36B]" /> {timeStr}
+                          <Clock className="w-3.5 h-3.5 text-indigo-600" /> {timeStr}
                         </span>
                         <span className="flex items-center gap-1.5">
                           <MapPin className="w-3.5 h-3.5 text-indigo-400" /> {event.venue?.name}
@@ -271,7 +271,7 @@ export const CalendarPage: React.FC = () => {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-white/[0.08]">
+                  <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-slate-200">
                     <Button
                       variant="secondary"
                       size="sm"
@@ -281,7 +281,7 @@ export const CalendarPage: React.FC = () => {
                       }}
                       className="gap-1.5 rounded-xl text-xs"
                     >
-                      <Download className="w-3.5 h-3.5 text-cyan-400" /> Export .ics
+                      <Download className="w-3.5 h-3.5 text-indigo-600" /> Export .ics
                     </Button>
                     <Link to={`/events/${event.id}`}>
                       <Button variant="primary" size="sm" className="gap-1 rounded-xl text-xs">

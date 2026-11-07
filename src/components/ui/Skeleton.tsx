@@ -9,7 +9,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   className = '', 
   variant = 'rectangular' 
 }) => {
-  const baseClasses = 'animate-pulse bg-white/[0.06] border border-white/5';
+  const baseClasses = 'animate-pulse bg-slate-100 border border-slate-100';
   
   const variantClasses = {
     text: 'h-4 rounded-md',
@@ -27,7 +27,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
 
 export const EventCardSkeleton: React.FC = () => {
   return (
-    <div className="glass-card rounded-3xl p-4 border border-white/10 space-y-4">
+    <div className="glass-card rounded-3xl p-4 border border-slate-200 space-y-4">
       <Skeleton className="w-full h-48 rounded-2xl" />
       <div className="space-y-2">
         <div className="flex items-center justify-between">
@@ -37,7 +37,7 @@ export const EventCardSkeleton: React.FC = () => {
         <Skeleton className="w-3/4 h-6 rounded-lg" />
         <Skeleton className="w-full h-4 rounded-md" />
       </div>
-      <div className="pt-3 border-t border-white/5 flex items-center justify-between">
+      <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
         <Skeleton className="w-24 h-4" />
         <Skeleton className="w-20 h-8 rounded-xl" />
       </div>

@@ -65,7 +65,7 @@ export const AdminDashboardPage: React.FC = () => {
           <div className="mt-6 flex justify-center gap-3">
             <Link
               to="/home"
-              className="bg-[#050814]/80 hover:bg-[#0b1020] text-xs font-semibold px-4 py-2.5 rounded-2xl border border-white/10 transition"
+              className="bg-white hover:bg-white text-xs font-semibold px-4 py-2.5 rounded-2xl border border-slate-200 transition"
             >
               Back to Home
             </Link>
@@ -82,7 +82,7 @@ export const AdminDashboardPage: React.FC = () => {
         <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="bg-indigo-500/20 text-cyan-300 border border-indigo-500/30 text-[10px] font-mono font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+              <span className="bg-indigo-500/20 text-indigo-600 border border-indigo-500/30 text-[10px] font-mono font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
                 Institutional Administration
               </span>
               <span className="text-xs text-slate-400 font-mono">
@@ -107,23 +107,23 @@ export const AdminDashboardPage: React.FC = () => {
             </Link>
             <Link
               to="/admin/events"
-              className="bg-[#050814]/80 hover:bg-[#0b1020] text-white border border-white/10 font-semibold text-xs px-4 py-2.5 rounded-2xl transition flex items-center gap-2 shadow"
+              className="bg-white hover:bg-white text-white border border-slate-200 font-semibold text-xs px-4 py-2.5 rounded-2xl transition flex items-center gap-2 shadow"
             >
-              <Layers className="w-4 h-4 text-cyan-400" />
+              <Layers className="w-4 h-4 text-indigo-600" />
               All Campus Events
             </Link>
             <Link
               to="/admin/venues"
-              className="bg-[#050814]/80 hover:bg-[#0b1020] text-white border border-white/10 font-semibold text-xs px-4 py-2.5 rounded-2xl transition flex items-center gap-2 shadow"
+              className="bg-white hover:bg-white text-white border border-slate-200 font-semibold text-xs px-4 py-2.5 rounded-2xl transition flex items-center gap-2 shadow"
             >
-              <Building2 className="w-4 h-4 text-emerald-400" />
+              <Building2 className="w-4 h-4 text-emerald-700" />
               Venues Registry
             </Link>
             <Link
               to="/admin/organizers"
-              className="bg-[#050814]/80 hover:bg-[#0b1020] text-white border border-white/10 font-semibold text-xs px-4 py-2.5 rounded-2xl transition flex items-center gap-2 shadow"
+              className="bg-white hover:bg-white text-white border border-slate-200 font-semibold text-xs px-4 py-2.5 rounded-2xl transition flex items-center gap-2 shadow"
             >
-              <Users className="w-4 h-4 text-amber-400" />
+              <Users className="w-4 h-4 text-amber-700" />
               Organizer Verification
             </Link>
           </div>
@@ -137,12 +137,12 @@ export const AdminDashboardPage: React.FC = () => {
             className="p-5 rounded-3xl border glass-card border-amber-500/40 hover:border-amber-500 transition flex flex-col justify-between group cursor-pointer"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono font-semibold text-amber-400">Pending Approvals</span>
-              <Clock className="w-4 h-4 text-amber-400" />
+              <span className="text-xs font-mono font-semibold text-amber-700">Pending Approvals</span>
+              <Clock className="w-4 h-4 text-amber-700" />
             </div>
             <div>
-              <div className="text-3xl font-mono font-black text-amber-300">{pendingEvents.length}</div>
-              <div className="text-[10px] text-slate-400 group-hover:text-cyan-300 transition mt-1">Review queue →</div>
+              <div className="text-3xl font-mono font-black text-amber-800">{pendingEvents.length}</div>
+              <div className="text-[10px] text-slate-400 group-hover:text-indigo-600 transition mt-1">Review queue →</div>
             </div>
           </Link>
 
@@ -152,12 +152,12 @@ export const AdminDashboardPage: React.FC = () => {
             className="p-5 rounded-3xl border glass-card border-emerald-500/40 hover:border-emerald-500 transition flex flex-col justify-between group cursor-pointer"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono font-semibold text-emerald-400">Published Events</span>
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <span className="text-xs font-mono font-semibold text-emerald-700">Published Events</span>
+              <CheckCircle2 className="w-4 h-4 text-emerald-700" />
             </div>
             <div>
-              <div className="text-3xl font-mono font-black text-emerald-300">{publishedEvents.length}</div>
-              <div className="text-[10px] text-slate-400 group-hover:text-cyan-300 transition mt-1">Active on feeds →</div>
+              <div className="text-3xl font-mono font-black text-emerald-700">{publishedEvents.length}</div>
+              <div className="text-[10px] text-slate-400 group-hover:text-indigo-600 transition mt-1">Active on feeds →</div>
             </div>
           </Link>
 
@@ -172,14 +172,14 @@ export const AdminDashboardPage: React.FC = () => {
             </div>
             <div>
               <div className="text-3xl font-mono font-black text-orange-300">{changesRequestedEvents.length}</div>
-              <div className="text-[10px] text-slate-400 group-hover:text-cyan-300 transition mt-1">Awaiting organizer edit →</div>
+              <div className="text-[10px] text-slate-400 group-hover:text-indigo-600 transition mt-1">Awaiting organizer edit →</div>
             </div>
           </Link>
 
           {/* Cancelled Events */}
           <Link
             to="/admin/events?status=cancelled"
-            className="p-5 rounded-3xl border glass-card border-white/10 hover:border-white/20 transition flex flex-col justify-between group cursor-pointer"
+            className="p-5 rounded-3xl border glass-card border-slate-200 hover:border-slate-300 transition flex flex-col justify-between group cursor-pointer"
           >
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-mono font-semibold text-slate-400">Cancelled Events</span>
@@ -187,7 +187,7 @@ export const AdminDashboardPage: React.FC = () => {
             </div>
             <div>
               <div className="text-3xl font-mono font-black text-slate-300">{cancelledEvents.length}</div>
-              <div className="text-[10px] text-slate-400 group-hover:text-cyan-300 transition mt-1">Delisted records →</div>
+              <div className="text-[10px] text-slate-400 group-hover:text-indigo-600 transition mt-1">Delisted records →</div>
             </div>
           </Link>
 
@@ -197,12 +197,12 @@ export const AdminDashboardPage: React.FC = () => {
             className="p-5 rounded-3xl border glass-card border-amber-500/40 hover:border-amber-500 col-span-2 lg:col-span-1 transition flex flex-col justify-between group cursor-pointer"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono font-semibold text-amber-400">Conflict Radar</span>
-              <AlertTriangle className="w-4 h-4 text-amber-400" />
+              <span className="text-xs font-mono font-semibold text-amber-700">Conflict Radar</span>
+              <AlertTriangle className="w-4 h-4 text-amber-700" />
             </div>
             <div>
-              <div className="text-3xl font-mono font-black text-amber-300">{unresolvedConflictCount}</div>
-              <div className="text-[10px] text-slate-400 group-hover:text-cyan-300 transition mt-1">Venue collisions →</div>
+              <div className="text-3xl font-mono font-black text-amber-800">{unresolvedConflictCount}</div>
+              <div className="text-[10px] text-slate-400 group-hover:text-indigo-600 transition mt-1">Venue collisions →</div>
             </div>
           </Link>
         </div>
@@ -211,27 +211,27 @@ export const AdminDashboardPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Quick Approval Queue Preview */}
           <div className="glass-card rounded-3xl p-6 sm:p-7 glow-indigo space-y-4">
-            <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
               <div className="flex items-center gap-2.5">
-                <Clock className="w-4 h-4 text-cyan-400" />
+                <Clock className="w-4 h-4 text-indigo-600" />
                 <h2 className="font-bold text-white text-base">Urgent Clearance Submissions</h2>
               </div>
-              <Link to="/admin/approvals" className="text-xs text-indigo-400 hover:text-cyan-300 font-semibold underline">
+              <Link to="/admin/approvals" className="text-xs text-indigo-400 hover:text-indigo-600 font-semibold underline">
                 Open Queue →
               </Link>
             </div>
 
             {pendingEvents.length === 0 ? (
               <div className="py-8 text-center text-slate-400 text-xs">
-                <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto mb-2" />
+                <CheckCircle2 className="w-8 h-8 text-emerald-700 mx-auto mb-2" />
                 No submissions awaiting administrative decision.
               </div>
             ) : (
               <div className="space-y-3">
                 {pendingEvents.slice(0, 3).map(e => (
-                  <div key={e.id} className="p-4 bg-[#050814]/80 rounded-2xl border border-white/10 flex items-center justify-between gap-3">
+                  <div key={e.id} className="p-4 bg-white rounded-2xl border border-slate-200 flex items-center justify-between gap-3">
                     <div className="min-w-0 space-y-1">
-                      <div className="text-[11px] text-cyan-400 font-semibold">{e.organization?.name}</div>
+                      <div className="text-[11px] text-indigo-600 font-semibold">{e.organization?.name}</div>
                       <h4 className="font-bold text-white text-xs truncate">{e.title}</h4>
                       <div className="text-[10px] text-slate-400 font-mono">
                         {e.venue?.name} · {new Date(e.start_time).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' })}
@@ -251,9 +251,9 @@ export const AdminDashboardPage: React.FC = () => {
 
           {/* Recent Audit Log Trail */}
           <div className="glass-card rounded-3xl p-6 sm:p-7 glow-indigo space-y-4">
-            <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
               <div className="flex items-center gap-2.5">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <ShieldCheck className="w-4 h-4 text-emerald-700" />
                 <h2 className="font-bold text-white text-base">Recent Administrative Audit Decisions</h2>
               </div>
               <span className="text-xs text-slate-400 font-mono">{approvals.length} total</span>
@@ -261,13 +261,13 @@ export const AdminDashboardPage: React.FC = () => {
 
             <div className="space-y-3 max-h-[260px] overflow-y-auto pr-1">
               {approvals.slice(0, 5).map(app => (
-                <div key={app.id} className="p-3.5 bg-[#050814]/80 rounded-2xl border border-white/10 text-xs space-y-1.5">
+                <div key={app.id} className="p-3.5 bg-white rounded-2xl border border-slate-200 text-xs space-y-1.5">
                   <div className="flex items-center justify-between">
                     <span className={`text-[10px] font-mono font-extrabold uppercase px-2 py-0.5 rounded-full border ${
                       app.decision === 'approved' 
-                        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' 
+                        ? 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30' 
                         : app.decision === 'changes_requested'
-                        ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                        ? 'bg-amber-500/20 text-amber-800 border-amber-500/30'
                         : 'bg-rose-500/20 text-rose-300 border-rose-500/30'
                     }`}>
                       {app.decision.replace('_', ' ')}

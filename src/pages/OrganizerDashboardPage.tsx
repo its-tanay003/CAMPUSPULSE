@@ -78,7 +78,7 @@ export const OrganizerDashboardPage: React.FC = () => {
         <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
           <div className="relative z-10">
             <div className="flex flex-wrap items-center gap-2 mb-2">
-              <span className="bg-[#C7F36B]/20 text-[#C7F36B] border border-[#C7F36B]/40 text-[10px] font-mono font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+              <span className="bg-indigo-50 text-indigo-600 border border-indigo-200 text-[10px] font-mono font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
                 Authorized Organizer Studio
               </span>
               <span className="text-xs text-slate-400 font-mono">
@@ -96,9 +96,9 @@ export const OrganizerDashboardPage: React.FC = () => {
           <div className="flex flex-wrap items-center gap-3 shrink-0 relative z-10">
             <Link
               to="/organizer/clashes"
-              className="bg-black/40 hover:bg-black/60 text-slate-200 border border-white/15 font-semibold text-xs px-4 py-2.5 rounded-2xl transition flex items-center gap-2 shadow"
+              className="bg-slate-100 hover:bg-black/60 text-slate-200 border border-slate-200 font-semibold text-xs px-4 py-2.5 rounded-2xl transition flex items-center gap-2 shadow"
             >
-              <AlertTriangle className="w-4 h-4 text-amber-400" />
+              <AlertTriangle className="w-4 h-4 text-amber-700" />
               Conflict Radar ({unresolvedConflictCount})
             </Link>
             <Link
@@ -120,7 +120,7 @@ export const OrganizerDashboardPage: React.FC = () => {
             className={`p-5 rounded-3xl border text-left transition flex flex-col justify-between cursor-pointer ${
               statusFilter === 'draft'
                 ? 'glass-card border-indigo-500 ring-2 ring-indigo-500/40 glow-indigo'
-                : 'glass-card border-white/10 hover:border-white/20'
+                : 'glass-card border-slate-200 hover:border-slate-300'
             }`}
           >
             <div className="flex items-center justify-between mb-3">
@@ -140,15 +140,15 @@ export const OrganizerDashboardPage: React.FC = () => {
             className={`p-5 rounded-3xl border text-left transition flex flex-col justify-between cursor-pointer ${
               statusFilter === 'pending_review'
                 ? 'glass-card border-amber-500 ring-2 ring-amber-500/40'
-                : 'glass-card border-white/10 hover:border-white/20'
+                : 'glass-card border-slate-200 hover:border-slate-300'
             }`}
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono font-semibold text-amber-400">Pending Review</span>
-              <Clock className="w-4 h-4 text-amber-400" />
+              <span className="text-xs font-mono font-semibold text-amber-700">Pending Review</span>
+              <Clock className="w-4 h-4 text-amber-700" />
             </div>
             <div>
-              <div className="text-3xl font-mono font-black text-amber-300">{pendingCount}</div>
+              <div className="text-3xl font-mono font-black text-amber-800">{pendingCount}</div>
               <div className="text-[10px] text-slate-400 mt-0.5">Awaiting Admin DSW check</div>
             </div>
           </button>
@@ -160,15 +160,15 @@ export const OrganizerDashboardPage: React.FC = () => {
             className={`p-5 rounded-3xl border text-left transition flex flex-col justify-between cursor-pointer ${
               statusFilter === 'published'
                 ? 'glass-card border-emerald-500 ring-2 ring-emerald-500/40'
-                : 'glass-card border-white/10 hover:border-white/20'
+                : 'glass-card border-slate-200 hover:border-slate-300'
             }`}
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono font-semibold text-[#C7F36B]">Published Live</span>
-              <CheckCircle2 className="w-4 h-4 text-[#C7F36B]" />
+              <span className="text-xs font-mono font-semibold text-indigo-600">Published Live</span>
+              <CheckCircle2 className="w-4 h-4 text-indigo-600" />
             </div>
             <div>
-              <div className="text-3xl font-mono font-black text-[#C7F36B]">{publishedCount}</div>
+              <div className="text-3xl font-mono font-black text-indigo-600">{publishedCount}</div>
               <div className="text-[10px] text-slate-400 mt-0.5">Discoverable to campus</div>
             </div>
           </button>
@@ -180,7 +180,7 @@ export const OrganizerDashboardPage: React.FC = () => {
             className={`p-5 rounded-3xl border text-left transition flex flex-col justify-between cursor-pointer ${
               statusFilter === 'changes_requested'
                 ? 'glass-card border-rose-500 ring-2 ring-rose-500/40'
-                : 'glass-card border-white/10 hover:border-white/20'
+                : 'glass-card border-slate-200 hover:border-slate-300'
             }`}
           >
             <div className="flex items-center justify-between mb-3">
@@ -194,13 +194,13 @@ export const OrganizerDashboardPage: React.FC = () => {
           </button>
 
           {/* Conflict Warnings */}
-          <div className="p-5 rounded-3xl border glass-card border-white/10 col-span-2 lg:col-span-1 flex flex-col justify-between">
+          <div className="p-5 rounded-3xl border glass-card border-slate-200 col-span-2 lg:col-span-1 flex flex-col justify-between">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono font-semibold text-cyan-400">Conflict Alerts</span>
-              <AlertTriangle className="w-4 h-4 text-amber-400" />
+              <span className="text-xs font-mono font-semibold text-indigo-600">Conflict Alerts</span>
+              <AlertTriangle className="w-4 h-4 text-amber-700" />
             </div>
             <div>
-              <div className="text-3xl font-mono font-black text-amber-300">{unresolvedConflictCount}</div>
+              <div className="text-3xl font-mono font-black text-amber-800">{unresolvedConflictCount}</div>
               <div className="text-[10px] text-slate-400 mt-0.5">Timing/venue overlap warnings</div>
             </div>
           </div>
@@ -211,7 +211,7 @@ export const OrganizerDashboardPage: React.FC = () => {
           <div className="glass-card border-l-4 border-l-amber-500 rounded-3xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center shrink-0">
-                <AlertTriangle className="w-5 h-5 text-amber-400" />
+                <AlertTriangle className="w-5 h-5 text-amber-700" />
               </div>
               <div>
                 <h3 className="font-bold text-amber-200 text-sm">
@@ -224,7 +224,7 @@ export const OrganizerDashboardPage: React.FC = () => {
             </div>
             <Link
               to="/organizer/clashes"
-              className="bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-bold px-4 py-2.5 rounded-2xl transition text-center shrink-0"
+              className="bg-amber-500/20 hover:bg-amber-500/30 text-amber-800 border border-amber-500/40 text-xs font-bold px-4 py-2.5 rounded-2xl transition text-center shrink-0"
             >
               Open Conflict Radar →
             </Link>
@@ -235,14 +235,14 @@ export const OrganizerDashboardPage: React.FC = () => {
         <div className="glass-card rounded-3xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
             <span className="text-xs font-semibold text-slate-400 flex items-center gap-1.5 mr-1 font-mono">
-              <Filter className="w-3.5 h-3.5 text-[#C7F36B]" /> Filters:
+              <Filter className="w-3.5 h-3.5 text-indigo-600" /> Filters:
             </span>
             
             <select
               aria-label="Filter events by status"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as any)}
-              className="text-xs bg-black/40 border border-white/15 rounded-xl px-3.5 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#C7F36B] cursor-pointer"
+              className="text-xs bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#C7F36B] cursor-pointer"
             >
               <option value="all">All Statuses ({myEvents.length})</option>
               <option value="draft">Drafts ({draftCount})</option>
@@ -257,7 +257,7 @@ export const OrganizerDashboardPage: React.FC = () => {
                 aria-label="Filter events by club organization"
                 value={selectedOrgFilter}
                 onChange={(e) => setSelectedOrgFilter(e.target.value)}
-                className="text-xs bg-black/40 border border-white/15 rounded-xl px-3.5 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#C7F36B] cursor-pointer"
+                className="text-xs bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#C7F36B] cursor-pointer"
               >
                 <option value="all">All My Clubs ({userOrgs.length})</option>
                 {userOrgs.map(org => (
@@ -268,20 +268,20 @@ export const OrganizerDashboardPage: React.FC = () => {
           </div>
 
           <div className="text-xs text-slate-400 font-mono self-end sm:self-auto">
-            Showing <strong className="text-[#C7F36B]">{filteredEvents.length}</strong> of {myEvents.length} events
+            Showing <strong className="text-indigo-600">{filteredEvents.length}</strong> of {myEvents.length} events
           </div>
         </div>
 
         {/* Event Lifecycle Catalogue */}
         <div className="glass-card rounded-3xl overflow-hidden glow-indigo">
-          <div className="p-6 border-b border-white/[0.08] flex items-center justify-between">
+          <div className="p-6 border-b border-slate-200 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <Building2 className="w-4 h-4 text-indigo-400" />
               <h2 className="font-bold text-white text-base">Organized Events Pipeline</h2>
             </div>
             <Link
               to="/organizer/events"
-              className="text-xs text-[#C7F36B] hover:underline font-mono font-semibold"
+              className="text-xs text-indigo-600 hover:underline font-mono font-semibold"
             >
               Full Catalogue View →
             </Link>
@@ -329,14 +329,14 @@ export const OrganizerDashboardPage: React.FC = () => {
                         {/* Status Badge */}
                         <span className={`text-[10px] font-mono font-extrabold uppercase px-2.5 py-0.5 rounded-full border ${
                           event.status === 'published'
-                            ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+                            ? 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30'
                             : event.status === 'pending_review'
-                            ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                            ? 'bg-amber-500/20 text-amber-800 border-amber-500/30'
                             : event.status === 'changes_requested'
                             ? 'bg-rose-500/20 text-rose-300 border-rose-500/30'
                             : event.status === 'draft'
                             ? 'bg-slate-700/50 text-slate-300 border-slate-600'
-                            : 'bg-black/40 text-slate-400 border-white/10'
+                            : 'bg-slate-100 text-slate-400 border-slate-200'
                         }`}>
                           {event.status.replace('_', ' ')}
                         </span>
@@ -355,14 +355,14 @@ export const OrganizerDashboardPage: React.FC = () => {
 
                         {/* Privacy Pill for Drafts */}
                         {event.status === 'draft' && (
-                          <span className="text-[10px] font-mono bg-slate-800 text-slate-400 px-2.5 py-0.5 rounded-full border border-white/10">
+                          <span className="text-[10px] font-mono bg-slate-800 text-slate-400 px-2.5 py-0.5 rounded-full border border-slate-200">
                             Private to Club
                           </span>
                         )}
 
                         {/* Conflict Warning Indicator */}
                         {itemClashes.length > 0 && (
-                          <span className="text-[10px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-full flex items-center gap-1 font-semibold">
+                          <span className="text-[10px] font-mono bg-amber-500/10 text-amber-700 border border-amber-500/30 px-2.5 py-0.5 rounded-full flex items-center gap-1 font-semibold">
                             <AlertTriangle className="w-3 h-3" />
                             {itemClashes.length} Conflict Warning{itemClashes.length > 1 ? 's' : ''}
                           </span>
@@ -370,7 +370,7 @@ export const OrganizerDashboardPage: React.FC = () => {
                       </div>
 
                       <h3 className="font-bold text-white text-base truncate">
-                        <Link to={`/events/${event.id}`} className="hover:text-[#C7F36B] transition">
+                        <Link to={`/events/${event.id}`} className="hover:text-indigo-600 transition">
                           {event.title}
                         </Link>
                       </h3>
@@ -390,12 +390,12 @@ export const OrganizerDashboardPage: React.FC = () => {
                     </div>
 
                     {/* Action Controls */}
-                    <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-white/[0.08]">
+                    <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-slate-200">
                       {/* Lifecycle Timeline Modal Toggle */}
                       <button
                         type="button"
                         onClick={() => setSelectedTimelineEvent(event)}
-                        className="text-xs bg-black/40 hover:bg-black/60 text-[#C7F36B] hover:text-white font-semibold px-3.5 py-2 rounded-xl border border-white/10 transition flex items-center gap-1.5 cursor-pointer"
+                        className="text-xs bg-slate-100 hover:bg-black/60 text-indigo-600 hover:text-indigo-600 font-semibold px-3.5 py-2 rounded-xl border border-slate-200 transition flex items-center gap-1.5 cursor-pointer"
                         title="View Submission Timeline & History"
                       >
                         <Clock className="w-3.5 h-3.5" />
@@ -405,7 +405,7 @@ export const OrganizerDashboardPage: React.FC = () => {
                       {/* Public Preview */}
                       <Link
                         to={`/events/${event.id}`}
-                        className="text-xs bg-black/40 hover:bg-black/60 text-slate-300 hover:text-white font-semibold px-3.5 py-2 rounded-xl border border-white/10 transition flex items-center gap-1.5"
+                        className="text-xs bg-slate-100 hover:bg-black/60 text-slate-300 hover:text-indigo-600 font-semibold px-3.5 py-2 rounded-xl border border-slate-200 transition flex items-center gap-1.5"
                         title="Preview Public Page"
                       >
                         <Eye className="w-3.5 h-3.5" />
@@ -416,7 +416,7 @@ export const OrganizerDashboardPage: React.FC = () => {
                       {isEditable ? (
                         <Link
                           to={`/organizer/edit/${event.id}`}
-                          className="text-xs bg-indigo-600/30 hover:bg-indigo-600/50 text-[#C7F36B] border border-indigo-500/40 font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5"
+                          className="text-xs bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-600 border border-indigo-500/40 font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5"
                           title="Edit Event Details"
                         >
                           <Edit3 className="w-3.5 h-3.5" />
@@ -424,7 +424,7 @@ export const OrganizerDashboardPage: React.FC = () => {
                         </Link>
                       ) : (
                         <span 
-                          className="text-xs bg-slate-800/60 text-slate-500 px-3.5 py-2 rounded-xl border border-white/5 cursor-not-allowed flex items-center gap-1.5 font-mono"
+                          className="text-xs bg-slate-800/60 text-slate-500 px-3.5 py-2 rounded-xl border border-slate-100 cursor-not-allowed flex items-center gap-1.5 font-mono"
                           title="Locked while live or without club edit rights"
                         >
                           <ShieldAlert className="w-3.5 h-3.5" />
@@ -459,7 +459,7 @@ export const OrganizerDashboardPage: React.FC = () => {
       {selectedTimelineEvent && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
           <div className="glass-card rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-7 glow-indigo relative">
-            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-5">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-200 mb-5">
               <div>
                 <span className="text-xs font-mono font-semibold text-indigo-400">
                   {selectedTimelineEvent.organization?.name || 'Club Organization'}
@@ -472,7 +472,7 @@ export const OrganizerDashboardPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setSelectedTimelineEvent(null)}
-                className="text-xs bg-black/40 hover:bg-black/60 text-slate-400 hover:text-white px-3.5 py-2 rounded-xl border border-white/10 transition cursor-pointer"
+                className="text-xs bg-slate-100 hover:bg-black/60 text-slate-400 hover:text-indigo-600 px-3.5 py-2 rounded-xl border border-slate-200 transition cursor-pointer"
               >
                 Close
               </button>

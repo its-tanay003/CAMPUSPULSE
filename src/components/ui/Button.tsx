@@ -15,15 +15,15 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-2xl transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C7F36B] disabled:opacity-40 disabled:cursor-not-allowed select-none active:scale-[0.97] cursor-pointer';
+  const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-2xl transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed select-none active:scale-[0.98] cursor-pointer';
 
   const variants = {
-    primary: 'bg-[#4F46E5] hover:bg-[#4338CA] text-white shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 border border-indigo-400/40 hover:-translate-y-0.5',
-    gradient: 'bg-gradient-to-r from-indigo-500 via-purple-600 to-[#C7F36B] hover:opacity-95 text-slate-950 font-black shadow-lg shadow-indigo-600/25 border border-white/20 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(199,243,107,0.4)]',
-    secondary: 'bg-[#11182B]/90 hover:bg-[#18223C] text-[#F8FAFC] border border-white/10 hover:border-white/25 shadow-sm backdrop-blur-md hover:-translate-y-0.5',
-    outline: 'bg-transparent hover:bg-white/[0.04] text-[#C7F36B] border border-[#C7F36B]/40 hover:border-[#C7F36B] hover:shadow-sm hover:shadow-[#C7F36B]/25 hover:-translate-y-0.5',
-    danger: 'bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white shadow-md shadow-rose-900/40 border border-rose-500/30 hover:-translate-y-0.5',
-    ghost: 'bg-transparent hover:bg-white/[0.08] text-slate-400 hover:text-white'
+    primary: 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm hover:shadow-md border border-indigo-600 hover:-translate-y-0.5',
+    gradient: 'bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold shadow-sm hover:shadow-md border border-indigo-600 hover:-translate-y-0.5',
+    secondary: 'bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 shadow-sm hover:border-slate-300 hover:-translate-y-0.5',
+    outline: 'bg-transparent hover:bg-indigo-50 text-indigo-600 border border-indigo-300 hover:border-indigo-600 hover:-translate-y-0.5',
+    danger: 'bg-rose-600 hover:bg-rose-700 text-white shadow-sm border border-rose-600 hover:-translate-y-0.5',
+    ghost: 'bg-transparent hover:bg-slate-100 text-slate-600 hover:text-slate-900'
   };
 
   const sizes = {

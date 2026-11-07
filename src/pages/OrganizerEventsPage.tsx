@@ -50,7 +50,7 @@ export const OrganizerEventsPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <Link
             to="/organizer"
-            className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-white transition font-medium"
+            className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-indigo-600 transition font-medium"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Organizer Workspace
@@ -95,7 +95,7 @@ export const OrganizerEventsPage: React.FC = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search title, venue, category..."
-              className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+              className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             />
           </div>
 
@@ -107,7 +107,7 @@ export const OrganizerEventsPage: React.FC = () => {
               id="filter-org-status"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as any)}
-              className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+              className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
             >
               <option value="all">All Statuses ({myEvents.length})</option>
               <option value="draft">Drafts Only</option>
@@ -126,7 +126,7 @@ export const OrganizerEventsPage: React.FC = () => {
               id="filter-org-club"
               value={orgFilter}
               onChange={(e) => setOrgFilter(e.target.value)}
-              className="w-full text-xs p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+              className="w-full text-xs p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
             >
               <option value="all">All Clubs ({userOrgs.length})</option>
               {userOrgs.map(org => (
@@ -138,10 +138,10 @@ export const OrganizerEventsPage: React.FC = () => {
 
         {/* Listing */}
         <div className="glass-card rounded-3xl overflow-hidden glow-indigo">
-          <div className="p-5 border-b border-white/[0.08] flex items-center justify-between text-xs text-slate-400">
+          <div className="p-5 border-b border-slate-200 flex items-center justify-between text-xs text-slate-400">
             <span className="flex items-center gap-2 font-semibold text-white">
-              <Filter className="w-3.5 h-3.5 text-cyan-400" />
-              Event Results: <span className="font-mono text-cyan-300">{filteredEvents.length}</span>
+              <Filter className="w-3.5 h-3.5 text-indigo-600" />
+              Event Results: <span className="font-mono text-indigo-600">{filteredEvents.length}</span>
             </span>
             <span className="font-mono">Total Organized: {myEvents.length}</span>
           </div>
@@ -177,14 +177,14 @@ export const OrganizerEventsPage: React.FC = () => {
                       <div className="flex flex-wrap items-center gap-2">
                         <span className={`text-[10px] font-mono font-extrabold uppercase px-2.5 py-0.5 rounded-full border ${
                           event.status === 'published'
-                            ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+                            ? 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30'
                             : event.status === 'pending_review'
-                            ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                            ? 'bg-amber-500/20 text-amber-800 border-amber-500/30'
                             : event.status === 'changes_requested'
                             ? 'bg-rose-500/20 text-rose-300 border-rose-500/30'
                             : event.status === 'draft'
                             ? 'bg-slate-700/50 text-slate-300 border-slate-600'
-                            : 'bg-[#050814]/80 text-slate-400 border-white/10'
+                            : 'bg-white text-slate-400 border-slate-200'
                         }`}>
                           {event.status.replace('_', ' ')}
                         </span>
@@ -195,18 +195,18 @@ export const OrganizerEventsPage: React.FC = () => {
 
                         <span className="text-white/20">·</span>
 
-                        <span className="text-xs text-cyan-300 font-medium">
+                        <span className="text-xs text-indigo-600 font-medium">
                           {event.category}
                         </span>
 
                         {event.status === 'draft' && (
-                          <span className="text-[10px] font-mono bg-slate-800 text-slate-400 px-2.5 py-0.5 rounded-full border border-white/10">
+                          <span className="text-[10px] font-mono bg-slate-800 text-slate-400 px-2.5 py-0.5 rounded-full border border-slate-200">
                             Private Draft
                           </span>
                         )}
 
                         {clashes.length > 0 && (
-                          <span className="text-[10px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-full flex items-center gap-1 font-semibold">
+                          <span className="text-[10px] font-mono bg-amber-500/10 text-amber-700 border border-amber-500/30 px-2.5 py-0.5 rounded-full flex items-center gap-1 font-semibold">
                             <AlertTriangle className="w-3 h-3" />
                             {clashes.length} Warning{clashes.length > 1 ? 's' : ''}
                           </span>
@@ -214,7 +214,7 @@ export const OrganizerEventsPage: React.FC = () => {
                       </div>
 
                       <h3 className="font-bold text-white text-base truncate">
-                        <Link to={`/events/${event.id}`} className="hover:text-cyan-300 transition">
+                        <Link to={`/events/${event.id}`} className="hover:text-indigo-600 transition">
                           {event.title}
                         </Link>
                       </h3>
@@ -233,10 +233,10 @@ export const OrganizerEventsPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-white/[0.08]">
+                    <div className="flex items-center gap-2 shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-slate-200">
                       <Link
                         to={`/events/${event.id}`}
-                        className="text-xs bg-[#050814]/80 hover:bg-[#0b1020] text-slate-300 hover:text-white font-semibold px-3.5 py-2 rounded-xl border border-white/10 transition flex items-center gap-1.5"
+                        className="text-xs bg-white hover:bg-white text-slate-300 hover:text-indigo-600 font-semibold px-3.5 py-2 rounded-xl border border-slate-200 transition flex items-center gap-1.5"
                       >
                         <Eye className="w-3.5 h-3.5" />
                         Preview
@@ -245,7 +245,7 @@ export const OrganizerEventsPage: React.FC = () => {
                       {isEditable && (
                         <Link
                           to={`/organizer/edit/${event.id}`}
-                          className="text-xs bg-indigo-600/30 hover:bg-indigo-600/50 text-cyan-300 border border-indigo-500/40 font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5"
+                          className="text-xs bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-600 border border-indigo-500/40 font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5"
                         >
                           <Edit3 className="w-3.5 h-3.5" />
                           Edit

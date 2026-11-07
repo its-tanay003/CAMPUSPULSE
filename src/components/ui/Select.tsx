@@ -26,7 +26,7 @@ export const Select: React.FC<SelectProps> = ({
   return (
     <div className="w-full space-y-1.5">
       {label && (
-        <label htmlFor={selectId} className="block text-xs font-semibold text-slate-300 tracking-tight">
+        <label htmlFor={selectId} className="block text-xs font-semibold text-slate-700 tracking-tight">
           {label}
         </label>
       )}
@@ -34,25 +34,24 @@ export const Select: React.FC<SelectProps> = ({
         id={selectId}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
-        className={`w-full text-xs sm:text-sm p-3.5 bg-[#0A0F1E]/90 border rounded-2xl text-slate-100 transition-all duration-200 focus:outline-none focus:ring-2 cursor-pointer backdrop-blur-md shadow-inner ${
+        className={`w-full text-xs sm:text-sm p-3.5 bg-white border rounded-2xl text-slate-900 transition-all duration-200 focus:outline-none focus:ring-2 cursor-pointer shadow-sm ${
           error
-            ? 'border-rose-500/80 focus:ring-rose-500/50 bg-rose-950/10'
-            : 'border-white/10 focus:border-indigo-500/80 focus:ring-indigo-500/30 hover:border-white/20'
+            ? 'border-rose-400 focus:ring-rose-200 bg-rose-50/20'
+            : 'border-slate-200 focus:border-indigo-500 focus:ring-indigo-100 hover:border-slate-300'
         } ${className}`}
         {...props}
       >
         {options.map((opt) => (
-          <option key={opt.value} value={opt.value} className="bg-[#0D1326] text-slate-100 py-1">
+          <option key={opt.value} value={opt.value} className="bg-white text-slate-900 py-1">
             {opt.label}
           </option>
         ))}
       </select>
       {error && (
-        <p id={errorId} role="alert" className="text-[11px] text-rose-400 font-medium">
+        <p id={errorId} role="alert" className="text-[11px] text-rose-600 font-medium">
           {error}
         </p>
       )}
     </div>
   );
 };
-

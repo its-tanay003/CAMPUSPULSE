@@ -32,16 +32,16 @@ export const ClashCheckPage: React.FC = () => {
         {/* Header */}
         <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center font-bold">
+            <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-800 border border-amber-500/30 flex items-center justify-center font-bold">
               <AlertTriangle className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-400">Deterministic Engine</span>
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-700">Deterministic Engine</span>
               <h1 className="text-3xl font-extrabold text-white tracking-tight mt-0.5">
                 P17 Conflict & Clash Verification Engine
               </h1>
               <p className="text-xs sm:text-sm text-slate-400 mt-1">
-                Evaluates exact interval collisions (<code className="text-cyan-400 font-mono">A.start &lt; B.end AND B.start &lt; A.end</code>) across authoritative campus venues.
+                Evaluates exact interval collisions (<code className="text-indigo-600 font-mono">A.start &lt; B.end AND B.start &lt; A.end</code>) across authoritative campus venues.
               </p>
             </div>
           </div>
@@ -56,10 +56,10 @@ export const ClashCheckPage: React.FC = () => {
             id="test-event-select"
             value={selectedEventId}
             onChange={(e) => setSelectedEventId(e.target.value)}
-            className="w-full p-3.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+            className="w-full p-3.5 bg-white border border-slate-200 rounded-2xl text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
           >
             {events.map(ev => (
-              <option key={ev.id} value={ev.id} className="bg-[#0b1020] text-white">
+              <option key={ev.id} value={ev.id} className="bg-white text-white">
                 [{ev.status.toUpperCase()}] {ev.title} ({ev.venue?.name})
               </option>
             ))}
@@ -77,7 +77,7 @@ export const ClashCheckPage: React.FC = () => {
           </div>
           <div>
             <span className="text-slate-400 font-mono">Venue:</span>
-            <div className="font-bold text-cyan-400 mt-1">{targetEvent.venue?.name}</div>
+            <div className="font-bold text-indigo-600 mt-1">{targetEvent.venue?.name}</div>
           </div>
           <div>
             <span className="text-slate-400 font-mono">Time Window:</span>
@@ -89,12 +89,12 @@ export const ClashCheckPage: React.FC = () => {
 
         {/* Live Analysis Output */}
         <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-6 glow-indigo">
-          <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-4">
             <h2 className="font-bold text-white text-base flex items-center gap-2.5">
-              <ShieldAlert className="w-5 h-5 text-cyan-400" />
+              <ShieldAlert className="w-5 h-5 text-indigo-600" />
               Automated Audit Findings
             </h2>
-            <span className="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-[#050814]/80 text-cyan-300 border border-white/10">
+            <span className="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-white text-indigo-600 border border-slate-200">
               {conflictResult.conflicts.length} finding{conflictResult.conflicts.length === 1 ? '' : 's'}
             </span>
           </div>
@@ -102,9 +102,9 @@ export const ClashCheckPage: React.FC = () => {
           <ClashWarningBox conflictResult={conflictResult} allowedToProceed={false} />
 
           {/* Mathematical Proof Card */}
-          <div className="bg-[#050814]/80 rounded-2xl p-5 border border-white/10 text-xs text-slate-300 space-y-2">
+          <div className="bg-white rounded-2xl p-5 border border-slate-200 text-xs text-slate-300 space-y-2">
             <div className="font-bold text-white flex items-center gap-2">
-              <Info className="w-4 h-4 text-cyan-400" />
+              <Info className="w-4 h-4 text-indigo-600" />
               Explainable Verification Rule Documentation
             </div>
             <p className="leading-relaxed text-slate-400">

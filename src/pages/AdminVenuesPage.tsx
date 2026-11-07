@@ -44,7 +44,7 @@ export const AdminVenuesPage: React.FC = () => {
           <div className="mt-6 flex justify-center gap-3">
             <Link
               to="/home"
-              className="bg-[#050814]/80 hover:bg-[#0b1020] text-xs font-semibold px-4 py-2.5 rounded-2xl border border-white/10 transition"
+              className="bg-white hover:bg-white text-xs font-semibold px-4 py-2.5 rounded-2xl border border-slate-200 transition"
             >
               Back to Home
             </Link>
@@ -116,7 +116,7 @@ export const AdminVenuesPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <Link
             to="/admin"
-            className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-white transition font-medium"
+            className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-indigo-600 transition font-medium"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Administrator Dashboard
@@ -124,7 +124,7 @@ export const AdminVenuesPage: React.FC = () => {
 
           <Link
             to="/admin/organizers"
-            className="text-xs text-indigo-400 hover:text-cyan-300 font-semibold underline"
+            className="text-xs text-indigo-400 hover:text-indigo-600 font-semibold underline"
           >
             Organizer Verification Governance →
           </Link>
@@ -133,7 +133,7 @@ export const AdminVenuesPage: React.FC = () => {
         {/* Header */}
         <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-cyan-300 border border-indigo-500/30 flex items-center justify-center font-bold">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-600 border border-indigo-500/30 flex items-center justify-center font-bold">
               <Building2 className="w-6 h-6" />
             </div>
             <div>
@@ -150,7 +150,7 @@ export const AdminVenuesPage: React.FC = () => {
 
         {/* Policy Alert Banner */}
         <div className="glass-card rounded-3xl p-5 text-xs text-slate-300 flex items-start gap-3.5">
-          <Info className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+          <Info className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
           <div className="leading-relaxed">
             <strong className="text-white">Authoritative Data Standard: </strong>
             In accordance with campus scheduling governance, venues marked as <em>Authoritative</em> stem from verified estate feeds. Venues marked as <em>Demonstration/Non-Authoritative</em> will display disclaimers to prevent erroneous collision blocks.
@@ -160,18 +160,18 @@ export const AdminVenuesPage: React.FC = () => {
         {message && (
           <div className={`p-4 rounded-2xl border text-xs flex items-center gap-2.5 ${
             message.type === 'success'
-              ? 'glass-card border-emerald-500/50 bg-emerald-950/20 text-emerald-300'
+              ? 'glass-card border-emerald-500/50 bg-emerald-950/20 text-emerald-700'
               : 'glass-card border-rose-500/50 bg-rose-950/20 text-rose-300'
           }`}>
-            {message.type === 'success' ? <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" /> : <AlertTriangle className="w-4 h-4 shrink-0 text-rose-400" />}
+            {message.type === 'success' ? <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-700" /> : <AlertTriangle className="w-4 h-4 shrink-0 text-rose-400" />}
             <span>{message.text}</span>
           </div>
         )}
 
         {/* Venue Registry Cards */}
         <div className="glass-card rounded-3xl overflow-hidden glow-indigo">
-          <div className="p-5 border-b border-white/[0.08] flex items-center justify-between text-xs text-slate-400">
-            <span className="font-semibold text-white">Campus Facilities (<span className="font-mono text-cyan-300">{venues.length}</span>)</span>
+          <div className="p-5 border-b border-slate-200 flex items-center justify-between text-xs text-slate-400">
+            <span className="font-semibold text-white">Campus Facilities (<span className="font-mono text-indigo-600">{venues.length}</span>)</span>
             <span className="font-mono">Estate Management Registry</span>
           </div>
 
@@ -183,7 +183,7 @@ export const AdminVenuesPage: React.FC = () => {
                     {/* Status Pill */}
                     <span className={`text-[10px] font-mono font-extrabold uppercase px-2.5 py-0.5 rounded-full border ${
                       venue.is_active
-                        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+                        ? 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30'
                         : 'bg-slate-700/50 text-slate-400 border-slate-600'
                     }`}>
                       {venue.is_active ? 'Active & Bookable' : 'Deactivated'}
@@ -191,12 +191,12 @@ export const AdminVenuesPage: React.FC = () => {
 
                     {/* Authoritative Badge */}
                     {venue.is_authoritative ? (
-                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-cyan-300 border border-indigo-500/30 flex items-center gap-1">
+                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-600 border border-indigo-500/30 flex items-center gap-1">
                         <ShieldCheck className="w-3 h-3" />
                         Authoritative Source
                       </span>
                     ) : (
-                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
+                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-800 border border-amber-500/30 flex items-center gap-1">
                         <HelpCircle className="w-3 h-3" />
                         Unconfirmed / Informal
                       </span>
@@ -204,7 +204,7 @@ export const AdminVenuesPage: React.FC = () => {
 
                     {/* Demo Record Badge */}
                     {venue.is_demo && (
-                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
+                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-indigo-600 border border-cyan-500/30">
                         Demonstration Record
                       </span>
                     )}
@@ -227,11 +227,11 @@ export const AdminVenuesPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-white/[0.08]">
+                <div className="flex items-center gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-200">
                   <button
                     type="button"
                     onClick={() => handleStartEdit(venue)}
-                    className="text-xs bg-indigo-600/30 hover:bg-indigo-600/50 text-cyan-300 border border-indigo-500/40 font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 cursor-pointer"
+                    className="text-xs bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-600 border border-indigo-500/40 font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 cursor-pointer"
                   >
                     <Edit3 className="w-3.5 h-3.5" />
                     Edit Details
@@ -242,8 +242,8 @@ export const AdminVenuesPage: React.FC = () => {
                     onClick={() => handleToggleActive(venue)}
                     className={`text-xs font-semibold px-3.5 py-2 rounded-xl border transition cursor-pointer ${
                       venue.is_active
-                        ? 'text-amber-300 hover:bg-amber-500/10 border-amber-500/30'
-                        : 'text-emerald-300 hover:bg-emerald-500/10 border-emerald-500/30'
+                        ? 'text-amber-800 hover:bg-amber-500/10 border-amber-500/30'
+                        : 'text-emerald-700 hover:bg-emerald-500/10 border-emerald-500/30'
                     }`}
                   >
                     {venue.is_active ? 'Deactivate' : 'Activate'}
@@ -258,7 +258,7 @@ export const AdminVenuesPage: React.FC = () => {
         {editingVenue && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
             <div className="glass-card rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-7 glow-indigo relative">
-              <div className="flex items-center justify-between pb-3 border-b border-white/[0.08] mb-4">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200 mb-4">
                 <h3 className="font-extrabold text-base text-white flex items-center gap-2">
                   <Edit3 className="w-4 h-4 text-indigo-400" />
                   Edit Venue: {editingVenue.name}
@@ -266,7 +266,7 @@ export const AdminVenuesPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setEditingVenue(null)}
-                  className="text-xs bg-[#050814]/80 hover:bg-[#0b1020] text-slate-400 hover:text-white px-3 py-1.5 rounded-xl border border-white/10 transition cursor-pointer"
+                  className="text-xs bg-white hover:bg-white text-slate-400 hover:text-indigo-600 px-3 py-1.5 rounded-xl border border-slate-200 transition cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -280,7 +280,7 @@ export const AdminVenuesPage: React.FC = () => {
                     type="text"
                     value={editName}
                     onChange={(e) => setEditName(e.target.value)}
-                    className="w-full p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
 
@@ -292,7 +292,7 @@ export const AdminVenuesPage: React.FC = () => {
                       type="text"
                       value={editBuilding}
                       onChange={(e) => setEditBuilding(e.target.value)}
-                      className="w-full p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                   </div>
                   <div>
@@ -302,7 +302,7 @@ export const AdminVenuesPage: React.FC = () => {
                       type="text"
                       value={editLocation}
                       onChange={(e) => setEditLocation(e.target.value)}
-                      className="w-full p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                   </div>
                 </div>
@@ -315,7 +315,7 @@ export const AdminVenuesPage: React.FC = () => {
                       type="number"
                       value={editCapacity}
                       onChange={(e) => setEditCapacity(e.target.value)}
-                      className="w-full p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
+                      className="w-full p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
                     />
                   </div>
                   <div>
@@ -325,7 +325,7 @@ export const AdminVenuesPage: React.FC = () => {
                       type="text"
                       value={editAuthority}
                       onChange={(e) => setEditAuthority(e.target.value)}
-                      className="w-full p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full p-3 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                   </div>
                 </div>
@@ -338,17 +338,17 @@ export const AdminVenuesPage: React.FC = () => {
                     value={editDataSource}
                     onChange={(e) => setEditDataSource(e.target.value)}
                     placeholder="e.g. Official Campus Enterprise Room Allocation System"
-                    className="w-full p-3 bg-[#050814]/80 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full p-3 bg-white border border-slate-200 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
 
-                <div className="pt-3 border-t border-white/[0.08] space-y-2.5">
+                <div className="pt-3 border-t border-slate-200 space-y-2.5">
                   <label className="flex items-center gap-2.5 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={editIsAuthoritative}
                       onChange={(e) => setEditIsAuthoritative(e.target.checked)}
-                      className="rounded bg-[#050814] border-white/10 text-indigo-600 focus:ring-indigo-500"
+                      className="rounded bg-white border-slate-200 text-indigo-600 focus:ring-indigo-500"
                     />
                     <span className="font-semibold text-slate-300">
                       Authoritative Booking Source (Direct venue collisions trigger Hard Conflicts)
@@ -360,7 +360,7 @@ export const AdminVenuesPage: React.FC = () => {
                       type="checkbox"
                       checked={editIsActive}
                       onChange={(e) => setEditIsActive(e.target.checked)}
-                      className="rounded bg-[#050814] border-white/10 text-indigo-600 focus:ring-indigo-500"
+                      className="rounded bg-white border-slate-200 text-indigo-600 focus:ring-indigo-500"
                     />
                     <span className="font-semibold text-slate-300">
                       Active Facility (Available for organizer booking requests)
@@ -372,7 +372,7 @@ export const AdminVenuesPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setEditingVenue(null)}
-                    className="bg-[#050814]/80 hover:bg-[#0b1020] text-slate-400 hover:text-white font-semibold px-4 py-2.5 rounded-2xl border border-white/10 transition cursor-pointer"
+                    className="bg-white hover:bg-white text-slate-400 hover:text-indigo-600 font-semibold px-4 py-2.5 rounded-2xl border border-slate-200 transition cursor-pointer"
                   >
                     Cancel
                   </button>

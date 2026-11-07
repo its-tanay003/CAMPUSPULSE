@@ -87,7 +87,7 @@ export const AdminApprovalsPage: React.FC = () => {
           <div className="mt-6 flex justify-center gap-3">
             <Link
               to="/home"
-              className="bg-[#050814]/80 hover:bg-[#0b1020] text-xs font-semibold px-4 py-2.5 rounded-2xl border border-white/10 transition"
+              className="bg-white hover:bg-white text-xs font-semibold px-4 py-2.5 rounded-2xl border border-slate-200 transition"
             >
               Back to Home
             </Link>
@@ -126,14 +126,14 @@ export const AdminApprovalsPage: React.FC = () => {
         {/* Navigation Breadcrumbs */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 text-xs text-slate-400">
-            <Link to="/admin" className="hover:text-white transition">Admin Dashboard</Link>
+            <Link to="/admin" className="hover:text-indigo-600 transition">Admin Dashboard</Link>
             <span>/</span>
             <span className="text-white font-semibold">Clearance Queue</span>
           </div>
 
           <Link
             to="/admin/events"
-            className="text-xs text-indigo-400 hover:text-cyan-300 font-semibold underline"
+            className="text-xs text-indigo-400 hover:text-indigo-600 font-semibold underline"
           >
             Browse All Campus Events ({events.length}) →
           </Link>
@@ -143,7 +143,7 @@ export const AdminApprovalsPage: React.FC = () => {
         <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="bg-indigo-500/20 text-cyan-300 border border-indigo-500/30 text-[10px] font-mono font-bold px-3 py-0.5 rounded-full uppercase">
+              <span className="bg-indigo-500/20 text-indigo-600 border border-indigo-500/30 text-[10px] font-mono font-bold px-3 py-0.5 rounded-full uppercase">
                 Dean of Student Welfare & Estate Clearances
               </span>
               <span className="text-xs text-slate-400 font-mono">· {currentUser?.full_name}</span>
@@ -156,8 +156,8 @@ export const AdminApprovalsPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-2.5 bg-[#050814]/80 text-cyan-300 px-4 py-2.5 rounded-2xl text-xs font-mono font-bold border border-white/10 shadow-sm">
-            <Clock className="w-4 h-4 text-cyan-400" />
+          <div className="flex items-center gap-2.5 bg-white text-indigo-600 px-4 py-2.5 rounded-2xl text-xs font-mono font-bold border border-slate-200 shadow-sm">
+            <Clock className="w-4 h-4 text-indigo-600" />
             <span>{pendingEvents.length} Pending Approval{pendingEvents.length === 1 ? '' : 's'}</span>
           </div>
         </div>
@@ -169,7 +169,7 @@ export const AdminApprovalsPage: React.FC = () => {
             <div className="glass-card rounded-3xl p-5 space-y-3">
               <div className="flex items-center justify-between">
                 <h2 className="text-xs font-mono font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                  <Filter className="w-3.5 h-3.5 text-cyan-400" />
+                  <Filter className="w-3.5 h-3.5 text-indigo-600" />
                   Pending Queue ({pendingEvents.length})
                 </h2>
                 <span className="text-[11px] text-slate-400 font-mono">Select to inspect</span>
@@ -183,7 +183,7 @@ export const AdminApprovalsPage: React.FC = () => {
                   value={filterQuery}
                   onChange={(e) => setFilterQuery(e.target.value)}
                   placeholder="Filter queue by title, club, venue..."
-                  className="w-full text-xs pl-9 pr-3.5 py-2.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                  className="w-full text-xs pl-9 pr-3.5 py-2.5 bg-white border border-slate-200 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
                 />
               </div>
             </div>
@@ -218,7 +218,7 @@ export const AdminApprovalsPage: React.FC = () => {
                       className={`p-5 rounded-3xl border transition-all cursor-pointer glass-card text-xs space-y-2.5 ${
                         isSelected
                           ? 'border-indigo-500/80 ring-2 ring-indigo-500/40 glow-indigo'
-                          : 'border-white/10 hover:border-white/20'
+                          : 'border-slate-200 hover:border-slate-300'
                       }`}
                     >
                       <div className="flex items-center justify-between">
@@ -237,28 +237,28 @@ export const AdminApprovalsPage: React.FC = () => {
                       <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-400">
                         <span>Venue: <strong className="text-slate-200">{event.venue?.name}</strong></span>
                         <span>·</span>
-                        <span className="text-cyan-300 font-mono">{event.category}</span>
+                        <span className="text-indigo-600 font-mono">{event.category}</span>
                       </div>
 
-                      <div className="flex items-center justify-between pt-2.5 border-t border-white/[0.08] text-[11px]">
+                      <div className="flex items-center justify-between pt-2.5 border-t border-slate-200 text-[11px]">
                         {quickClash.has_hard_conflict ? (
                           <span className="text-rose-400 font-mono font-bold flex items-center gap-1">
                             <AlertCircle className="w-3.5 h-3.5" />
                             Double-Booking Detected
                           </span>
                         ) : quickClash.conflicts.length > 0 ? (
-                          <span className="text-amber-400 font-mono font-medium flex items-center gap-1">
+                          <span className="text-amber-700 font-mono font-medium flex items-center gap-1">
                             <AlertTriangle className="w-3.5 h-3.5" />
                             {quickClash.conflicts.length} Warning(s)
                           </span>
                         ) : (
-                          <span className="text-emerald-400 font-mono font-medium flex items-center gap-1">
+                          <span className="text-emerald-700 font-mono font-medium flex items-center gap-1">
                             <Check className="w-3.5 h-3.5" />
                             Schedule Clear
                           </span>
                         )}
 
-                        <span className="text-cyan-400 font-bold">
+                        <span className="text-indigo-600 font-bold">
                           {isSelected ? 'Inspecting →' : 'Select'}
                         </span>
                       </div>
@@ -267,7 +267,7 @@ export const AdminApprovalsPage: React.FC = () => {
                 })
               ) : (
                 <div className="glass-card rounded-3xl p-8 text-center text-xs">
-                  <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto mb-2" />
+                  <CheckCircle2 className="w-8 h-8 text-emerald-700 mx-auto mb-2" />
                   <h3 className="font-bold text-white">Queue Empty</h3>
                   <p className="text-slate-400 mt-1">
                     All club event proposals have been evaluated.
@@ -282,10 +282,10 @@ export const AdminApprovalsPage: React.FC = () => {
             {activeEvent ? (
               <div className="glass-card rounded-3xl p-6 sm:p-7 glow-indigo space-y-6">
                 {/* Dossier Header */}
-                <div className="border-b border-white/[0.08] pb-4 flex items-start justify-between gap-4">
+                <div className="border-b border-slate-200 pb-4 flex items-start justify-between gap-4">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                      <span className="text-[10px] font-mono font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-800 border border-amber-500/30">
                         {activeEvent.status.replace('_', ' ')}
                       </span>
                       <span className="text-xs font-semibold text-indigo-400">
@@ -300,14 +300,14 @@ export const AdminApprovalsPage: React.FC = () => {
 
                   <Link
                     to={`/events/${activeEvent.id}`}
-                    className="text-xs bg-[#050814]/80 hover:bg-[#0b1020] text-cyan-300 border border-white/10 px-3.5 py-2 rounded-xl font-semibold transition flex items-center gap-1.5 shrink-0"
+                    className="text-xs bg-white hover:bg-white text-indigo-600 border border-slate-200 px-3.5 py-2 rounded-xl font-semibold transition flex items-center gap-1.5 shrink-0"
                   >
                     Public View <ExternalLink className="w-3.5 h-3.5" />
                   </Link>
                 </div>
 
                 {/* Validation & Information Checklist */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs bg-[#050814]/80 p-5 rounded-2xl border border-white/10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs bg-white p-5 rounded-2xl border border-slate-200">
                   <div className="space-y-0.5">
                     <span className="text-slate-400 block text-[11px] font-mono">Host Organization:</span>
                     <strong className="text-white">{activeEvent.organization?.name}</strong>
@@ -344,7 +344,7 @@ export const AdminApprovalsPage: React.FC = () => {
                   <h4 className="font-mono font-bold text-slate-400 uppercase tracking-wider text-[11px]">
                     Event Synopsis & Audience
                   </h4>
-                  <p className="bg-[#050814]/80 p-4 rounded-2xl border border-white/10 text-slate-300 leading-relaxed whitespace-pre-wrap">
+                  <p className="bg-white p-4 rounded-2xl border border-slate-200 text-slate-300 leading-relaxed whitespace-pre-wrap">
                     {activeEvent.description}
                   </p>
                   <div className="text-[11px] text-slate-400">
@@ -365,14 +365,14 @@ export const AdminApprovalsPage: React.FC = () => {
 
                 {/* Previous Decisions for this Event */}
                 {eventApprovalHistory.length > 0 && (
-                  <div className="space-y-2.5 pt-3 border-t border-white/[0.08]">
+                  <div className="space-y-2.5 pt-3 border-t border-slate-200">
                     <h4 className="font-mono font-bold text-slate-400 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
-                      <History className="w-3.5 h-3.5 text-cyan-400" />
+                      <History className="w-3.5 h-3.5 text-indigo-600" />
                       Previous Review History ({eventApprovalHistory.length})
                     </h4>
                     <div className="space-y-2">
                       {eventApprovalHistory.map(app => (
-                        <div key={app.id} className="p-3.5 bg-[#050814]/80 rounded-2xl border border-white/10 text-xs space-y-1">
+                        <div key={app.id} className="p-3.5 bg-white rounded-2xl border border-slate-200 text-xs space-y-1">
                           <div className="flex items-center justify-between text-[11px]">
                             <span className="font-bold text-white">
                               Decision: {app.decision.toUpperCase()} by {app.reviewer_name}
@@ -389,7 +389,7 @@ export const AdminApprovalsPage: React.FC = () => {
                 )}
 
                 {/* Action Form */}
-                <div className="space-y-4 pt-4 border-t border-white/[0.08]">
+                <div className="space-y-4 pt-4 border-t border-slate-200">
                   <h4 className="font-bold text-white text-xs uppercase tracking-wider">
                     Executive Review Decision
                   </h4>
@@ -402,7 +402,7 @@ export const AdminApprovalsPage: React.FC = () => {
                       className={`p-3 rounded-2xl text-xs font-bold border transition flex flex-col items-center justify-center gap-1.5 cursor-pointer ${
                         actionType === 'approved'
                           ? 'bg-emerald-600 text-white border-emerald-500 shadow-md ring-2 ring-emerald-500/40'
-                          : 'bg-[#050814]/80 border-white/10 text-slate-400 hover:text-white'
+                          : 'bg-white border-slate-200 text-slate-400 hover:text-indigo-600'
                       }`}
                     >
                       <Check className="w-4 h-4" />
@@ -415,7 +415,7 @@ export const AdminApprovalsPage: React.FC = () => {
                       className={`p-3 rounded-2xl text-xs font-bold border transition flex flex-col items-center justify-center gap-1.5 cursor-pointer ${
                         actionType === 'changes_requested'
                           ? 'bg-amber-600 text-white border-amber-500 shadow-md ring-2 ring-amber-500/40'
-                          : 'bg-[#050814]/80 border-white/10 text-slate-400 hover:text-white'
+                          : 'bg-white border-slate-200 text-slate-400 hover:text-indigo-600'
                       }`}
                     >
                       <AlertCircle className="w-4 h-4" />
@@ -428,7 +428,7 @@ export const AdminApprovalsPage: React.FC = () => {
                       className={`p-3 rounded-2xl text-xs font-bold border transition flex flex-col items-center justify-center gap-1.5 cursor-pointer ${
                         actionType === 'rejected'
                           ? 'bg-rose-600 text-white border-rose-500 shadow-md ring-2 ring-rose-500/40'
-                          : 'bg-[#050814]/80 border-white/10 text-slate-400 hover:text-white'
+                          : 'bg-white border-slate-200 text-slate-400 hover:text-indigo-600'
                       }`}
                     >
                       <XCircle className="w-4 h-4" />
@@ -453,7 +453,7 @@ export const AdminApprovalsPage: React.FC = () => {
                           ? 'e.g. Please alter starting time by +1 hour or select Block 28 Hall B to avoid collision.'
                           : 'e.g. Incompatible with University examination blackout dates.'
                       }
-                      className="w-full text-xs p-3.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full text-xs p-3.5 bg-white border border-slate-200 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                   </div>
 
@@ -490,9 +490,9 @@ export const AdminApprovalsPage: React.FC = () => {
 
         {/* Audit Trail Log Section */}
         <div className="glass-card rounded-3xl overflow-hidden glow-indigo">
-          <div className="p-6 border-b border-white/[0.08] flex items-center justify-between">
+          <div className="p-6 border-b border-slate-200 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              <ShieldCheck className="w-4 h-4 text-emerald-700" />
               <h3 className="font-bold text-white text-base">Administrative Clearance Audit Trail</h3>
             </div>
             <span className="text-xs text-slate-400 font-mono">{approvals.length} recorded actions</span>
@@ -506,16 +506,16 @@ export const AdminApprovalsPage: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <span className={`font-mono font-extrabold uppercase text-[10px] px-2.5 py-0.5 rounded-full border ${
                         app.decision === 'approved' 
-                          ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' 
+                          ? 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30' 
                           : app.decision === 'changes_requested'
-                          ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                          ? 'bg-amber-500/20 text-amber-800 border-amber-500/30'
                           : 'bg-rose-500/20 text-rose-300 border-rose-500/30'
                       }`}>
                         {app.decision.replace('_', ' ')}
                       </span>
                       <span className="font-bold text-white">Event #{app.event_id}</span>
                       <span className="text-white/20">·</span>
-                      <span className="text-cyan-400 font-semibold">Reviewer: {app.reviewer_name}</span>
+                      <span className="text-indigo-600 font-semibold">Reviewer: {app.reviewer_name}</span>
                     </div>
                     <div className="text-slate-300 italic">"{app.reason}"</div>
                   </div>

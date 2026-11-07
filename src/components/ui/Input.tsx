@@ -22,7 +22,7 @@ export const Input: React.FC<InputProps> = ({
   return (
     <div className="w-full space-y-1.5">
       {label && (
-        <label htmlFor={inputId} className="block text-xs font-semibold text-slate-300 tracking-tight">
+        <label htmlFor={inputId} className="block text-xs font-semibold text-slate-700 tracking-tight">
           {label}
         </label>
       )}
@@ -32,24 +32,23 @@ export const Input: React.FC<InputProps> = ({
         aria-describedby={
           error ? errorId : helperText ? helperId : undefined
         }
-        className={`w-full text-xs sm:text-sm p-3.5 bg-[#0A0F1E]/90 border rounded-2xl text-slate-100 placeholder-slate-500 transition-all duration-200 focus:outline-none focus:ring-2 backdrop-blur-md shadow-inner ${
+        className={`w-full text-xs sm:text-sm p-3.5 bg-white border rounded-2xl text-slate-900 placeholder-slate-400 transition-all duration-200 focus:outline-none focus:ring-2 shadow-sm ${
           error
-            ? 'border-rose-500/80 focus:ring-rose-500/50 bg-rose-950/10'
-            : 'border-white/10 focus:border-indigo-500/80 focus:ring-indigo-500/30 hover:border-white/20'
+            ? 'border-rose-400 focus:ring-rose-200 bg-rose-50/20'
+            : 'border-slate-200 focus:border-indigo-500 focus:ring-indigo-100 hover:border-slate-300'
         } ${className}`}
         {...props}
       />
       {error && (
-        <p id={errorId} role="alert" className="text-[11px] text-rose-400 font-medium">
+        <p id={errorId} role="alert" className="text-[11px] text-rose-600 font-medium">
           {error}
         </p>
       )}
       {!error && helperText && (
-        <p id={helperId} className="text-[11px] text-[#94A3B8]">
+        <p id={helperId} className="text-[11px] text-slate-500">
           {helperText}
         </p>
       )}
     </div>
   );
 };
-

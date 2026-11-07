@@ -43,7 +43,7 @@ export const AdminOrganizersPage: React.FC = () => {
           <div className="mt-6 flex justify-center gap-3">
             <Link
               to="/home"
-              className="bg-[#050814]/80 hover:bg-[#0b1020] text-xs font-semibold px-4 py-2.5 rounded-2xl border border-white/10 transition"
+              className="bg-white hover:bg-white text-xs font-semibold px-4 py-2.5 rounded-2xl border border-slate-200 transition"
             >
               Back to Home
             </Link>
@@ -96,7 +96,7 @@ export const AdminOrganizersPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <Link
             to="/admin"
-            className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-white transition font-medium"
+            className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-indigo-600 transition font-medium"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Administrator Dashboard
@@ -104,7 +104,7 @@ export const AdminOrganizersPage: React.FC = () => {
 
           <Link
             to="/admin/venues"
-            className="text-xs text-indigo-400 hover:text-cyan-300 font-semibold underline"
+            className="text-xs text-indigo-400 hover:text-indigo-600 font-semibold underline"
           >
             Manage Venue Records →
           </Link>
@@ -113,7 +113,7 @@ export const AdminOrganizersPage: React.FC = () => {
         {/* Header */}
         <div className="glass-card rounded-3xl p-6 sm:p-8 glow-indigo">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-cyan-300 border border-indigo-500/30 flex items-center justify-center font-bold">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-600 border border-indigo-500/30 flex items-center justify-center font-bold">
               <BadgeCheck className="w-6 h-6" />
             </div>
             <div>
@@ -130,7 +130,7 @@ export const AdminOrganizersPage: React.FC = () => {
 
         {/* Notice of Controlled Verification Standard */}
         <div className="glass-card rounded-3xl p-5 text-xs text-slate-300 flex items-start gap-3.5">
-          <Info className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+          <Info className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
           <div className="leading-relaxed">
             <strong className="text-white">Controlled Verification Policy: </strong>
             Ordinary users and student leads cannot grant themselves verified status. Verified organizations obtain direct publishing clearance paths and authoritative badge trust on student discovery portals.
@@ -140,10 +140,10 @@ export const AdminOrganizersPage: React.FC = () => {
         {message && (
           <div className={`p-4 rounded-2xl border text-xs flex items-center gap-2.5 ${
             message.type === 'success'
-              ? 'glass-card border-emerald-500/50 bg-emerald-950/20 text-emerald-300'
+              ? 'glass-card border-emerald-500/50 bg-emerald-950/20 text-emerald-700'
               : 'glass-card border-rose-500/50 bg-rose-950/20 text-rose-300'
           }`}>
-            {message.type === 'success' ? <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" /> : <AlertTriangle className="w-4 h-4 shrink-0 text-rose-400" />}
+            {message.type === 'success' ? <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-700" /> : <AlertTriangle className="w-4 h-4 shrink-0 text-rose-400" />}
             <span>{message.text}</span>
           </div>
         )}
@@ -157,7 +157,7 @@ export const AdminOrganizersPage: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search club, lead, email..."
-              className="w-full text-xs pl-9 pr-3.5 py-2.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+              className="w-full text-xs pl-9 pr-3.5 py-2.5 bg-white border border-slate-200 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             />
           </div>
 
@@ -166,7 +166,7 @@ export const AdminOrganizersPage: React.FC = () => {
             <select
               value={filterVerified}
               onChange={(e) => setFilterVerified(e.target.value as any)}
-              className="text-xs p-2.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+              className="text-xs p-2.5 bg-white border border-slate-200 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
             >
               <option value="all">All Organizations ({organizations.length})</option>
               <option value="verified">Verified Only</option>
@@ -177,8 +177,8 @@ export const AdminOrganizersPage: React.FC = () => {
 
         {/* Organizations Registry */}
         <div className="glass-card rounded-3xl overflow-hidden glow-indigo">
-          <div className="p-5 border-b border-white/[0.08] flex items-center justify-between text-xs text-slate-400">
-            <span className="font-semibold text-white">Registered Campus Bodies (<span className="font-mono text-cyan-300">{filteredOrgs.length}</span>)</span>
+          <div className="p-5 border-b border-slate-200 flex items-center justify-between text-xs text-slate-400">
+            <span className="font-semibold text-white">Registered Campus Bodies (<span className="font-mono text-indigo-600">{filteredOrgs.length}</span>)</span>
             <span className="font-mono">Student Welfare Governance</span>
           </div>
 
@@ -189,18 +189,18 @@ export const AdminOrganizersPage: React.FC = () => {
                   <div className="flex flex-wrap items-center gap-2">
                     {/* Verified Status */}
                     {org.is_verified ? (
-                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 border border-emerald-500/30 flex items-center gap-1">
                         <CheckCircle2 className="w-3 h-3" />
                         Verified Official Body
                       </span>
                     ) : (
-                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-slate-700/50 text-slate-400 border border-white/10 flex items-center gap-1">
+                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-slate-700/50 text-slate-400 border border-slate-200 flex items-center gap-1">
                         <XCircle className="w-3 h-3" />
                         Unverified Organization
                       </span>
                     )}
 
-                    <span className="text-xs uppercase font-mono font-extrabold px-2.5 py-0.5 rounded-full bg-[#050814]/80 text-cyan-300 border border-white/10">
+                    <span className="text-xs uppercase font-mono font-extrabold px-2.5 py-0.5 rounded-full bg-white text-indigo-600 border border-slate-200">
                       {org.type}
                     </span>
 
@@ -220,14 +220,14 @@ export const AdminOrganizersPage: React.FC = () => {
 
                   {/* Verification Audit Details */}
                   {org.is_verified && org.verified_by && (
-                    <div className="text-[11px] text-emerald-400/90 bg-emerald-950/20 border border-emerald-500/20 p-3 rounded-2xl mt-1.5 space-y-0.5 font-mono">
+                    <div className="text-[11px] text-emerald-700/90 bg-emerald-950/20 border border-emerald-500/20 p-3 rounded-2xl mt-1.5 space-y-0.5 font-mono">
                       <div>Verified By: <strong>{org.verified_by}</strong> on {org.verified_at ? new Date(org.verified_at).toLocaleDateString('en-IN') : 'Archive record'}</div>
                       {org.verification_notes && <div className="text-slate-300 italic font-sans">"{org.verification_notes}"</div>}
                     </div>
                   )}
                 </div>
 
-                <div className="flex items-center gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-white/[0.08]">
+                <div className="flex items-center gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-200">
                   {org.is_verified ? (
                     <button
                       type="button"
@@ -263,7 +263,7 @@ export const AdminOrganizersPage: React.FC = () => {
         {selectedOrg && actionConfirm && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
             <div className="glass-card rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl relative space-y-4 glow-indigo">
-              <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200">
                 <h3 className="font-extrabold text-base text-white flex items-center gap-2">
                   <BadgeCheck className="w-4 h-4 text-indigo-400" />
                   {actionConfirm === 'verify' ? 'Confirm Organization Verification' : 'Revoke Verification Status'}
@@ -274,7 +274,7 @@ export const AdminOrganizersPage: React.FC = () => {
                     setSelectedOrg(null);
                     setActionConfirm(null);
                   }}
-                  className="text-xs bg-[#050814]/80 hover:bg-[#0b1020] text-slate-400 hover:text-white px-3 py-1.5 rounded-xl border border-white/10 cursor-pointer"
+                  className="text-xs bg-white hover:bg-white text-slate-400 hover:text-indigo-600 px-3 py-1.5 rounded-xl border border-slate-200 cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -306,18 +306,18 @@ export const AdminOrganizersPage: React.FC = () => {
                       ? 'e.g. Registered club constitution verified. Faculty advisor consent received on file.'
                       : 'e.g. Failure to renew annual student charter or inactive leadership.'
                   }
-                  className="w-full text-xs p-3.5 bg-[#050814]/80 border border-white/10 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full text-xs p-3.5 bg-white border border-slate-200 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
 
-              <div className="pt-3 flex items-center justify-end gap-3 border-t border-white/[0.08]">
+              <div className="pt-3 flex items-center justify-end gap-3 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={() => {
                     setSelectedOrg(null);
                     setActionConfirm(null);
                   }}
-                  className="bg-[#050814]/80 hover:bg-[#0b1020] text-slate-400 hover:text-white text-xs font-semibold px-4 py-2.5 rounded-2xl border border-white/10 cursor-pointer"
+                  className="bg-white hover:bg-white text-slate-400 hover:text-indigo-600 text-xs font-semibold px-4 py-2.5 rounded-2xl border border-slate-200 cursor-pointer"
                 >
                   Cancel
                 </button>

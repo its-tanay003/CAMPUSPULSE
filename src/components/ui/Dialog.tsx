@@ -82,7 +82,7 @@ export const Dialog: React.FC<DialogProps> = ({
       aria-modal="true"
       aria-labelledby="dialog-title"
       aria-describedby={description ? "dialog-description" : undefined}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050814]/85 backdrop-blur-md animate-fadeIn"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-fadeIn"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -90,29 +90,28 @@ export const Dialog: React.FC<DialogProps> = ({
       <div
         ref={dialogRef}
         tabIndex={-1}
-        className="w-full max-w-lg glass-card rounded-3xl overflow-hidden p-6 sm:p-7 space-y-4 animate-scaleUp focus:outline-none glow-indigo"
+        className="w-full max-w-lg bg-white border border-slate-200 rounded-3xl overflow-hidden p-6 sm:p-7 space-y-4 shadow-2xl focus:outline-none"
       >
-        <div className="flex items-start justify-between border-b border-white/10 pb-4">
+        <div className="flex items-start justify-between border-b border-slate-100 pb-4">
           <div>
-            <h2 id="dialog-title" className="text-xl font-extrabold text-white tracking-tight">
+            <h2 id="dialog-title" className="text-xl font-extrabold text-slate-900 tracking-tight">
               {title}
             </h2>
             {description && (
-              <p id="dialog-description" className="text-xs text-slate-400 mt-1 leading-relaxed">{description}</p>
+              <p id="dialog-description" className="text-xs text-slate-500 mt-1 leading-relaxed">{description}</p>
             )}
           </div>
           <button
             onClick={onClose}
             aria-label="Close dialog"
-            className="p-2 min-w-[40px] min-h-[40px] flex items-center justify-center text-slate-400 hover:text-white rounded-xl hover:bg-white/[0.08] transition"
+            className="p-2 min-w-[40px] min-h-[40px] flex items-center justify-center text-slate-400 hover:text-slate-700 rounded-xl hover:bg-slate-100 transition cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="text-xs text-slate-200">{children}</div>
+        <div className="text-xs text-slate-700">{children}</div>
       </div>
     </div>
   );
 };
-
