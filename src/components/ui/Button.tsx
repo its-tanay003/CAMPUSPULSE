@@ -15,15 +15,15 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-2xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6366F1] disabled:opacity-40 disabled:cursor-not-allowed select-none active:scale-[0.98] cursor-pointer';
+  const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-2xl transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C7F36B] disabled:opacity-40 disabled:cursor-not-allowed select-none active:scale-[0.97] cursor-pointer';
 
   const variants = {
-    primary: 'bg-[#6366F1] hover:bg-[#4F46E5] text-white shadow-lg shadow-[#6366F1]/25 hover:shadow-indigo-500/40 border border-indigo-400/30',
-    gradient: 'bg-gradient-to-r from-[#6366F1] via-[#8B5CF6] to-[#06B6D4] hover:opacity-95 text-white shadow-lg shadow-indigo-500/25 border border-white/20',
-    secondary: 'bg-[#0D1326]/80 hover:bg-[#151D38] text-[#F8FAFC] border border-white/10 hover:border-white/20 shadow-sm backdrop-blur-md',
-    outline: 'bg-transparent hover:bg-white/[0.04] text-[#06B6D4] border border-[#06B6D4]/40 hover:border-[#06B6D4] hover:shadow-sm hover:shadow-cyan-500/20',
-    danger: 'bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white shadow-md shadow-rose-900/30 border border-rose-500/30',
-    ghost: 'bg-transparent hover:bg-white/[0.06] text-[#94A3B8] hover:text-[#F8FAFC]'
+    primary: 'bg-[#4F46E5] hover:bg-[#4338CA] text-white shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 border border-indigo-400/40 hover:-translate-y-0.5',
+    gradient: 'bg-gradient-to-r from-indigo-500 via-purple-600 to-[#C7F36B] hover:opacity-95 text-slate-950 font-black shadow-lg shadow-indigo-600/25 border border-white/20 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(199,243,107,0.4)]',
+    secondary: 'bg-[#11182B]/90 hover:bg-[#18223C] text-[#F8FAFC] border border-white/10 hover:border-white/25 shadow-sm backdrop-blur-md hover:-translate-y-0.5',
+    outline: 'bg-transparent hover:bg-white/[0.04] text-[#C7F36B] border border-[#C7F36B]/40 hover:border-[#C7F36B] hover:shadow-sm hover:shadow-[#C7F36B]/25 hover:-translate-y-0.5',
+    danger: 'bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white shadow-md shadow-rose-900/40 border border-rose-500/30 hover:-translate-y-0.5',
+    ghost: 'bg-transparent hover:bg-white/[0.08] text-slate-400 hover:text-white'
   };
 
   const sizes = {
@@ -49,4 +49,3 @@ export const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
-

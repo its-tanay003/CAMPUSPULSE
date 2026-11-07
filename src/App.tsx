@@ -4,6 +4,7 @@ import { AppProvider } from './context/AppContext';
 import { Navbar } from './components/Navbar';
 import { BrandedLoadingScreen } from './components/BrandedLoadingScreen';
 import { OnboardingModal } from './components/OnboardingModal';
+import { PageTransitionWrapper } from './components/PageTransitionWrapper';
 
 // Pages
 import { LandingPage } from './pages/LandingPage';
@@ -51,7 +52,7 @@ export const App: React.FC = () => {
       />
 
       <BrowserRouter>
-        <div className="min-h-screen flex flex-col bg-[#090D1A] text-[#F8FAFC] antialiased selection:bg-[#4F46E5] selection:text-white">
+        <div className="min-h-screen flex flex-col bg-[#070A13] text-[#F8FAFC] antialiased selection:bg-[#4F46E5] selection:text-white">
           {/* Skip link for keyboard accessibility */}
           <a
             href="#main-content"
@@ -63,52 +64,54 @@ export const App: React.FC = () => {
           <Navbar onOpenOnboarding={() => setOnboardingOpen(true)} />
 
           <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
-            <Routes>
-              {/* Public & Student Routes */}
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/home" element={<StudentHomePage />} />
-              <Route path="/discover" element={<DiscoverPage />} />
-              <Route path="/events/:id" element={<EventDetailPage />} />
-              <Route path="/calendar" element={<CalendarPage />} />
-              <Route path="/my-events" element={<MyEventsPage />} />
-              <Route path="/saved" element={<Navigate to="/my-events" replace />} />
-              <Route path="/clubs" element={<ClubsDirectoryPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
+            <PageTransitionWrapper>
+              <Routes>
+                {/* Public & Student Routes */}
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/home" element={<StudentHomePage />} />
+                <Route path="/discover" element={<DiscoverPage />} />
+                <Route path="/events/:id" element={<EventDetailPage />} />
+                <Route path="/calendar" element={<CalendarPage />} />
+                <Route path="/my-events" element={<MyEventsPage />} />
+                <Route path="/saved" element={<Navigate to="/my-events" replace />} />
+                <Route path="/clubs" element={<ClubsDirectoryPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
 
-              {/* Organizer Studio Routes */}
-              <Route path="/organizer" element={<OrganizerDashboardPage />} />
-              <Route path="/organizer/events" element={<OrganizerEventsPage />} />
-              <Route path="/organizer/create" element={<CreateEventPage />} />
-              <Route path="/organizer/edit/:id" element={<CreateEventPage />} />
-              <Route path="/organizer/clashes" element={<ClashCheckPage />} />
+                {/* Organizer Studio Routes */}
+                <Route path="/organizer" element={<OrganizerDashboardPage />} />
+                <Route path="/organizer/events" element={<OrganizerEventsPage />} />
+                <Route path="/organizer/create" element={<CreateEventPage />} />
+                <Route path="/organizer/edit/:id" element={<CreateEventPage />} />
+                <Route path="/organizer/clashes" element={<ClashCheckPage />} />
 
-              {/* Administrator Approvals & Governance Routes */}
-              <Route path="/admin" element={<AdminDashboardPage />} />
-              <Route path="/admin/approvals" element={<AdminApprovalsPage />} />
-              <Route path="/admin/events" element={<AdminEventsDirectoryPage />} />
-              <Route path="/admin/venues" element={<AdminVenuesPage />} />
-              <Route path="/admin/organizers" element={<AdminOrganizersPage />} />
+                {/* Administrator Approvals & Governance Routes */}
+                <Route path="/admin" element={<AdminDashboardPage />} />
+                <Route path="/admin/approvals" element={<AdminApprovalsPage />} />
+                <Route path="/admin/events" element={<AdminEventsDirectoryPage />} />
+                <Route path="/admin/venues" element={<AdminVenuesPage />} />
+                <Route path="/admin/organizers" element={<AdminOrganizersPage />} />
 
-              {/* Fallback */}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
+                {/* Fallback */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </PageTransitionWrapper>
           </main>
 
           {/* Accessible Footer with Complete Links */}
-          <footer className="bg-[#101828] text-slate-400 text-xs py-12 border-t border-white/[0.08]">
+          <footer className="bg-[#0B0F19] text-slate-400 text-xs py-12 border-t border-white/[0.08]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 {/* Brand column */}
                 <div className="space-y-3 md:col-span-1">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-[#C7F36B] p-0.5">
-                      <div className="w-full h-full bg-[#101828] rounded-[10px] flex items-center justify-center font-bold text-white text-xs">
+                    <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-[#C7F36B] p-0.5">
+                      <div className="w-full h-full bg-[#0D1326] rounded-[10px] flex items-center justify-center font-black text-white text-xs">
                         P
                       </div>
                     </div>
-                    <span className="text-base font-extrabold text-white">CampusPulse</span>
+                    <span className="text-base font-black text-white">CampusPulse</span>
                   </div>
                   <p className="text-xs text-slate-400 leading-relaxed">
                     Connecting students with campus happenings through clash-free scheduling and verified chapter networks.
