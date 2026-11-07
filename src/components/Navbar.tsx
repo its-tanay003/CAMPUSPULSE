@@ -12,8 +12,7 @@ import {
   PlusCircle, 
   CheckCircle2, 
   Sparkles,
-  Zap,
-  HelpCircle
+  Zap
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { UserRole } from '../types';
@@ -29,17 +28,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
   const [roleSwitcherOpen, setRoleSwitcherOpen] = useState(false);
 
   const isActive = (path: string) => location.pathname === path;
-
   const savedCount = savedEvents.filter(s => s.user_id === currentUser?.id).length;
 
   return (
-    <header className="sticky top-0 z-50 bg-[#090D1A]/85 backdrop-blur-xl text-[#F8FAFC] border-b border-white/[0.08] shadow-2xl">
+    <header className="sticky top-0 z-50 bg-[#070A13]/85 backdrop-blur-2xl text-[#F8FAFC] border-b border-white/[0.08] shadow-2xl">
       {/* Top Banner: Verification & Demo Data Notice with Live Status */}
-      <aside aria-label="Prototype demo indicator" className="bg-gradient-to-r from-indigo-950/60 via-[#101828] to-cyan-950/60 border-b border-white/[0.05] text-cyan-300 text-xs px-4 py-1.5 flex items-center justify-between">
+      <aside aria-label="Prototype demo indicator" className="bg-gradient-to-r from-indigo-950/70 via-[#0B0F19] to-cyan-950/70 border-b border-white/[0.05] text-cyan-300 text-xs px-4 py-1.5 flex items-center justify-between">
         <div className="flex items-center gap-2 mx-auto text-center font-medium">
-          <span className="w-2 h-2 rounded-full bg-[#C7F36B] shadow-[0_0_8px_#C7F36B] animate-pulse shrink-0" aria-hidden="true" />
+          <span className="w-2 h-2 rounded-full bg-[#C7F36B] shadow-[0_0_10px_#C7F36B] animate-pulse shrink-0" aria-hidden="true" />
           <span className="text-[11px] sm:text-xs text-slate-300">
-            <strong className="text-[#C7F36B] font-semibold">CampusPulse Live Engine:</strong> Real-time zero-clash scheduling & student chapter hub.
+            <strong className="text-[#C7F36B] font-semibold">CampusPulse Live Engine:</strong> Real-time zero-clash scheduling & verified university chapter registry.
           </span>
         </div>
       </aside>
@@ -47,14 +45,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
       <nav aria-label="Main navigation" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand */}
         <div className="flex items-center gap-6">
-          <Link to="/" className="flex items-center gap-2.5 group rounded-2xl p-1 transition-transform active:scale-95">
+          <Link to="/" className="flex items-center gap-2.5 group rounded-2xl p-1 transition-transform active:scale-95 active-press">
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-[#C7F36B] p-0.5 shadow-lg glow-indigo group-hover:scale-105 transition-all">
-              <div className="w-full h-full bg-[#101828] rounded-[14px] flex items-center justify-center font-black text-white text-lg">
-                <Zap className="w-5 h-5 text-[#C7F36B] fill-[#C7F36B]/20" />
+              <div className="w-full h-full bg-[#0D1326] rounded-[14px] flex items-center justify-center font-black text-white text-lg">
+                <Zap className="w-5 h-5 text-[#C7F36B] fill-[#C7F36B]/25 filter drop-shadow-[0_0_8px_rgba(199,243,107,0.5)]" />
               </div>
             </div>
             <div>
-              <span className="text-xl font-extrabold tracking-tight text-white group-hover:text-[#C7F36B] transition-colors">
+              <span className="text-xl font-black tracking-tight text-white group-hover:text-[#C7F36B] transition-colors">
                 Campus<span className="text-[#C7F36B]">Pulse</span>
               </span>
               <span className="hidden sm:inline-block ml-2 text-[9px] font-mono font-bold uppercase tracking-wider bg-white/[0.06] text-cyan-300 px-2 py-0.5 rounded-full border border-white/10">
@@ -67,9 +65,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
           <div className="hidden md:flex items-center gap-1.5 text-xs font-semibold">
             <Link
               to="/discover"
-              className={`px-3.5 py-2 rounded-2xl transition-all flex items-center gap-2 ${
+              className={`px-3.5 py-2 rounded-2xl transition-all flex items-center gap-2 hover-lift ${
                 isActive('/discover') 
-                  ? 'bg-indigo-500/15 text-cyan-300 border border-indigo-500/30 shadow-sm shadow-indigo-950/50' 
+                  ? 'bg-indigo-500/20 text-[#C7F36B] border border-indigo-500/40 shadow-sm shadow-indigo-950/50 font-bold' 
                   : 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
               }`}
             >
@@ -78,9 +76,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
             </Link>
             <Link
               to="/calendar"
-              className={`px-3.5 py-2 rounded-2xl transition-all flex items-center gap-2 ${
+              className={`px-3.5 py-2 rounded-2xl transition-all flex items-center gap-2 hover-lift ${
                 isActive('/calendar') 
-                  ? 'bg-indigo-500/15 text-cyan-300 border border-indigo-500/30 shadow-sm shadow-indigo-950/50' 
+                  ? 'bg-indigo-500/20 text-[#C7F36B] border border-indigo-500/40 shadow-sm shadow-indigo-950/50 font-bold' 
                   : 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
               }`}
             >
@@ -89,9 +87,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
             </Link>
             <Link
               to="/clubs"
-              className={`px-3.5 py-2 rounded-2xl transition-all flex items-center gap-2 ${
+              className={`px-3.5 py-2 rounded-2xl transition-all flex items-center gap-2 hover-lift ${
                 isActive('/clubs') 
-                  ? 'bg-indigo-500/15 text-cyan-300 border border-indigo-500/30 shadow-sm shadow-indigo-950/50' 
+                  ? 'bg-indigo-500/20 text-[#C7F36B] border border-indigo-500/40 shadow-sm shadow-indigo-950/50 font-bold' 
                   : 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
               }`}
             >
@@ -108,7 +106,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
             <button
               onClick={onOpenOnboarding}
               aria-label="Open welcome tour"
-              className="p-2 text-slate-400 hover:text-[#C7F36B] hover:bg-white/[0.06] rounded-2xl transition border border-white/5"
+              className="p-2 text-slate-400 hover:text-[#C7F36B] hover:bg-white/[0.06] rounded-2xl transition border border-white/5 cursor-pointer active-press"
               title="Tour & Product Intro"
             >
               <Sparkles className="w-4 h-4" />
@@ -122,7 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
               aria-haspopup="menu"
               aria-expanded={roleSwitcherOpen}
               aria-label={`Role simulator menu. Current role: ${currentUser?.role || 'Guest'}`}
-              className="flex items-center gap-2 bg-[#131C31]/90 hover:bg-[#1B2642] border border-white/10 hover:border-white/20 text-xs px-3.5 py-2 min-h-[36px] rounded-full text-slate-200 transition-all shadow-sm backdrop-blur-md cursor-pointer"
+              className="flex items-center gap-2 bg-[#11182B]/90 hover:bg-[#18223C] border border-white/10 hover:border-white/20 text-xs px-3.5 py-2 min-h-[36px] rounded-full text-slate-200 transition-all shadow-sm backdrop-blur-md cursor-pointer active-press"
               title="Switch user role for test evaluation"
             >
               <span 
@@ -143,7 +141,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
               <div 
                 role="menu"
                 aria-label="Select simulation role"
-                className="absolute right-0 mt-2 w-64 glass-card rounded-2xl shadow-2xl py-2 z-50 text-xs glow-indigo"
+                className="absolute right-0 mt-2 w-64 glass-card rounded-2xl shadow-2xl py-2 z-50 text-xs glow-indigo animate-page-enter"
               >
                 <div className="px-4 py-2 text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider border-b border-white/[0.07]">
                   Role Simulator
@@ -172,7 +170,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
           {currentUser?.role === 'organizer' && (
             <Link
               to="/organizer"
-              className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-4 py-2 rounded-2xl flex items-center gap-1.5 transition shadow-lg shadow-indigo-600/30 border border-indigo-400/30"
+              className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-4 py-2 rounded-2xl flex items-center gap-1.5 transition shadow-lg shadow-indigo-600/30 border border-indigo-400/30 active-press"
             >
               <PlusCircle className="w-3.5 h-3.5 text-[#C7F36B]" />
               Organizer Studio
@@ -182,7 +180,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
           {currentUser?.role === 'admin' && (
             <Link
               to="/admin/approvals"
-              className="bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold px-4 py-2 rounded-2xl flex items-center gap-1.5 transition shadow-lg shadow-purple-600/30 border border-purple-400/30"
+              className="bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold px-4 py-2 rounded-2xl flex items-center gap-1.5 transition shadow-lg shadow-purple-600/30 border border-purple-400/30 active-press"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-purple-200" />
               Admin Portal
@@ -193,7 +191,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
           {currentUser && (
             <Link
               to="/my-events"
-              className="text-slate-400 hover:text-white p-2.5 rounded-2xl hover:bg-white/[0.06] transition relative border border-white/5"
+              className="text-slate-400 hover:text-white p-2.5 rounded-2xl hover:bg-white/[0.06] transition relative border border-white/5 active-press"
               title="My Schedule & Saved"
             >
               <Bookmark className="w-4 h-4" />
@@ -208,9 +206,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
           {/* User Profile */}
           <Link
             to="/profile"
-            className="flex items-center gap-2.5 pl-3 border-l border-white/[0.08] text-xs text-slate-400 hover:text-white"
+            className="flex items-center gap-2.5 pl-3 border-l border-white/[0.08] text-xs text-slate-400 hover:text-white active-press"
           >
-            <div className="w-8 h-8 rounded-full bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center font-bold text-white shadow-sm">
+            <div className="w-8 h-8 rounded-full bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center font-bold text-white shadow-sm">
               <User className="w-4 h-4 text-[#C7F36B]" />
             </div>
             <div className="hidden lg:block text-left">
@@ -225,13 +223,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
           <button
             onClick={() => switchRole(currentUser?.role === 'student' ? 'organizer' : currentUser?.role === 'organizer' ? 'admin' : 'student')}
             aria-label={`Current simulation role: ${currentUser?.role}. Click to switch role.`}
-            className="text-[11px] bg-[#131C31] px-2.5 py-1.5 min-h-[36px] rounded-xl text-[#C7F36B] border border-white/10 font-semibold"
+            className="text-[11px] bg-[#11182B] px-2.5 py-1.5 min-h-[36px] rounded-xl text-[#C7F36B] border border-white/10 font-semibold active-press cursor-pointer"
           >
             {currentUser?.role}
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-400 hover:text-white rounded-xl"
+            className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-400 hover:text-white rounded-xl active-press cursor-pointer"
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
           >
@@ -245,7 +243,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOnboarding }) => {
         <div 
           role="region" 
           aria-label="Mobile navigation drawer"
-          className="md:hidden glass-panel border-b border-white/10 px-4 pt-3 pb-6 space-y-3 animate-fade-in"
+          className="md:hidden glass-panel border-b border-white/10 px-4 pt-3 pb-6 space-y-3 animate-page-enter"
         >
           <div className="grid grid-cols-2 gap-2 pb-3 border-b border-white/10 text-sm font-semibold">
             <Link
