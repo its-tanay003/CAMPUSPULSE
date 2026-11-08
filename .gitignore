@@ -15,15 +15,25 @@ dist-ssr
 # local env files
 .env
 .env*.local
+*.env
 !.env.example
 
-# Editor directories and files
+# Editor and OS directories
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Testing & Coverage
+coverage/
+.nyc_output/
+
+# Antigravity & Agent Scratch Cache
+.gemini/
+.system_generated/

@@ -2,7 +2,7 @@
   "name": "campuspulse",
   "private": true,
   "version": "1.0.0",
-  "description": "CampusPulse - Relevant Campus Event Discovery and Scheduling Clash Management Platform (INT335 P17)",
+  "description": "Campus-first event discovery, student engagement, and zero-clash physical room reservation governance platform powered by deterministic half-open interval scheduling algorithms (INT335 P17).",
   "type": "module",
   "scripts": {
     "dev": "vite",
