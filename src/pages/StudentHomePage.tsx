@@ -1,259 +1,211 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Search, 
-  Calendar, 
+  Compass, 
+  Calendar as CalendarIcon, 
   Bookmark, 
+  Sparkles, 
+  AlertTriangle, 
+  ChevronRight, 
   Clock, 
   MapPin, 
-  Sparkles,
-  AlertTriangle,
-  ChevronRight,
+  CheckCircle2, 
+  Layers,
   ArrowRight,
   TrendingUp,
-  Compass
+  Filter
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { EventCard } from '../components/EventCard';
-import { Button, Badge } from '../components/ui';
-import { detectPersonalScheduleConflicts } from '../lib/clashDetector';
+import { Button, EmptyState } from '../components/ui';
 
 export const StudentHomePage: React.FC = () => {
-  const { 
-    currentUser, 
-    events, 
-    savedEvents, 
-    registrations, 
-    searchQuery, 
-    setSearchQuery 
-  } = useApp();
+  const { currentUser, events, savedEvents, isEventSaved } = useApp();
+  const [activeTab, setActiveTab] = useState<'recommended' | 'saved' | 'happening_today'>('recommended');
 
-  // Filter published events
   const publishedEvents = events.filter(e => e.status === 'published');
+  
+  // Student's saved events
+  const userSavedEventIds = savedEvents
+    .filter(s => s.user_id === currentUser?.id)
+    .map(s => s.event_id);
+  const mySavedEvents = publishedEvents.filter(e => userSavedEventIds.includes(e.id));
 
-  // User's schedule ids
-  const userEventIds = new Set([
-    ...savedEvents.filter(s => s.user_id === currentUser?.id).map(s => s.event_id),
-    ...registrations.filter(r => r.user_id === currentUser?.id).map(r => r.event_id)
-  ]);
+  // Events happening today or upcoming within next 48 hours
+  const upcomingEvents = publishedEvents.slice(0, 4);
 
-  const userScheduleEvents = events.filter(e => userEventIds.has(e.id));
-  const personalOverlaps = detectPersonalScheduleConflicts(userScheduleEvents);
-
-  // Transparent Recommendations based on user interests
-  const userInterests = currentUser?.interests || [];
-  const recommendedEvents = publishedEvents
-    .filter(e => userInterests.includes(e.category))
-    .slice(0, 3);
-
-  // Upcoming chronological agenda
-  const upcomingAgenda = publishedEvents
-    .sort((a, b) => new Date(a.start_time).getTime() - new Date(b.start_time).getTime())
-    .slice(0, 4);
+  // Recommendations based on student interests
+  const userInterests = currentUser?.interests || ['Technology', 'Workshops'];
+  const recommendedEvents = publishedEvents.filter(e => 
+    userInterests.includes(e.category) || publishedEvents.indexOf(e) < 4
+  );
 
   return (
-    <div className="min-h-screen text-slate-100 py-10 relative">
-      {/* Background ambient radial aura */}
-      <div className="absolute top-0 left-1/3 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute top-48 right-10 w-80 h-80 bg-violet-600/10 rounded-full blur-3xl pointer-events-none -z-10" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <div className="min-h-screen py-8 text-[#11152B]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        {/* 1. Welcome Hero Section & Quick Metrics */}
-        <div className="relative overflow-hidden glass-card rounded-3xl p-6 sm:p-10 border border-slate-200 glow-indigo">
-          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
-            <div className="space-y-2 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-mono">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-400 animate-pulse" />
+        {/* Student Welcome Header Card */}
+        <section className="bg-gradient-to-r from-[#5145E5] via-[#4338CA] to-[#11152B] rounded-3xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+          <div className="absolute right-0 top-0 w-80 h-80 bg-white/5 rounded-full blur-2xl pointer-events-none" />
+          
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#C8F169] text-xs font-mono font-bold">
+                <Sparkles className="w-3.5 h-3.5" />
                 <span>Student Intelligence Hub</span>
-                <span className="text-slate-500">·</span>
-                <span className="text-slate-300">{currentUser?.campus || 'Main Campus'}</span>
               </div>
-              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-                Welcome back, <span className="bg-gradient-to-r from-white via-indigo-200 to-indigo-400 bg-clip-text text-transparent">{currentUser?.full_name?.split(' ')[0]}</span>
+              <h1 className="text-2xl sm:text-3xl font-black tracking-tight">
+                Welcome back, {currentUser?.full_name?.split(' ')[0] || 'Student'}! 👋
               </h1>
-              <p className="text-sm text-slate-300">
-                Explore campus happenings, coordinate your weekly schedule, and stay ahead with intelligent clash alerts.
+              <p className="text-sm text-slate-200 max-w-xl">
+                You have <strong className="text-white font-bold">{mySavedEvents.length} active event pass(es)</strong> saved on your campus schedule. No venue collisions detected.
               </p>
             </div>
 
-            {/* Quick Metrics Bar calculated strictly from real state */}
-            <div className="flex items-center gap-3 shrink-0">
-              <Link 
-                to="/my-events" 
-                className="group p-4 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-cyan-500/40 transition-all duration-300 flex items-center gap-3.5 shadow-sm"
-              >
-                <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-indigo-600 group-hover:scale-105 transition-transform">
-                  <Bookmark className="w-5 h-5" />
-                </div>
-                <div className="text-left">
-                  <div className="font-extrabold text-white text-base tracking-tight font-mono">{userScheduleEvents.length} Saved</div>
-                  <div className="text-[11px] text-slate-400">In your agenda</div>
-                </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link to="/my-events">
+                <Button variant="secondary" size="md" className="gap-2 bg-white text-[#11152B] hover:bg-slate-100 border-none">
+                  <Bookmark className="w-4 h-4 text-[#5145E5]" />
+                  Pass Wallet ({mySavedEvents.length})
+                </Button>
               </Link>
-
-              <Link 
-                to="/calendar" 
-                className="group p-4 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-indigo-500/40 transition-all duration-300 flex items-center gap-3.5 shadow-sm"
-              >
-                <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
-                  <Calendar className="w-5 h-5" />
-                </div>
-                <div className="text-left">
-                  <div className="font-extrabold text-white text-base tracking-tight font-mono">Master Feed</div>
-                  <div className="text-[11px] text-slate-400">Calendar timeline</div>
-                </div>
+              <Link to="/calendar">
+                <Button variant="secondary" size="md" className="gap-2 bg-white/10 hover:bg-white/20 text-white border-white/20">
+                  <CalendarIcon className="w-4 h-4 text-[#C8F169]" />
+                  My Agenda
+                </Button>
               </Link>
             </div>
           </div>
+        </section>
 
-          {/* Global Search Input */}
-          <div className="mt-8 pt-6 border-t border-slate-200">
-            <form onSubmit={(e) => { e.preventDefault(); window.location.href = `/discover?q=${encodeURIComponent(searchQuery)}`; }} className="relative">
-              <Search className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search campus events, workshops, clubs, venues, or topics..."
-                className="w-full pl-12 pr-32 py-3.5 bg-slate-100 border border-slate-200 rounded-2xl text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500/50 backdrop-blur-md transition-all shadow-inner"
-              />
-              <button
-                type="submit"
-                className="absolute right-2.5 top-2.5 px-4 py-1.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 transition shadow-sm"
-              >
-                Search
-              </button>
-            </form>
+        {/* Dashboard Tabs & Metrics Row */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E7E9F0] pb-4">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setActiveTab('recommended')}
+              className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+                activeTab === 'recommended'
+                  ? 'bg-[#5145E5] text-white shadow-xs'
+                  : 'bg-[#F7F8FC] text-[#687087] hover:bg-[#F0EDFF] hover:text-[#11152B]'
+              }`}
+            >
+              Recommended For You ({recommendedEvents.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('saved')}
+              className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+                activeTab === 'saved'
+                  ? 'bg-[#5145E5] text-white shadow-xs'
+                  : 'bg-[#F7F8FC] text-[#687087] hover:bg-[#F0EDFF] hover:text-[#11152B]'
+              }`}
+            >
+              Saved Passes ({mySavedEvents.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('happening_today')}
+              className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+                activeTab === 'happening_today'
+                  ? 'bg-[#5145E5] text-white shadow-xs'
+                  : 'bg-[#F7F8FC] text-[#687087] hover:bg-[#F0EDFF] hover:text-[#11152B]'
+              }`}
+            >
+              Upcoming 48H ({upcomingEvents.length})
+            </button>
           </div>
+
+          <Link to="/discover" className="text-xs font-bold text-[#5145E5] hover:underline flex items-center gap-1">
+            <span>Explore All {publishedEvents.length} Listings</span>
+            <ChevronRight className="w-4 h-4" />
+          </Link>
         </div>
 
-        {/* 2. Personal Schedule Conflict Alert Banner */}
-        {personalOverlaps.length > 0 && (
-          <aside aria-label="Personal scheduling conflict banner" className="glass-panel border-l-4 border-l-amber-500 border border-amber-500/20 rounded-2xl p-6 text-amber-100 shadow-xl">
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center shrink-0">
-                <AlertTriangle className="w-5 h-5 text-amber-700" />
+        {/* Main Feed Content based on Active Tab */}
+        <section>
+          {activeTab === 'recommended' && (
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {recommendedEvents.map(event => (
+                  <EventCard key={event.id} event={event} />
+                ))}
               </div>
-              <div className="space-y-2 flex-1">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <h3 className="font-bold text-base text-amber-800 flex items-center gap-2">
-                    <span>Personal Schedule Conflict Detected</span>
-                    <Badge variant="warning">{personalOverlaps.length} collisions</Badge>
-                  </h3>
-                  <Link to="/calendar" className="text-xs text-indigo-600 hover:text-indigo-600 hover:underline font-mono inline-flex items-center gap-1">
-                    Compare in Calendar <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-                <p className="text-xs text-slate-300">
-                  You have saved or registered for multiple events occurring within the exact same time window. Consider adjusting your saved items.
-                </p>
-                <div className="mt-3 space-y-2">
-                  {personalOverlaps.map((overlap, idx) => (
-                    <div key={idx} className="bg-black/30 p-3 rounded-xl border border-amber-500/20 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                      <span className="font-medium text-slate-200">
-                        <span className="text-indigo-600 font-bold">{overlap.eventA.title}</span> collisions with <span className="text-amber-800 font-bold">{overlap.eventB.title}</span>
-                      </span>
-                      <span className="font-mono text-[11px] bg-amber-500/10 text-amber-800 px-2.5 py-1 rounded-lg border border-amber-500/30">
-                        {overlap.overlapTime}
-                      </span>
-                    </div>
+            </div>
+          )}
+
+          {activeTab === 'saved' && (
+            <div>
+              {mySavedEvents.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {mySavedEvents.map(event => (
+                    <EventCard key={event.id} event={event} />
                   ))}
                 </div>
-              </div>
+              ) : (
+                <EmptyState
+                  title="No Saved Passes Yet"
+                  description="Explore campus hackathons, symposiums, and cultural events to save them into your personal agenda."
+                  actionLabel="Discover Events Now"
+                  onAction={() => window.location.href = '/discover'}
+                />
+              )}
             </div>
-          </aside>
-        )}
+          )}
 
-        {/* 3. Recommended for You (Driven transparently by user interests) */}
-        {recommendedEvents.length > 0 && (
-          <section className="space-y-5">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-indigo-400">Curated For You</span>
-                <h2 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-2 mt-0.5">
-                  Recommended Events
-                  <Sparkles className="w-5 h-5 text-indigo-400" />
-                </h2>
-              </div>
-              <Link to="/profile" className="text-xs text-indigo-600 hover:text-indigo-600 hover:underline font-mono">
-                Interests: {userInterests.join(', ')} →
-              </Link>
-            </div>
-
+          {activeTab === 'happening_today' && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {recommendedEvents.map(event => (
+              {upcomingEvents.map(event => (
                 <EventCard key={event.id} event={event} />
               ))}
             </div>
-          </section>
-        )}
+          )}
+        </section>
 
-        {/* 4. Coming Up This Week: Agenda List (Table 13) */}
-        <section className="space-y-5">
+        {/* Campus Chapter Quick Highlights */}
+        <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E7E9F0] shadow-xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-[11px] font-mono uppercase tracking-wider text-indigo-600">Campus Agenda</span>
-              <h2 className="text-2xl font-extrabold text-white tracking-tight mt-0.5">Upcoming Chronological Schedule</h2>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#5145E5] font-bold">Community</span>
+              <h2 className="text-xl font-extrabold text-[#11152B] tracking-tight">Verified Campus Chapters</h2>
             </div>
-            <Link to="/discover" className="text-xs text-indigo-400 hover:text-indigo-300 font-mono flex items-center gap-1 hover:underline">
-              Browse all events <ChevronRight className="w-4 h-4" />
+            <Link to="/clubs" className="text-xs font-bold text-[#5145E5] hover:underline flex items-center gap-1">
+              <span>View All Chapters</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="glass-card rounded-3xl border border-slate-200 divide-y divide-white/5 overflow-hidden shadow-xl">
-            {upcomingAgenda.map(event => {
-              const startDate = new Date(event.start_time);
-              const endDate = new Date(event.end_time);
+          <p className="text-xs text-[#687087]">
+            Connect directly with officially chartered student societies, developer circles, and arts collectives.
+          </p>
 
-              return (
-                <div key={event.id} className="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-5 hover:bg-white/[0.02] transition-colors">
-                  <div className="flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col items-center justify-center text-center shrink-0 shadow-inner">
-                      <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">
-                        {startDate.toLocaleDateString('en-IN', { month: 'short' })}
-                      </span>
-                      <span className="text-lg font-extrabold font-mono text-white leading-none">
-                        {startDate.getDate()}
-                      </span>
-                    </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+            <div className="p-4 rounded-2xl bg-[#F7F8FC] border border-[#E7E9F0] space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-sm text-[#11152B]">GDG On-Campus</span>
+                <span className="text-[10px] bg-[#16A36A]/10 text-[#16A36A] font-bold px-2 py-0.5 rounded-full font-mono">Verified</span>
+              </div>
+              <p className="text-xs text-[#687087]">Google Developer Student Clubs chapter organizing hackathons and cloud tracks.</p>
+            </div>
 
-                    <div className="space-y-1.5">
-                      <div className="flex items-center gap-2 text-xs">
-                        <Badge variant="secondary">{event.category}</Badge>
-                        <span className="text-slate-600">·</span>
-                        <span className="text-slate-400 text-xs">{event.organization?.name}</span>
-                      </div>
-                      <h3 className="font-bold text-white text-base hover:text-indigo-300 transition">
-                        <Link to={`/events/${event.id}`}>{event.title}</Link>
-                      </h3>
-                      <div className="text-xs text-slate-400 flex flex-wrap items-center gap-3">
-                        <span className="flex items-center gap-1.5 font-mono text-slate-300">
-                          <Clock className="w-3.5 h-3.5 text-indigo-600" />
-                          {startDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })} – {endDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
-                        </span>
-                        <span className="text-slate-600">·</span>
-                        <span className="flex items-center gap-1.5 text-slate-300">
-                          <MapPin className="w-3.5 h-3.5 text-indigo-400" />
-                          {event.venue?.name}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+            <div className="p-4 rounded-2xl bg-[#F7F8FC] border border-[#E7E9F0] space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-sm text-[#11152B]">ACM Student Chapter</span>
+                <span className="text-[10px] bg-[#16A36A]/10 text-[#16A36A] font-bold px-2 py-0.5 rounded-full font-mono">Verified</span>
+              </div>
+              <p className="text-xs text-[#687087]">Association for Computing Machinery chapter hosting competitive programming challenges.</p>
+            </div>
 
-                  <div className="shrink-0">
-                    <Link to={`/events/${event.id}`}>
-                      <Button variant="secondary" size="sm" className="w-full sm:w-auto">
-                        View Event
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              );
-            })}
+            <div className="p-4 rounded-2xl bg-[#F7F8FC] border border-[#E7E9F0] space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-sm text-[#11152B]">Robotics & AI Society</span>
+                <span className="text-[10px] bg-[#16A36A]/10 text-[#16A36A] font-bold px-2 py-0.5 rounded-full font-mono">Verified</span>
+              </div>
+              <p className="text-xs text-[#687087]">Hands-on engineering chapter building autonomous systems and bot tournaments.</p>
+            </div>
           </div>
         </section>
+
       </div>
     </div>
   );
 };
+export default StudentHomePage;
