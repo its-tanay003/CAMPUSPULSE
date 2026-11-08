@@ -63,3 +63,4 @@ CampusPulse combines proven product patterns from industry event solutions and c
 | **Unstop** | Structured competition details & eligibility rules | Dedicated challenge specs (team size limits, problem statements, and prize breakdowns). |
 | **Macbease** | Hyperlocal campus community & chapter verification | Chartered student chapter registry with verification badges and follow actions. |
 | **Hack2skill** | Multi-phase event roadmaps & jury guidelines | Phased milestone schedule on event detail pages with structured academic integrity rules. |
+

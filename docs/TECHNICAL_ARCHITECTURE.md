@@ -127,3 +127,4 @@ To evaluate all platform personas without needing multi-account login credential
 - **Student Persona:** Tanay Tanishk (`user-student-01`)
 - **Organizer Persona:** GDSC / ACM Student Chapter Lead (`user-organizer-01`)
 - **Administrator Persona:** Dr. R. K. Verma (Estate & Student Welfare Admin — `user-admin-01`)
+
