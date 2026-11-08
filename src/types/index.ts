@@ -8,6 +8,7 @@ export interface UserProfile {
   role: UserRole;
   campus: string;
   interests: string[];
+  followed_org_ids?: string[];
   created_at?: string;
 }
 
@@ -26,6 +27,12 @@ export interface Organization {
   verified_at?: string;
   verification_notes?: string;
   member_count?: number;
+  social_links?: {
+    instagram?: string;
+    linkedin?: string;
+    website?: string;
+    discord?: string;
+  };
 }
 
 export interface OrganizationMember {
@@ -82,6 +89,69 @@ export type EventStatus =
   | 'cancelled' 
   | 'completed';
 
+export interface AgendaItem {
+  time: string;
+  title: string;
+  description?: string;
+  speaker?: string;
+}
+
+export interface SpeakerInfo {
+  name: string;
+  role: string;
+  organization?: string;
+  avatar_url?: string;
+}
+
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export interface CompetitionDetails {
+  problem_statement?: string;
+  eligibility_criteria?: string;
+  team_size_min?: number;
+  team_size_max?: number;
+  evaluation_criteria?: string[];
+  rules?: string[];
+  prizes?: {
+    rank: string;
+    reward: string;
+  }[];
+}
+
+export interface EventAnnouncement {
+  id: string;
+  event_id: string;
+  title: string;
+  message: string;
+  type: 'update' | 'venue_change' | 'timing_change' | 'important';
+  created_at: string;
+  created_by?: string;
+}
+
+export interface EventFeedback {
+  id: string;
+  event_id: string;
+  user_id: string;
+  user_name?: string;
+  rating: number; // 1 to 5
+  feedback_text: string;
+  created_at: string;
+}
+
+export interface CampusNotification {
+  id: string;
+  user_id: string;
+  title: string;
+  message: string;
+  type: 'event_reminder' | 'status_update' | 'announcement' | 'approval';
+  link?: string;
+  is_read: boolean;
+  created_at: string;
+}
+
 export interface CampusEvent {
   id: string;
   title: string;
@@ -108,6 +178,14 @@ export interface CampusEvent {
   views_count: number;
   created_at: string;
   updated_at: string;
+
+  // Rich detail extensions
+  agenda?: AgendaItem[];
+  speakers?: SpeakerInfo[];
+  faqs?: FAQItem[];
+  rules?: string[];
+  competition_details?: CompetitionDetails;
+  announcements?: EventAnnouncement[];
 }
 
 export interface SavedEvent {
@@ -166,4 +244,3 @@ export interface ApprovalAction {
   reason: string;
   created_at: string;
 }
-

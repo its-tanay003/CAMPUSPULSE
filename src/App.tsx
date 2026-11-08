@@ -24,6 +24,7 @@ import { AdminVenuesPage } from './pages/AdminVenuesPage';
 import { AdminOrganizersPage } from './pages/AdminOrganizersPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { ClubsDirectoryPage } from './pages/ClubsDirectoryPage';
+import { ClubDetailPage } from './pages/ClubDetailPage';
 import { LoginPage } from './pages/LoginPage';
 import { SignupPage } from './pages/SignupPage';
 
@@ -75,6 +76,7 @@ export const App: React.FC = () => {
                 <Route path="/my-events" element={<MyEventsPage />} />
                 <Route path="/saved" element={<Navigate to="/my-events" replace />} />
                 <Route path="/clubs" element={<ClubsDirectoryPage />} />
+                <Route path="/clubs/:id" element={<ClubDetailPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
